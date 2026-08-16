@@ -17,6 +17,7 @@ export default function GetQuotePage() {
         title="Get a Baby Seat Taxi Quote"
         description="Tell us your pickup, destination and your child's age, and we'll confirm pricing and the right seat for your trip."
         breadcrumbLabel="Get a Quote"
+        image={{ src: "/images/baby-capsule-taxi-sydney-real.png", alt: "Baby capsule taxi Sydney for newborns and infants" }}
       />
 
       <section className="wt-section on-dark">

@@ -17,6 +17,7 @@ export default function BlogPage() {
         title="News & Guides"
         description="Helpful articles about baby capsules, child seats, NSW child restraint laws and family travel across Sydney."
         breadcrumbLabel="Blog"
+        image={{ src: "/images/blog-benefits-of-baby-seat-taxi-real.png", alt: "Baby Seat Taxi Sydney blog" }}
       />
 
       <section className="wt-section">

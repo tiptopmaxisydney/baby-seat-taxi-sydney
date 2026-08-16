@@ -9,7 +9,13 @@ import type { ServicePage } from "@/lib/servicePages";
 export default function ServicePageTemplate({ page }: { page: ServicePage }) {
   return (
     <>
-      <ServiceHero eyebrow={page.eyebrow} title={page.h1} description={page.heroDescription} breadcrumbLabel={page.navLabel} />
+      <ServiceHero
+        eyebrow={page.eyebrow}
+        title={page.h1}
+        description={page.heroDescription}
+        breadcrumbLabel={page.navLabel}
+        image={page.image}
+      />
 
       <SplitSection
         eyebrow={page.eyebrow}

@@ -97,7 +97,7 @@ export default function Home() {
         ]}
         itemsIntro="Services include:"
         items={airportServices}
-        image={{ src: "/images/sydney-airport-transfers-with-baby-seats.svg", alt: "Sydney Airport transfers with baby seats", width: 800, height: 533 }}
+        image={{ src: "/images/sydney-airport-transfers-with-baby-seats-real.png", alt: "Sydney Airport transfers with baby seats", width: 795, height: 529 }}
         imageFirst
         background="dark"
       />
@@ -110,7 +110,7 @@ export default function Home() {
         ]}
         itemsIntro="We provide hospital pickup services from major Sydney hospitals including:"
         items={hospitalsServed}
-        image={{ src: "/images/hospital-transfers-with-baby-seats.svg", alt: "Hospital transfers with baby seats in Sydney", width: 800, height: 533 }}
+        image={{ src: "/images/hospital-transfers-with-baby-seats-real.png", alt: "Hospital transfers with baby seats in Sydney", width: 795, height: 529 }}
         background="dark"
       />
 
@@ -122,7 +122,7 @@ export default function Home() {
         ]}
         itemsIntro="Popular family destinations in Sydney:"
         items={popularDestinations}
-        image={{ src: "/images/family-transport-across-sydney.svg", alt: "Family transport across Sydney with baby seats", width: 800, height: 533 }}
+        image={{ src: "/images/family-transport-across-sydney-real.png", alt: "Family transport across Sydney with baby seats", width: 795, height: 529 }}
         imageFirst
         background="dark"
       />
@@ -135,7 +135,7 @@ export default function Home() {
         ]}
         itemsIntro="Safety features:"
         items={safetyFeatures}
-        image={{ src: "/images/child-safety-information.svg", alt: "Child safety information for baby seat taxi bookings", width: 740, height: 603 }}
+        image={{ src: "/images/child-safety-information-real.png", alt: "Child safety information for baby seat taxi bookings", width: 738, height: 599 }}
         background="dark"
       />
 
@@ -174,6 +174,7 @@ export default function Home() {
                 <Image src={post.image.src} alt={post.image.alt} width={400} height={225} style={{ width: "100%", height: "auto" }} />
                 <div className="wt-blog-card-body">
                   <h3>{post.title}</h3>
+                  <p>{post.excerpt}</p>
                 </div>
               </Link>
             ))}

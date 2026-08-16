@@ -50,6 +50,7 @@ export default function ContactUsPage() {
         title="Book a Baby Seat Taxi in Sydney"
         description="Contact Sydney's Baby Seat Taxi Specialists"
         breadcrumbLabel="Contact Us"
+        image={{ src: "/images/family-transport-across-sydney-real.png", alt: "Family transport across Sydney with baby seats" }}
       />
 
       <section className="wt-section on-dark">

@@ -38,7 +38,13 @@ const faqColumns = [
 export default function FaqsPage() {
   return (
     <>
-      <ServiceHero eyebrow="FAQ's" title="FAQ's" description="Frequently Asked Questions" breadcrumbLabel="FAQ's" />
+      <ServiceHero
+        eyebrow="FAQ's"
+        title="FAQ's"
+        description="Frequently Asked Questions"
+        breadcrumbLabel="FAQ's"
+        image={{ src: "/images/child-safety-information-real.png", alt: "Child safety information for baby seat taxi bookings" }}
+      />
 
       <Faq columns={faqColumns} title="Frequently Asked Questions" eyebrow="Questions" />
       <FinalCta />

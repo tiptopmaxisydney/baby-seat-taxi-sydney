@@ -17,6 +17,7 @@ export default function FareEstimatorPage() {
         title="What Affects Your Fare?"
         description="Baby seat taxi pricing depends on a few key factors. Request a quote below for an exact, no-obligation price for your trip."
         breadcrumbLabel="Fare Estimator"
+        image={{ src: "/images/child-seat-taxi-sydney-real.png", alt: "Child seat taxi Sydney for toddlers and young children" }}
       />
 
       <FeatureGrid

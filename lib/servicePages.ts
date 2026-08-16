@@ -22,10 +22,10 @@ export type ServicePage = {
 const IMG = {
   capsule: { src: "/images/baby-capsule-taxi-sydney-real.png", width: 700, height: 467 },
   childSeat: { src: "/images/child-seat-taxi-sydney-real.png", width: 700, height: 467 },
-  airport: { src: "/images/sydney-airport-transfers-with-baby-seats.svg", width: 800, height: 533 },
-  hospital: { src: "/images/hospital-transfers-with-baby-seats.svg", width: 800, height: 533 },
-  family: { src: "/images/family-transport-across-sydney.svg", width: 800, height: 533 },
-  safety: { src: "/images/child-safety-information.svg", width: 740, height: 603 },
+  airport: { src: "/images/sydney-airport-transfers-with-baby-seats-real.png", width: 795, height: 529 },
+  hospital: { src: "/images/hospital-transfers-with-baby-seats-real.png", width: 795, height: 529 },
+  family: { src: "/images/family-transport-across-sydney-real.png", width: 795, height: 529 },
+  safety: { src: "/images/child-safety-information-real.png", width: 738, height: 599 },
 } as const;
 
 export const servicePages: ServicePage[] = [

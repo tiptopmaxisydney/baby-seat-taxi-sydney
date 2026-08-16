@@ -17,6 +17,7 @@ export default function BookingsPage() {
         title="Book Your Baby Seat Taxi"
         description="Three easy ways to book — by phone, through our app, or with an online quote request."
         breadcrumbLabel="Bookings"
+        image={{ src: "/images/sydney-airport-transfers-with-baby-seats-real.png", alt: "Sydney Airport transfers with baby seats" }}
       />
 
       <section className="wt-section on-dark">

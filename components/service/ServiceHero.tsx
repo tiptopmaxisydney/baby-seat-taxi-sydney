@@ -7,11 +7,24 @@ type ServiceHeroProps = {
   title: string;
   description: string;
   breadcrumbLabel: string;
+  image?: { src: string; alt: string };
 };
 
-export default function ServiceHero({ eyebrow, title, description, breadcrumbLabel }: ServiceHeroProps) {
+export default function ServiceHero({ eyebrow, title, description, breadcrumbLabel, image }: ServiceHeroProps) {
   return (
-    <section className="wt-page-hero">
+    <section
+      className="wt-page-hero"
+      style={
+        image
+          ? {
+              backgroundImage: `linear-gradient(135deg, rgba(18, 35, 46, 0.88) 0%, rgba(29, 54, 73, 0.8) 100%), url(${image.src})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              minHeight: 340,
+            }
+          : undefined
+      }
+    >
       <div className="container">
         <div className="wt-page-hero-inner">
           <div className="wt-breadcrumb">

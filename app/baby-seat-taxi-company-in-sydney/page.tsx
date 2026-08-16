@@ -41,6 +41,7 @@ export default function AboutUsPage() {
         title="Baby Seat Taxi Company in Sydney"
         description="About Baby Seat Taxi Sydney - Safe Family Transport Across Sydney"
         breadcrumbLabel="About Us"
+        image={{ src: "/images/baby-seat-taxi-sydney-hero.png", alt: "Baby Seat Taxi Sydney family transport" }}
       />
 
       <section className="wt-section on-dark">

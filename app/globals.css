@@ -105,6 +105,16 @@ img {
 .wt-section.on-dark .wt-area-card p {
   color: rgba(255, 255, 255, 0.7);
 }
+/* .wt-blog-card keeps its own white background regardless of the section
+   it sits in (e.g. the home page's dark "From the Blog" grid), so its text
+   must stay dark — without this override the broader on-dark h3/p rules
+   above make the title and excerpt white-on-white and invisible. */
+.wt-section.on-dark .wt-blog-card h3 {
+  color: var(--wt-navy);
+}
+.wt-section.on-dark .wt-blog-card p {
+  color: var(--wt-muted);
+}
 .wt-section.on-dark .wt-step-num {
   color: rgba(255, 255, 255, 0.12);
   -webkit-text-stroke-color: var(--wt-blue);
@@ -385,6 +395,8 @@ img {
   background: linear-gradient(135deg, rgba(18, 35, 46, 0.94) 0%, rgba(29, 54, 73, 0.9) 100%);
   padding: 54px 0;
   color: #fff;
+  display: flex;
+  align-items: center;
 }
 .wt-page-hero-inner {
   max-width: 760px;
