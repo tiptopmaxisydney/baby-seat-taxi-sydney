@@ -4,10 +4,15 @@ import ServiceHero from "@/components/service/ServiceHero";
 import Faq from "@/components/home/Faq";
 import FinalCta from "@/components/home/FinalCta";
 
+const title = "Baby Seat Taxi Company in Sydney | Safety-First Family Cabs";
+const description = "About Baby Seat Taxi Sydney - safe family transport across Sydney with baby capsules and child seats available on request.";
+
 export const metadata: Metadata = {
-  title: "Baby Seat Taxi Company in Sydney | Safety-First Family Cabs",
-  description:
-    "About Baby Seat Taxi Sydney - safe family transport across Sydney with baby capsules and child seats available on request.",
+  title,
+  description,
+  alternates: { canonical: "/baby-seat-taxi-company-in-sydney" },
+  openGraph: { title, description, url: "/baby-seat-taxi-company-in-sydney" },
+  twitter: { card: "summary_large_image", title, description },
 };
 
 const aboutFaq = [

@@ -64,7 +64,7 @@ export default function Header() {
                 </a>
                 <div className="wt-mega">
                   <div className="wt-mega-group">
-                    <h4>Services</h4>
+                    <p className="wt-mega-group-title">Services</p>
                     <ul>
                       {servicesLinks.map((link) => (
                         <li key={link.href}>
@@ -81,7 +81,7 @@ export default function Header() {
                 </a>
                 <div className="wt-mega">
                   <div className="wt-mega-group">
-                    <h4>Locations</h4>
+                    <p className="wt-mega-group-title">Locations</p>
                     <ul>
                       {locationsLinks.map((link) => (
                         <li key={link.href}>

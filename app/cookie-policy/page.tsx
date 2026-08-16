@@ -2,9 +2,15 @@ import type { Metadata } from "next";
 import ServiceHero from "@/components/service/ServiceHero";
 import { siteConfig } from "@/lib/siteConfig";
 
+const title = "Cookie Policy | Baby Seat Taxi Sydney";
+const description = "Cookie Policy for the Baby Seat Taxi Sydney website, operated by " + siteConfig.legalName + ".";
+
 export const metadata: Metadata = {
-  title: "Cookie Policy | Baby Seat Taxi Sydney",
-  description: "Cookie Policy for the Baby Seat Taxi Sydney website, operated by " + siteConfig.legalName + ".",
+  title,
+  description,
+  alternates: { canonical: "/cookie-policy" },
+  openGraph: { title, description, url: "/cookie-policy" },
+  twitter: { card: "summary_large_image", title, description },
 };
 
 export default function CookiePolicyPage() {

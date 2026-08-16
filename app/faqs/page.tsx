@@ -3,9 +3,15 @@ import ServiceHero from "@/components/service/ServiceHero";
 import Faq from "@/components/home/Faq";
 import FinalCta from "@/components/home/FinalCta";
 
+const title = "Baby Seat Taxi Sydney FAQs | Child Seat Taxi Questions";
+const description = "Frequently asked questions about booking a baby seat taxi in Sydney, including baby capsules, child seats and service areas.";
+
 export const metadata: Metadata = {
-  title: "Baby Seat Taxi Sydney FAQs | Child Seat Taxi Questions",
-  description: "Frequently asked questions about booking a baby seat taxi in Sydney, including baby capsules, child seats and service areas.",
+  title,
+  description,
+  alternates: { canonical: "/faqs" },
+  openGraph: { title, description, url: "/faqs" },
+  twitter: { card: "summary_large_image", title, description },
 };
 
 const faqColumns = [

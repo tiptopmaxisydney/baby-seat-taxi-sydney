@@ -4,9 +4,15 @@ import Link from "next/link";
 import ServiceHero from "@/components/service/ServiceHero";
 import { blogPosts } from "@/lib/blogPosts";
 
+const title = "Blog | Baby Seat Taxi Sydney";
+const description = "News, guides and helpful information about baby seat taxis, child restraint laws and family travel in Sydney.";
+
 export const metadata: Metadata = {
-  title: "Blog | Baby Seat Taxi Sydney",
-  description: "News, guides and helpful information about baby seat taxis, child restraint laws and family travel in Sydney.",
+  title,
+  description,
+  alternates: { canonical: "/baby-seat-taxi-sydney-blog" },
+  openGraph: { title, description, url: "/baby-seat-taxi-sydney-blog" },
+  twitter: { card: "summary_large_image", title, description },
 };
 
 export default function BlogPage() {

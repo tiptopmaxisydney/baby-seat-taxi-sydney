@@ -4,9 +4,15 @@ import BookingForm from "@/components/home/BookingForm";
 import Faq from "@/components/home/Faq";
 import { siteConfig } from "@/lib/siteConfig";
 
+const title = "Get a Booking | Baby Seat Taxi Sydney";
+const description = "Get an instant booking for a baby capsule, child seat or booster seat taxi in Sydney. Tell us your trip details and we'll confirm pricing and availability.";
+
 export const metadata: Metadata = {
-  title: "Get a Booking | Baby Seat Taxi Sydney",
-  description: "Get an instant booking for a baby capsule, child seat or booster seat taxi in Sydney. Tell us your trip details and we'll confirm pricing and availability.",
+  title,
+  description,
+  alternates: { canonical: "/get-quote" },
+  openGraph: { title, description, url: "/get-quote" },
+  twitter: { card: "summary_large_image", title, description },
 };
 
 export default function GetBookingPage() {
@@ -23,6 +29,7 @@ export default function GetBookingPage() {
       <section className="wt-section on-dark">
         <div className="container">
           <div style={{ maxWidth: 640, margin: "0 auto" }}>
+            <h2 style={{ textAlign: "center" }}>Request Your Booking</h2>
             <BookingForm />
             <p style={{ textAlign: "center", marginTop: 24, color: "rgba(255,255,255,0.65)", fontSize: "0.9rem" }}>
               Prefer to speak with our team? Call{" "}

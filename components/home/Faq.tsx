@@ -26,15 +26,17 @@ export default function Faq({ columns = defaultFaqColumns, title = "Frequently A
                 const isOpen = openKey === key;
                 return (
                   <div className={`wt-faq-item${isOpen ? " active" : ""}`} key={key}>
-                    <button
-                      type="button"
-                      className="wt-faq-question"
-                      aria-expanded={isOpen}
-                      onClick={() => setOpenKey(isOpen ? null : key)}
-                    >
-                      {faq.question}
-                      {isOpen ? <FaMinus aria-hidden="true" /> : <FaPlus aria-hidden="true" />}
-                    </button>
+                    <h3 style={{ margin: 0 }}>
+                      <button
+                        type="button"
+                        className="wt-faq-question"
+                        aria-expanded={isOpen}
+                        onClick={() => setOpenKey(isOpen ? null : key)}
+                      >
+                        {faq.question}
+                        {isOpen ? <FaMinus aria-hidden="true" /> : <FaPlus aria-hidden="true" />}
+                      </button>
+                    </h3>
                     <div className="wt-faq-answer">{faq.answer}</div>
                   </div>
                 );

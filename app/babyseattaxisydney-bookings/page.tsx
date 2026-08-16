@@ -4,9 +4,15 @@ import ServiceHero from "@/components/service/ServiceHero";
 import BookingForm from "@/components/home/BookingForm";
 import { siteConfig } from "@/lib/siteConfig";
 
+const title = "Bookings | Baby Seat Taxi Sydney";
+const description = "Book a baby capsule, child seat or booster seat taxi in Sydney by phone, app or online booking form.";
+
 export const metadata: Metadata = {
-  title: "Bookings | Baby Seat Taxi Sydney",
-  description: "Book a baby capsule, child seat or booster seat taxi in Sydney by phone, app or online booking form.",
+  title,
+  description,
+  alternates: { canonical: "/babyseattaxisydney-bookings" },
+  openGraph: { title, description, url: "/babyseattaxisydney-bookings" },
+  twitter: { card: "summary_large_image", title, description },
 };
 
 export default function BookingsPage() {
@@ -22,6 +28,8 @@ export default function BookingsPage() {
 
       <section className="wt-section on-dark">
         <div className="container">
+          <span className="wt-eyebrow">Bookings</span>
+          <h2>Choose How to Book</h2>
           <div className="wt-grid-3">
             <div className="wt-card">
               <h3>

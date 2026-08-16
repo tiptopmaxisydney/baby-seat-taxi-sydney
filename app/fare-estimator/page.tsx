@@ -4,9 +4,15 @@ import ServiceHero from "@/components/service/ServiceHero";
 import FeatureGrid from "@/components/service/FeatureGrid";
 import FinalCta from "@/components/home/FinalCta";
 
+const title = "Fare Estimator | Baby Seat Taxi Sydney";
+const description = "See what affects the price of a baby seat taxi in Sydney, and request an instant, accurate booking for your trip.";
+
 export const metadata: Metadata = {
-  title: "Fare Estimator | Baby Seat Taxi Sydney",
-  description: "See what affects the price of a baby seat taxi in Sydney, and request an instant, accurate booking for your trip.",
+  title,
+  description,
+  alternates: { canonical: "/fare-estimator" },
+  openGraph: { title, description, url: "/fare-estimator" },
+  twitter: { card: "summary_large_image", title, description },
 };
 
 export default function FareEstimatorPage() {

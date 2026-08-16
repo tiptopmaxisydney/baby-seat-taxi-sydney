@@ -11,14 +11,53 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
+  const canonical = `/${slug}`;
+
   const servicePage = getServicePage(slug);
   if (servicePage) {
-    return { title: servicePage.metaTitle, description: servicePage.metaDescription };
+    return {
+      title: servicePage.metaTitle,
+      description: servicePage.metaDescription,
+      alternates: { canonical },
+      openGraph: {
+        title: servicePage.metaTitle,
+        description: servicePage.metaDescription,
+        url: canonical,
+        type: "website",
+        images: [{ url: servicePage.image.src }],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: servicePage.metaTitle,
+        description: servicePage.metaDescription,
+        images: [servicePage.image.src],
+      },
+    };
   }
+
   const post = getBlogPost(slug);
   if (post) {
-    return { title: post.metaTitle, description: post.metaDescription };
+    return {
+      title: post.metaTitle,
+      description: post.metaDescription,
+      alternates: { canonical },
+      openGraph: {
+        title: post.metaTitle,
+        description: post.metaDescription,
+        url: canonical,
+        type: "article",
+        publishedTime: post.date,
+        images: [{ url: post.image.src }],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: post.metaTitle,
+        description: post.metaDescription,
+        images: [post.image.src],
+      },
+    };
   }
+
   return {};
 }
 

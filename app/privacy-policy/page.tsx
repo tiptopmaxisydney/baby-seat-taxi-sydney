@@ -2,9 +2,15 @@ import type { Metadata } from "next";
 import ServiceHero from "@/components/service/ServiceHero";
 import { siteConfig } from "@/lib/siteConfig";
 
+const title = "Privacy Policy | Baby Seat Taxi Sydney";
+const description = "Privacy Policy for Baby Seat Taxi Sydney, operated by " + siteConfig.legalName + ".";
+
 export const metadata: Metadata = {
-  title: "Privacy Policy | Baby Seat Taxi Sydney",
-  description: "Privacy Policy for Baby Seat Taxi Sydney, operated by " + siteConfig.legalName + ".",
+  title,
+  description,
+  alternates: { canonical: "/privacy-policy" },
+  openGraph: { title, description, url: "/privacy-policy" },
+  twitter: { card: "summary_large_image", title, description },
 };
 
 export default function PrivacyPolicyPage() {

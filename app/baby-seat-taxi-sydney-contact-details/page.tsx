@@ -5,9 +5,15 @@ import ServiceHero from "@/components/service/ServiceHero";
 import Faq from "@/components/home/Faq";
 import { siteConfig } from "@/lib/siteConfig";
 
+const title = "Contact Baby Seat Taxi Sydney | Book Family Transport";
+const description = "Contact Baby Seat Taxi Sydney by phone or email to book a baby capsule or child seat taxi, or ask a question. Available 24/7 across Sydney.";
+
 export const metadata: Metadata = {
-  title: "Contact Baby Seat Taxi Sydney | Book Family Transport",
-  description: "Contact Baby Seat Taxi Sydney by phone or email to book a baby capsule or child seat taxi, or ask a question. Available 24/7 across Sydney.",
+  title,
+  description,
+  alternates: { canonical: "/baby-seat-taxi-sydney-contact-details" },
+  openGraph: { title, description, url: "/baby-seat-taxi-sydney-contact-details" },
+  twitter: { card: "summary_large_image", title, description },
 };
 
 const contactFaq = [

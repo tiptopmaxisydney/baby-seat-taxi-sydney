@@ -5,6 +5,8 @@ import { siteConfig } from "@/lib/siteConfig";
 export const metadata: Metadata = {
   title: "Thank You | Baby Seat Taxi Sydney",
   description: "Thank you for contacting Baby Seat Taxi Sydney. Our team will be in touch shortly.",
+  alternates: { canonical: "/thank-you" },
+  robots: { index: false, follow: true },
 };
 
 export default function ThankYouPage() {
