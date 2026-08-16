@@ -58,6 +58,7 @@ img {
   max-width: 1220px;
   margin: 0 auto;
   padding: 0 24px;
+  width: 100%;
 }
 
 .wt-section {
@@ -241,6 +242,15 @@ img {
   position: sticky;
   top: 0;
   z-index: 50;
+}
+
+/* The "Book Now" / "Booking" CTAs (Header, StickyCta) jump to #wcb-booking-form via a
+   same-page hash link. Without this, the sticky .wt-header (~73px tall on desktop, ~59px
+   on mobile) covers the top of whatever it scrolls to, cutting off the booking form's
+   own heading. scroll-margin-top reserves that space so the target lands below the
+   sticky header instead of underneath it. */
+#wcb-booking-form {
+  scroll-margin-top: 90px;
 }
 .wt-header-inner {
   position: relative;
