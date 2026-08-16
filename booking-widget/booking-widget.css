@@ -1,0 +1,135 @@
+/* Tailwind utility layer for the ported Tiptop booking widget only — preflight/reset is
+   disabled in tailwind.config.js so this has no effect on the rest of the site's CSS. */
+@tailwind base;
+@tailwind components;
+
+/* Preflight normally zeroes border-width and sets border-style: solid on every element,
+   so Tailwind's border-* utilities (which only set width/color) have a solid-but-invisible
+   border to widen. With preflight disabled, elements keep the browser's initial border-width
+   (~medium, a few px) merely hidden by border-style: none — forcing style:solid without also
+   zeroing width would make that default border appear everywhere, not just where a `border`
+   utility is used. Scoped to .create-booking so it doesn't touch the rest of the site.
+   Must come before @tailwind utilities: this and Tailwind's border-* utilities share the
+   same specificity, so whichever is later in the cascade wins ties — placed after utilities
+   (as it originally was), this block silently zeroed out every `border`/`border-slate-200`
+   utility in the widget, which is why no field ever showed a visible border.
+   Excludes elements with an "ant-*" class: antd's own CSS-in-JS styles (its Radio.Button
+   "tabs", Select, DatePicker panels, etc. — themed via AntConfig.tsx) are injected as a
+   separate <style> tag by AntdRegistry, whose position relative to this stylesheet isn't
+   guaranteed. Without the exclusion, a `border-width: 0` win here would silently zero out
+   antd's own border-width regardless of cascade order, leaving color/style but no width. */
+.create-booking,
+.create-booking *:not(:where([class*="ant-"])),
+.create-booking *:not(:where([class*="ant-"]))::before,
+.create-booking *:not(:where([class*="ant-"]))::after {
+  border-width: 0;
+  border-style: solid;
+}
+
+/* Same story as the border reset above, but for native <button> elements: with preflight
+   disabled, plain `<button>`s (e.g. "Add a stop") keep the browser's default button chrome —
+   a gray background and inset border — since nothing here ever reset it. Tailwind's own
+   preflight normally does this via `background-color: transparent`. Placed before
+   @tailwind utilities so an explicit `bg-*` utility (e.g. the orange primary buttons) still
+   wins over this default. Excludes antd buttons for the same reason as above. */
+.create-booking :where(button):not(:where([class*="ant-"])) {
+  background-color: transparent;
+  background-image: none;
+  cursor: pointer;
+}
+
+@tailwind utilities;
+
+/* Flattened equivalents of the non-Tailwind rules tiptopnextjs's src/styles/globals.scss
+   applies to this same form (.create-booking, .phone_input_detail, .typing-indicator).
+   Flattened rather than nested because this project has no Sass compiler configured. */
+.create-booking .ant-input-group-addon {
+  padding: 10px !important;
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+}
+.create-booking .ant-input {
+  border: none !important;
+  box-shadow: none !important;
+}
+.create-booking input,
+.create-booking select,
+.create-booking .ant-picker,
+.create-booking .ant-select-selector {
+  background: #ffffff !important;
+  border-radius: 8px !important;
+  font-size: 16px !important;
+}
+.create-booking input::placeholder,
+.create-booking select::placeholder,
+.create-booking .ant-picker::placeholder,
+.create-booking .ant-select-selector::placeholder {
+  color: #999999;
+}
+.create-booking .ant-form-item-control-input-content {
+  display: flex;
+  align-items: center;
+}
+
+.input-placeholder ::placeholder {
+  color: gray !important;
+}
+
+.phone_input_detail .ant-input {
+  background: transparent !important;
+}
+.phone_input_detail .ant-input-group-addon {
+  background: transparent !important;
+}
+.phone_input_detail .ant-form-item {
+  border: none !important;
+  outline: none !important;
+  margin-bottom: 0 !important;
+}
+.phone_input_detail .number-outlined {
+  border: none !important;
+  outline: none !important;
+  outline-offset: 0 !important;
+  border-color: transparent !important;
+}
+.phone_input_detail .number-selector {
+  border: none !important;
+}
+.phone_input_detail .ant-input-group-addon,
+.phone_input_detail .ant-input-group > input.ant-input {
+  vertical-align: middle !important;
+}
+
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  padding: 20px 16px;
+  background: #f2f4f8ea;
+  border-radius: 20px;
+}
+.typing-indicator span {
+  height: 8px;
+  width: 8px;
+  margin: 0 2px;
+  background-color: #9ca3af;
+  border-radius: 50%;
+  display: inline-block;
+  animation: wt-booking-bounce 1.3s linear infinite;
+}
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes wt-booking-bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-4px);
+  }
+}

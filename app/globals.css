@@ -368,9 +368,10 @@ img {
   margin-bottom: 18px;
 }
 .wt-hero p {
-  color: #555;
+  color: #1d3649;
   font-size: 1.05rem;
   max-width: 560px;
+  margin-top: 10px;
 }
 .wt-hero-actions {
   margin-top: 24px;
@@ -388,6 +389,20 @@ img {
   gap: 10px;
   margin-top: 12px;
   flex-wrap: wrap;
+}
+.wt-hero-live-booking {
+  margin-top: 48px;
+  padding-top: 40px;
+  border-top: 1px solid var(--wt-border);
+}
+.wt-hero-live-booking h2 {
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+}
+.wt-hero-live-booking > p {
+  color: #555;
+  max-width: 640px;
+  margin-bottom: 20px;
 }
 
 /* Inner page hero */

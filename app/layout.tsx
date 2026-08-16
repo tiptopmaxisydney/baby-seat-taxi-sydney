@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins, Roboto } from "next/font/google";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 import "./globals.css";
+import "@/booking-widget/booking-widget.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import StickyCta from "@/components/layout/StickyCta";
@@ -28,6 +30,11 @@ export const metadata: Metadata = {
   authors: [{ name: siteConfig.name, url: siteConfig.url }],
   creator: siteConfig.name,
   publisher: siteConfig.name,
+  icons: {
+    icon: "/images/cropped-baby-icon-150x150.webp",
+    shortcut: "/images/cropped-baby-icon-150x150.webp",
+    apple: "/images/cropped-baby-icon-150x150.webp",
+  },
   openGraph: {
     title: "Baby Seat Taxi Sydney | Book Maxi Taxi with Baby Seat",
     description:
@@ -100,10 +107,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
       </head>
       <body id="top">
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <StickyCta />
+        <AntdRegistry>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+          <StickyCta />
+        </AntdRegistry>
       </body>
     </html>
   );

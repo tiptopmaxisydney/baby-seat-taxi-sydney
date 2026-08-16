@@ -5,18 +5,18 @@ import Faq from "@/components/home/Faq";
 import { siteConfig } from "@/lib/siteConfig";
 
 export const metadata: Metadata = {
-  title: "Get a Quote | Baby Seat Taxi Sydney",
-  description: "Get an instant quote for a baby capsule, child seat or booster seat taxi in Sydney. Tell us your trip details and we'll confirm pricing and availability.",
+  title: "Get a Booking | Baby Seat Taxi Sydney",
+  description: "Get an instant booking for a baby capsule, child seat or booster seat taxi in Sydney. Tell us your trip details and we'll confirm pricing and availability.",
 };
 
-export default function GetQuotePage() {
+export default function GetBookingPage() {
   return (
     <>
       <ServiceHero
-        eyebrow="Get a Quote"
-        title="Get a Baby Seat Taxi Quote"
+        eyebrow="Get a Booking"
+        title="Book Your Baby Seat Taxi"
         description="Tell us your pickup, destination and your child's age, and we'll confirm pricing and the right seat for your trip."
-        breadcrumbLabel="Get a Quote"
+        breadcrumbLabel="Get a Booking"
         image={{ src: "/images/baby-capsule-taxi-sydney-real.png", alt: "Baby capsule taxi Sydney for newborns and infants" }}
       />
 

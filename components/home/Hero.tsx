@@ -1,5 +1,6 @@
 import { FaPhoneAlt, FaRegEnvelope, FaApple, FaGooglePlay } from "react-icons/fa";
 import { siteConfig } from "@/lib/siteConfig";
+import TiptopBookingWidget from "@/booking-widget/components/TiptopBookingWidget";
 
 export default function Hero() {
   return (
@@ -8,6 +9,9 @@ export default function Hero() {
         <div className="wt-hero-content">
           <div className="wt-hero-eyebrow">Sydney&apos;s Family Transport Specialist</div>
           <h1>Baby Seat Taxi Sydney - Safe Family Transport with Baby Capsules &amp; Child Seats</h1>
+          <div id="wcb-booking-form">
+            <TiptopBookingWidget />
+          </div>
           <p>
             Travel safely with your baby, toddler or young child using Sydney&apos;s trusted baby seat taxi
             service. We provide professionally fitted baby capsules and child seats for airport transfers,

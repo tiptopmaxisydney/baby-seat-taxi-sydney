@@ -38,7 +38,7 @@ export default function ServiceHero({ eyebrow, title, description, breadcrumbLab
               <FaPhoneAlt aria-hidden="true" /> Call Us
             </a>
             <a href="/#wcb-booking-form" className="wt-btn wt-btn-outline-inverted">
-              Get a Quote
+              Book Now
             </a>
           </div>
         </div>

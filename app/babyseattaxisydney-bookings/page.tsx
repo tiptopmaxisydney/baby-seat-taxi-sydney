@@ -6,7 +6,7 @@ import { siteConfig } from "@/lib/siteConfig";
 
 export const metadata: Metadata = {
   title: "Bookings | Baby Seat Taxi Sydney",
-  description: "Book a baby capsule, child seat or booster seat taxi in Sydney by phone, app or online quote form.",
+  description: "Book a baby capsule, child seat or booster seat taxi in Sydney by phone, app or online booking form.",
 };
 
 export default function BookingsPage() {
@@ -15,7 +15,7 @@ export default function BookingsPage() {
       <ServiceHero
         eyebrow="Bookings"
         title="Book Your Baby Seat Taxi"
-        description="Three easy ways to book — by phone, through our app, or with an online quote request."
+        description="Three easy ways to book — by phone, through our app, or with an online booking request."
         breadcrumbLabel="Bookings"
         image={{ src: "/images/sydney-airport-transfers-with-baby-seats-real.png", alt: "Sydney Airport transfers with baby seats" }}
       />
@@ -45,7 +45,7 @@ export default function BookingsPage() {
             </div>
             <div className="wt-card">
               <h3>
-                <FaFileAlt aria-hidden="true" style={{ marginRight: 8, color: "var(--wt-blue)" }} /> Request a Quote
+                <FaFileAlt aria-hidden="true" style={{ marginRight: 8, color: "var(--wt-blue)" }} /> Request a Booking
               </h3>
               <p>
                 Fill in the form below with your trip details and your child&apos;s age, and our team will confirm pricing and the

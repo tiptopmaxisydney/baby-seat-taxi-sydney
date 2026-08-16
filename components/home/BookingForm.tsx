@@ -27,7 +27,7 @@ export default function BookingForm() {
   return (
     <div className="wcb-booking-widget">
       <div className="wcb-form-hero">
-        <h3>Get a baby seat taxi quote</h3>
+        <h3>Book your baby seat taxi</h3>
         <p>Airport transfers, hospital pickups and family trips covered.</p>
       </div>
 
@@ -191,7 +191,7 @@ export default function BookingForm() {
             Next
           </button>
           <button className="wcb-submit" type="submit">
-            Request a quote
+            Book Now
           </button>
         </div>
       </form>

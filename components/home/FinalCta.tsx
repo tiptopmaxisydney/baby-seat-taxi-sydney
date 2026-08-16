@@ -2,7 +2,7 @@ import { siteConfig } from "@/lib/siteConfig";
 
 export default function FinalCta() {
   return (
-    <section className="wt-section on-dark">
+    <section className="wt-section on-dark" id="wcb-booking-form">
       <div className="container">
         <div className="wt-final-cta">
           <h2>Need Assistance or Have Feedback?</h2>

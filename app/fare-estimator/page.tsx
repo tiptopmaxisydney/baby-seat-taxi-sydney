@@ -6,7 +6,7 @@ import FinalCta from "@/components/home/FinalCta";
 
 export const metadata: Metadata = {
   title: "Fare Estimator | Baby Seat Taxi Sydney",
-  description: "See what affects the price of a baby seat taxi in Sydney, and request an instant, accurate quote for your trip.",
+  description: "See what affects the price of a baby seat taxi in Sydney, and request an instant, accurate booking for your trip.",
 };
 
 export default function FareEstimatorPage() {
@@ -15,7 +15,7 @@ export default function FareEstimatorPage() {
       <ServiceHero
         eyebrow="Fare Estimator"
         title="What Affects Your Fare?"
-        description="Baby seat taxi pricing depends on a few key factors. Request a quote below for an exact, no-obligation price for your trip."
+        description="Baby seat taxi pricing depends on a few key factors. Request a booking below for an exact, no-obligation price for your trip."
         breadcrumbLabel="Fare Estimator"
         image={{ src: "/images/child-seat-taxi-sydney-real.png", alt: "Child seat taxi Sydney for toddlers and young children" }}
       />
@@ -35,7 +35,7 @@ export default function FareEstimatorPage() {
           },
           {
             title: "Seat Type & Number of Children",
-            description: "Let us know how many children are travelling and which seat type each one needs so your quote reflects the correct vehicle.",
+            description: "Let us know how many children are travelling and which seat type each one needs so your booking reflects the correct vehicle.",
           },
           {
             title: "One Way or Return",
@@ -55,13 +55,13 @@ export default function FareEstimatorPage() {
       <section className="wt-section on-dark">
         <div className="container">
           <span className="wt-eyebrow">Get an Exact Price</span>
-          <h2>Request a Quote for Your Exact Trip</h2>
+          <h2>Request a Booking for Your Exact Trip</h2>
           <p style={{ maxWidth: 700 }}>
-            Rather than a rough estimate, our booking form gives you a real, priced quote based on your actual pickup, destination,
+            Rather than a rough estimate, our booking form gives you a real, priced booking based on your actual pickup, destination,
             trip time and seat requirements — with no obligation to book.
           </p>
           <Link href="/get-quote/" className="wt-btn wt-btn-primary" style={{ marginTop: 8 }}>
-            Request a Quote
+            Request a Booking
           </Link>
         </div>
       </section>

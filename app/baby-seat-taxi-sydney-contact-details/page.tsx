@@ -108,7 +108,7 @@ export default function ContactUsPage() {
               ))}
             </ul>
             <Link href="/#wcb-booking-form" className="wt-btn wt-btn-primary" style={{ marginTop: 16 }}>
-              Request a Quote
+              Book Now
             </Link>
           </div>
         </div>

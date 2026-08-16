@@ -11,7 +11,7 @@ export default function StickyCta() {
         <FaWhatsapp aria-hidden="true" /> WhatsApp
       </a>
       <a href="#wcb-booking-form">
-        <FaFileAlt aria-hidden="true" /> Quote
+        <FaFileAlt aria-hidden="true" /> Booking
       </a>
     </div>
   );

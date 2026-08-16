@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Hero from "@/components/home/Hero";
 import SplitSection from "@/components/home/SplitSection";
-import BookingForm from "@/components/home/BookingForm";
 import Faq from "@/components/home/Faq";
 import {
   whyChooseUsPoints,
@@ -150,16 +149,6 @@ export default function Home() {
                 <p>{item.description}</p>
               </a>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="wt-section on-dark" id="get-a-quote">
-        <div className="container">
-          <span className="wt-eyebrow">Get A Quote For Baby Seat</span>
-          <h2>Get instant call back and quote from Sydney&apos;s best baby seat taxi</h2>
-          <div style={{ maxWidth: 640, margin: "24px auto 0" }}>
-            <BookingForm />
           </div>
         </div>
       </section>
