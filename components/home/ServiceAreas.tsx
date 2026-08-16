@@ -2,7 +2,7 @@ import { serviceAreas } from "@/lib/homeData";
 
 export default function ServiceAreas() {
   return (
-    <section className="wt-section">
+    <section className="wt-section on-dark">
       <div className="container">
         <span className="wt-eyebrow">Where We Drive</span>
         <h2>Areas We Service Across Sydney</h2>

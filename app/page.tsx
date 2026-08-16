@@ -1,26 +1,20 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import Hero from "@/components/home/Hero";
-import AboutSection from "@/components/home/AboutSection";
 import SplitSection from "@/components/home/SplitSection";
-import WhyChooseUs from "@/components/home/WhyChooseUs";
-import HowItWorks from "@/components/home/HowItWorks";
-import FleetShowcase from "@/components/home/FleetShowcase";
-import ServiceAreas from "@/components/home/ServiceAreas";
+import BookingForm from "@/components/home/BookingForm";
 import Faq from "@/components/home/Faq";
-import AppSection from "@/components/home/AppSection";
-import FinalCta from "@/components/home/FinalCta";
 import {
-  fleetIncludes,
-  childSafetyInfoPoints,
-  bookingSteps,
-  driverAssistance,
-  familiesWeAssist,
+  whyChooseUsPoints,
+  recentNews,
   popularDestinations,
   hospitalsServed,
   airportServices,
   safetyFeatures,
   faqColumns,
 } from "@/lib/homeData";
+import { blogPosts } from "@/lib/blogPosts";
 import { siteConfig } from "@/lib/siteConfig";
 
 export const metadata: Metadata = {
@@ -42,31 +36,35 @@ export default function Home() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <link
-        rel="preload"
-        href="/images/baby-seat-taxi-sydney-logo.png"
-        as="image"
-        fetchPriority="high"
-      />
+      <link rel="preload" href="/images/Baby-Seat-Finall-Logo.webp" as="image" fetchPriority="high" />
 
       <Hero />
-      <AboutSection />
 
-      <SplitSection
-        eyebrow="Our Service"
-        title="Professional Baby Seat Taxi Service Sydney"
-        paragraphs={[
-          "A baby seat taxi requires careful planning to ensure children can travel safely and comfortably. At Baby Seat Taxi Sydney, we provide professionally fitted baby capsules and child seats designed around the needs of each family.",
-          "When you make a booking, our team confirms your requirements, including your child's age, the seat type needed and travel details, so we can prepare the most suitable vehicle for your journey.",
-        ]}
-        itemsIntro="Our service includes:"
-        items={fleetIncludes}
-        image={{ src: "/images/baby-capsule-taxi-sydney.png", alt: "Baby capsule fitted in a Baby Seat Taxi Sydney vehicle", width: 700, height: 467 }}
-      />
-
-      <WhyChooseUs />
-      <HowItWorks />
-      <FleetShowcase />
+      <section className="wt-section on-dark">
+        <div className="container">
+          <span className="wt-eyebrow">Why Choose Us</span>
+          <h2>Why Choose Baby Seat Taxi Sydney</h2>
+          <div className="wt-split">
+            <div className="wt-split-media">
+              <video
+                controls
+                preload="metadata"
+                poster="https://babyseattaxisydney.com.au/wp-content/uploads/2023/03/photo.png"
+                style={{ borderRadius: "var(--wt-radius-lg)", width: "100%" }}
+              >
+                <source src="https://babyseattaxisydney.com.au/wp-content/uploads/2023/03/Baby-seat-Taxi-Sydney.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div className="wt-split-body">
+              <ul>
+                {whyChooseUsPoints.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <SplitSection
         title="Baby Capsule Taxi (Newborn to Approximately 1 Year)"
@@ -76,8 +74,9 @@ export default function Home() {
         ]}
         itemsIntro="Suitable for:"
         items={["Hospital discharge transport", "Airport transfers", "Family travel", "Everyday transport"]}
-        image={{ src: "/images/baby-capsule-taxi-sydney.png", alt: "Baby capsule taxi Sydney for newborns and infants", width: 700, height: 467 }}
+        image={{ src: "/images/baby-capsule-taxi-sydney-real.png", alt: "Baby capsule taxi Sydney for newborns and infants", width: 700, height: 467 }}
         imageFirst
+        background="dark"
       />
 
       <SplitSection
@@ -86,8 +85,8 @@ export default function Home() {
         paragraphs={["Children under four years of age require an approved child restraint suitable for their age and size."]}
         itemsIntro="Our child seat taxis provide:"
         items={["Safe and secure travel", "Professionally fitted restraints", "Comfortable family transport throughout Sydney"]}
-        image={{ src: "/images/child-seat-taxi-sydney.png", alt: "Child seat taxi Sydney for toddlers and young children", width: 700, height: 467 }}
-        background="light"
+        image={{ src: "/images/child-seat-taxi-sydney-real.png", alt: "Child seat taxi Sydney for toddlers and young children", width: 700, height: 467 }}
+        background="dark"
       />
 
       <SplitSection
@@ -98,8 +97,9 @@ export default function Home() {
         ]}
         itemsIntro="Services include:"
         items={airportServices}
-        image={{ src: "/images/sydney-airport-transfers-with-baby-seats.png", alt: "Sydney Airport transfers with baby seats", width: 800, height: 533 }}
+        image={{ src: "/images/sydney-airport-transfers-with-baby-seats.svg", alt: "Sydney Airport transfers with baby seats", width: 800, height: 533 }}
         imageFirst
+        background="dark"
       />
 
       <SplitSection
@@ -110,8 +110,8 @@ export default function Home() {
         ]}
         itemsIntro="We provide hospital pickup services from major Sydney hospitals including:"
         items={hospitalsServed}
-        image={{ src: "/images/hospital-transfers-with-baby-seats.png", alt: "Hospital transfers with baby seats in Sydney", width: 800, height: 533 }}
-        background="light"
+        image={{ src: "/images/hospital-transfers-with-baby-seats.svg", alt: "Hospital transfers with baby seats in Sydney", width: 800, height: 533 }}
+        background="dark"
       />
 
       <SplitSection
@@ -122,8 +122,9 @@ export default function Home() {
         ]}
         itemsIntro="Popular family destinations in Sydney:"
         items={popularDestinations}
-        image={{ src: "/images/family-transport-across-sydney.png", alt: "Family transport across Sydney with baby seats", width: 800, height: 533 }}
+        image={{ src: "/images/family-transport-across-sydney.svg", alt: "Family transport across Sydney with baby seats", width: 800, height: 533 }}
         imageFirst
+        background="dark"
       />
 
       <SplitSection
@@ -134,51 +135,51 @@ export default function Home() {
         ]}
         itemsIntro="Safety features:"
         items={safetyFeatures}
-        image={{ src: "/images/child-safety-information.png", alt: "Child safety information for baby seat taxi bookings", width: 740, height: 603 }}
-        background="light"
+        image={{ src: "/images/child-safety-information.svg", alt: "Child safety information for baby seat taxi bookings", width: 740, height: 603 }}
+        background="dark"
       />
 
-      <SplitSection
-        eyebrow="Details That Help Us Prepare"
-        title="Providing your child's details when booking allows us to prepare the correct seat"
-        itemsIntro="Helpful information includes:"
-        items={childSafetyInfoPoints}
-        image={{ src: "/images/child-safety-information.png", alt: "Details to provide when booking a baby seat taxi", width: 740, height: 603 }}
-        imageFirst
-      />
+      <section className="wt-section on-dark">
+        <div className="container">
+          <span className="wt-eyebrow">Recent News</span>
+          <h2>Recent News</h2>
+          <div className="wt-grid-3">
+            {recentNews.map((item) => (
+              <a href={item.href} key={item.href} target="_blank" rel="noreferrer" className="wt-card" style={{ display: "block" }}>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      <SplitSection
-        title="Simple Booking Process"
-        paragraphs={["Booking your baby seat taxi is straightforward."]}
-        numbered
-        items={bookingSteps}
-        image={{ src: "/images/baby-capsule-taxi-sydney.png", alt: "Booking a baby seat taxi in Sydney", width: 700, height: 467 }}
-        background="light"
-      />
+      <section className="wt-section on-dark" id="get-a-quote">
+        <div className="container">
+          <span className="wt-eyebrow">Get A Quote For Baby Seat</span>
+          <h2>Get instant call back and quote from Sydney&apos;s best baby seat taxi</h2>
+          <div style={{ maxWidth: 640, margin: "24px auto 0" }}>
+            <BookingForm />
+          </div>
+        </div>
+      </section>
 
-      <SplitSection
-        title="Professional Drivers Focused on Family Travel"
-        paragraphs={[
-          "Our drivers understand that every family has different needs. They aim to provide a calm, respectful experience while helping children travel comfortably and safely.",
-        ]}
-        itemsIntro="Depending on your requirements, assistance may include:"
-        items={driverAssistance}
-        image={{ src: "/images/child-seat-taxi-sydney.png", alt: "Driver assistance for family baby seat taxi trips", width: 700, height: 467 }}
-        imageFirst
-      />
-
-      <SplitSection
-        title="Families and Customers We Assist"
-        paragraphs={["We proudly provide transport for a wide range of customers across Sydney, including:"]}
-        items={familiesWeAssist}
-        image={{ src: "/images/family-transport-across-sydney.png", alt: "Families and customers Baby Seat Taxi Sydney assists", width: 800, height: 533 }}
-        background="light"
-      />
-
-      <ServiceAreas />
       <Faq />
-      <AppSection />
-      <FinalCta />
+
+      <section className="wt-section on-dark">
+        <div className="container">
+          <div className="wt-blog-grid">
+            {blogPosts.map((post) => (
+              <Link href={`/${post.slug}/`} key={post.slug} className="wt-blog-card">
+                <Image src={post.image.src} alt={post.image.alt} width={400} height={225} style={{ width: "100%", height: "auto" }} />
+                <div className="wt-blog-card-body">
+                  <h3>{post.title}</h3>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
     </>
   );
 }

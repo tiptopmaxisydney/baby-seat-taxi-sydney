@@ -19,7 +19,7 @@ export default function BookingsPage() {
         breadcrumbLabel="Bookings"
       />
 
-      <section className="wt-section">
+      <section className="wt-section on-dark">
         <div className="container">
           <div className="wt-grid-3">
             <div className="wt-card">

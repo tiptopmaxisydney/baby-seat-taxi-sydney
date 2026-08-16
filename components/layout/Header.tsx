@@ -47,7 +47,7 @@ export default function Header() {
       <header className="wt-header">
         <div className="wt-header-inner">
           <Link href="/" className="wt-logo" onClick={closeMenu}>
-            <Image src="/images/baby-seat-taxi-sydney-logo.png" alt={siteConfig.name} width={200} height={39} priority />
+            <Image src="/images/Baby-Seat-Finall-Logo.webp" alt={siteConfig.name} width={224} height={44} priority />
           </Link>
 
           <nav>

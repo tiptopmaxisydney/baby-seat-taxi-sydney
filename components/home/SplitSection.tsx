@@ -9,7 +9,7 @@ type SplitSectionProps = {
   numbered?: boolean;
   image: { src: string; alt: string; width: number; height: number };
   imageFirst?: boolean;
-  background?: "white" | "light";
+  background?: "white" | "light" | "dark";
 };
 
 export default function SplitSection({
@@ -24,9 +24,10 @@ export default function SplitSection({
   background = "white",
 }: SplitSectionProps) {
   const ListTag = numbered ? "ol" : "ul";
+  const backgroundClass = background === "light" ? " on-light" : background === "dark" ? " on-dark" : "";
 
   return (
-    <section className={`wt-section${background === "light" ? " on-light" : ""}`}>
+    <section className={`wt-section${backgroundClass}`}>
       <div className="container">
         <div className={`wt-split${imageFirst ? "" : " reverse"}`}>
           <div className="wt-split-media">

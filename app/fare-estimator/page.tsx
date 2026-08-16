@@ -22,7 +22,7 @@ export default function FareEstimatorPage() {
       <FeatureGrid
         eyebrow="Pricing Factors"
         title="What Goes Into Your Fare"
-        background="white"
+        background="dark"
         features={[
           {
             title: "Distance & Route",
@@ -51,7 +51,7 @@ export default function FareEstimatorPage() {
         ]}
       />
 
-      <section className="wt-section on-light">
+      <section className="wt-section on-dark">
         <div className="container">
           <span className="wt-eyebrow">Get an Exact Price</span>
           <h2>Request a Quote for Your Exact Trip</h2>

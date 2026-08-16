@@ -19,11 +19,11 @@ export default function GetQuotePage() {
         breadcrumbLabel="Get a Quote"
       />
 
-      <section className="wt-section">
+      <section className="wt-section on-dark">
         <div className="container">
           <div style={{ maxWidth: 640, margin: "0 auto" }}>
             <BookingForm />
-            <p style={{ textAlign: "center", marginTop: 24, color: "var(--wt-muted)", fontSize: "0.9rem" }}>
+            <p style={{ textAlign: "center", marginTop: 24, color: "rgba(255,255,255,0.65)", fontSize: "0.9rem" }}>
               Prefer to speak with our team? Call{" "}
               <a href={`tel:${siteConfig.phoneIntl}`}>{siteConfig.phoneIntlDisplay}</a> or email{" "}
               <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.

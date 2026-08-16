@@ -14,7 +14,7 @@ export default function Faq({ columns = defaultFaqColumns, title = "Frequently A
   const [openKey, setOpenKey] = useState<string | null>(null);
 
   return (
-    <section className="wt-section on-light" id="faq">
+    <section className="wt-section on-dark" id="faq">
       <div className="container">
         <span className="wt-eyebrow">{eyebrow}</span>
         <h2>{title}</h2>

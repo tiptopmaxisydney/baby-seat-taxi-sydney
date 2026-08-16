@@ -1,91 +1,33 @@
-export const whyChooseUs = [
-  {
-    title: "Safety-First Family Transport",
-    description:
-      "Parents trust us because safety comes first. Every child restraint is professionally fitted and checked by trained drivers before your journey begins, so you can travel with confidence.",
-  },
-  {
-    title: "Baby Capsules & Child Seats Available",
-    description:
-      "Suitable for newborns, infants, toddlers and young children. Rear-facing baby capsules are available for newborns and young infants, with forward-facing child seats and booster seats available on request.",
-  },
-  {
-    title: "Sydney Airport & Hospital Specialists",
-    description:
-      "Reliable transfers to and from Sydney's Domestic and International Airports, plus safe pickup and drop-off for newborns and families leaving Sydney hospitals.",
-  },
+// Verbatim from the live homepage's "Why Choose Baby Seat Taxi Sydney" list.
+export const whyChooseUsPoints = [
+  "Parents trust us because safety comes first.",
+  "Family-Friendly Transport",
+  "Suitable for newborns, infants, toddlers and young children.",
+  "Baby Capsules & Child Seats Available",
+  "Rear-facing baby capsules available for newborns and young infants.",
+  "Forward-facing child seats available upon request.",
+  "Sydney Airport Specialists",
+  "Reliable transfers to and from Sydney Domestic and International Airports.",
+  "Hospital Pickups",
+  "Safe transport for newborns and families leaving Sydney hospitals.",
+  "Available Across Sydney",
+  "Serving Sydney CBD, Western Sydney, Inner West, Eastern Suburbs, North Shore and surrounding areas.",
+  "24/7 Service",
+  "Pre-booked and last-minute bookings available.",
 ];
 
-export const howItWorks = [
+// Verbatim from the live homepage's "Recent News" section.
+export const recentNews = [
   {
-    step: "01",
-    title: "Booking Confirmation",
-    items: [
-      "Pickup location",
-      "Destination",
-      "Preferred pickup time",
-      "Child's age and weight",
-      "Number of children travelling",
-      "Baby capsule, child seat or booster required",
-    ],
+    title: "Child car seats reduce injuries and deaths.",
+    description: "Children aged under 7 years must use an approved suitable child restraint when travelling in a vehicle.",
+    href: "https://www.nsw.gov.au/driving-boating-and-transport/roads-safety-and-rules/safe-driving/child-seats",
   },
   {
-    step: "02",
-    title: "Seat & Vehicle Allocation",
-    intro: "We assign a suitable vehicle and child restraint based on:",
-    items: ["Child's age and size", "Number of children", "Luggage and pram requirements", "Journey distance", "Pickup location"],
-  },
-  {
-    step: "03",
-    title: "Safe Fitting & Boarding",
-    intro: "When the driver arrives they will:",
-    items: [
-      "Fit and check the correct baby capsule or child seat",
-      "Position the vehicle safely for loading",
-      "Assist with prams and luggage",
-      "Secure the child restraint before departure",
-      "Confirm your child is seated safely before setting off",
-    ],
-  },
-  {
-    step: "04",
-    title: "Comfortable Family Travel",
-    intro: "During your journey our drivers aim to provide:",
-    items: [
-      "Smooth, unhurried driving",
-      "Direct routes where practical",
-      "Assistance when arriving at your destination",
-      "Respectful and professional customer service",
-    ],
-  },
-];
-
-export type FleetType = { title: string; icon: "capsule" | "seat" | "booster" | "multi"; description: string };
-
-export const fleetTypes: FleetType[] = [
-  {
-    title: "Baby Capsule (Newborn – 12 Months)",
-    icon: "capsule",
+    title: "Seatbelts and Child Restraints...",
     description:
-      "Rear-facing baby capsules professionally installed for newborns and young infants, ideal for hospital discharge and everyday travel.",
-  },
-  {
-    title: "Convertible Child Seat (6 Months – 4 Years)",
-    icon: "seat",
-    description:
-      "Forward-facing child seats fitted and checked by trained drivers, suitable for toddlers and young children under NSW road rules.",
-  },
-  {
-    title: "Booster Seat (4 – 7 Years)",
-    icon: "booster",
-    description:
-      "Booster seats available for older children who have outgrown a full harness restraint but still need an approved seat.",
-  },
-  {
-    title: "Multiple Child Seats",
-    icon: "multi",
-    description:
-      "Travelling with more than one child? Let us know each child's age when booking and we will arrange the right combination of seats.",
+      "When travelling in a motor vehicle in South Australia, all children under 16 years of age must be restrained in a suitable approved restraint that is properly adjusted and fastened...",
+    href: "https://www.mylicence.sa.gov.au/roadrules/seatbelts-and-child-restraints",
   },
 ];
 
@@ -132,50 +74,6 @@ export const fleetIncludes = [
   "Airport transfer vehicles with luggage and pram capacity",
   "Hospital and medical transport vehicles",
   "Coverage across Sydney CBD, Western Sydney, Inner West, Eastern Suburbs and North Shore",
-];
-
-export const childSafetyInfoPoints = [
-  "Your child's approximate age",
-  "Your child's approximate weight",
-  "Whether a rear-facing baby capsule is needed",
-  "Whether a forward-facing child seat is needed",
-  "Whether a booster seat is needed",
-  "Number of children travelling",
-  "Any specific seat brand or model preference",
-  "Pram or additional luggage requirements",
-];
-
-export const bookingSteps = [
-  "Contact us online or by phone.",
-  "Tell us your pickup and destination.",
-  "Let us know your child's age and the seat type needed.",
-  "Receive your fare quote and booking confirmation.",
-  "We assign a vehicle with the correct baby capsule or child seat.",
-  "Your driver arrives at the scheduled time and fits the seat.",
-  "Travel safely to your destination.",
-];
-
-export const driverAssistance = [
-  "Fitting and checking baby capsules and child seats before departure",
-  "Helping parents load prams, capsules and luggage",
-  "Assisting with car seat transfers between vehicles where needed",
-  "Airport pickup assistance",
-  "Hospital collection and drop-off for newborns and families",
-  "Providing a calm, safe environment for infants and young children",
-  "Extra support for parents travelling solo with multiple children",
-];
-
-export const familiesWeAssist = [
-  "New parents and newborns",
-  "Families travelling together",
-  "Hospital patients and maternity discharges",
-  "Grandparents and carers minding children",
-  "Cruise terminal passengers",
-  "Sydney Airport travellers",
-  "Tourists needing a baby capsule or booster seat",
-  "Event organisers and school groups",
-  "Corporate clients relocating with families",
-  "Community and support organisations",
 ];
 
 export const popularDestinations = [
@@ -269,29 +167,30 @@ export const faqColumns: Faq[][] = [
   ],
 ];
 
+// Verbatim from the live footer's "Services" column.
 export const footerServices = [
   { label: "Baby Capsule Taxi Sydney", href: "/baby-capsule-taxi-sydney/" },
   { label: "Child Seat Taxi Sydney", href: "/child-seat-taxi-sydney/" },
-  { label: "Booster Seat Taxi Sydney", href: "/booster-seat-taxi-sydney/" },
-  { label: "Baby Car Seat Taxi Sydney", href: "/baby-car-seat-taxi-sydney/" },
   { label: "Sydney Airport Transfers", href: "/sydney-airport-transfers-with-baby-seats/" },
   { label: "Taxi With Baby Seat Sydney", href: "/taxi-with-baby-seat-sydney/" },
 ];
 
+// Verbatim from the live footer's "Useful Links" column.
 export const footerLinks = [
-  { label: "About Us", href: "/baby-seat-taxi-company-in-sydney/" },
+  { label: "Home", href: "/" },
+  { label: "Company", href: "/baby-seat-taxi-company-in-sydney/" },
   { label: "Blog", href: "/baby-seat-taxi-sydney-blog/" },
   { label: "FAQ's", href: "/faqs/" },
   { label: "Contact Us", href: "/baby-seat-taxi-sydney-contact-details/" },
-  { label: "Privacy Policy", href: "/privacy-policy/" },
 ];
 
+// Verbatim from the live footer's "Location" column (6 of the 7 location
+// pages — the live footer omits Chatswood even though it's a real page).
 export const footerLocations = [
   { label: "Baby Seat Taxi Parramatta", href: "/baby-seat-taxi-parramatta/" },
   { label: "Baby Seat Taxi Blacktown", href: "/baby-seat-taxi-blacktown/" },
   { label: "Baby Seat Taxi Liverpool", href: "/baby-seat-taxi-liverpool/" },
   { label: "Baby Seat Taxi Penrith", href: "/baby-seat-taxi-penrith/" },
   { label: "Baby Seat Taxi Campbelltown", href: "/baby-seat-taxi-campbelltown/" },
-  { label: "Baby Seat Taxi Chatswood", href: "/baby-seat-taxi-chatswood/" },
   { label: "Baby Seat Taxi Bondi", href: "/baby-seat-taxi-bondi/" },
 ];

@@ -3,6 +3,9 @@
   --wt-blue-dark: #c9720a;
   --wt-blue-light: #fdf1e1;
   --wt-navy: #1d3649;
+  /* Teal used for the main header nav row on the live site — distinct from
+     the navy topbar/footer/dark sections. */
+  --wt-teal: #015271;
   --wt-accent: #c9720a;
   --wt-text: #33383f;
   --wt-muted: #5b6472;
@@ -65,6 +68,60 @@ img {
   background: var(--wt-blue-light);
 }
 
+/* Dark navy sections — the live site runs most of its body content (why
+   choose, seat options, airport/hospital transfers, FAQ, etc.) on a solid
+   navy field with white text, not the light/white sections used elsewhere. */
+.wt-section.on-dark {
+  background: var(--wt-navy);
+}
+.wt-section.on-dark h2,
+.wt-section.on-dark h3,
+.wt-section.on-dark h4 {
+  color: #fff;
+}
+.wt-section.on-dark > .container > p,
+.wt-section.on-dark p {
+  color: rgba(255, 255, 255, 0.78);
+}
+.wt-section.on-dark .wt-split-body ul,
+.wt-section.on-dark .wt-split-body ol,
+.wt-section.on-dark .wt-step ul,
+.wt-section.on-dark .wt-step p {
+  color: rgba(255, 255, 255, 0.78);
+}
+.wt-section.on-dark .wt-card,
+.wt-section.on-dark .wt-fleet-card,
+.wt-section.on-dark .wt-area-card {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+.wt-section.on-dark .wt-card h3,
+.wt-section.on-dark .wt-fleet-card h4,
+.wt-section.on-dark .wt-area-card h3 {
+  color: #fff;
+}
+.wt-section.on-dark .wt-card p,
+.wt-section.on-dark .wt-fleet-card p,
+.wt-section.on-dark .wt-area-card p {
+  color: rgba(255, 255, 255, 0.7);
+}
+.wt-section.on-dark .wt-step-num {
+  color: rgba(255, 255, 255, 0.12);
+  -webkit-text-stroke-color: var(--wt-blue);
+}
+.wt-section.on-dark .wt-faq-item {
+  border-color: rgba(255, 255, 255, 0.16);
+}
+.wt-section.on-dark .wt-faq-question {
+  color: #fff;
+}
+.wt-section.on-dark .wt-faq-answer {
+  color: rgba(255, 255, 255, 0.72);
+}
+.wt-section.on-dark .wt-app-wrap {
+  background: rgba(255, 255, 255, 0.06);
+}
+
 .wt-eyebrow {
   display: inline-block;
   font-family: var(--font-heading);
@@ -107,6 +164,13 @@ img {
 .wt-btn-outline:hover {
   background: var(--wt-blue);
   color: #fff;
+}
+.wt-btn-teal {
+  background: var(--wt-teal);
+  color: #fff;
+}
+.wt-btn-teal:hover {
+  background: var(--wt-navy);
 }
 .wt-btn-outline-inverted {
   background: transparent;
@@ -162,8 +226,8 @@ img {
 
 /* Header */
 .wt-header {
-  background: #fff;
-  border-bottom: 1px solid var(--wt-border);
+  background: var(--wt-teal);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   position: sticky;
   top: 0;
   z-index: 50;
@@ -199,7 +263,7 @@ img {
   font-family: var(--font-heading);
   font-weight: 600;
   font-size: 0.92rem;
-  color: var(--wt-navy);
+  color: #fff;
   padding: 10px 0;
   display: inline-block;
 }
@@ -217,7 +281,7 @@ img {
   background: none;
   border: none;
   font-size: 1.4rem;
-  color: var(--wt-navy);
+  color: #fff;
   cursor: pointer;
 }
 
@@ -269,19 +333,15 @@ img {
   color: var(--wt-accent);
 }
 
-/* Hero */
+/* Hero — matches the live site: a single text column on a light ground,
+   with the real photo bleeding in from the right as a background image
+   (no booking-form panel in the banner). */
 .wt-hero {
-  background: #fff url("/images/baby-seat-taxi-sydney-banner.png") bottom center / cover no-repeat;
-  min-height: 550px;
+  background: #fdf1e1 url("/images/baby-seat-taxi-sydney-hero.png") right center / cover no-repeat;
+  min-height: 480px;
   display: flex;
   align-items: center;
   padding: 50px 0;
-}
-.wt-hero-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(360px, 460px);
-  gap: 40px;
-  align-items: center;
 }
 .wt-hero-eyebrow {
   font-family: var(--font-heading);
@@ -304,11 +364,25 @@ img {
 }
 .wt-hero-actions {
   margin-top: 24px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.wt-hero-note {
+  margin-top: 28px;
+  font-weight: 700;
+  color: var(--wt-navy);
+}
+.wt-hero-badges {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
 }
 
 /* Inner page hero */
 .wt-page-hero {
-  background: linear-gradient(135deg, rgba(13, 27, 46, 0.92) 0%, rgba(29, 105, 180, 0.86) 100%);
+  background: linear-gradient(135deg, rgba(18, 35, 46, 0.94) 0%, rgba(29, 54, 73, 0.9) 100%);
   padding: 54px 0;
   color: #fff;
 }
@@ -709,6 +783,7 @@ img {
   .wt-nav-open > li > a {
     display: block;
     padding: 14px 0;
+    color: var(--wt-navy);
   }
   .wt-nav-open .wt-mega {
     position: static;
@@ -738,7 +813,8 @@ img {
     gap: 16px;
   }
   .wt-menu-toggle { display: block; }
-  .wt-hero-grid { grid-template-columns: 1fr; }
+  .wt-hero { text-align: left; background-position: 85% center; }
+  .wt-hero-content { max-width: 100%; }
   .wt-split { grid-template-columns: 1fr; gap: 28px; }
   .wt-split.reverse .wt-split-media { order: 0; }
   .wt-grid-3 { grid-template-columns: 1fr; }

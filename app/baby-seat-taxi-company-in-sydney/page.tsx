@@ -1,69 +1,94 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import ServiceHero from "@/components/service/ServiceHero";
-import SplitSection from "@/components/home/SplitSection";
-import FeatureGrid from "@/components/service/FeatureGrid";
-import ServiceAreas from "@/components/home/ServiceAreas";
+import Faq from "@/components/home/Faq";
 import FinalCta from "@/components/home/FinalCta";
-import { familiesWeAssist } from "@/lib/homeData";
 
 export const metadata: Metadata = {
-  title: "About Us | Baby Seat Taxi Sydney",
+  title: "Baby Seat Taxi Company in Sydney | Safety-First Family Cabs",
   description:
-    "Learn about Baby Seat Taxi Sydney, our approach to family transport, and how we support parents, carers and organisations across Sydney.",
+    "About Baby Seat Taxi Sydney - safe family transport across Sydney with baby capsules and child seats available on request.",
 };
+
+const aboutFaq = [
+  {
+    question: "Do I need to request a baby seat when booking?",
+    answer: "Yes. Please advise us during booking so we can arrange the appropriate child restraint.",
+  },
+  {
+    question: "Do you provide airport transfers?",
+    answer: "Yes. Sydney Airport transfers are one of our most popular services.",
+  },
+  {
+    question: "Can I request a baby capsule, child seat, or booster seat?",
+    answer: "Absolutely. We provide all three options depending on your child's age and requirements.",
+  },
+  {
+    question: "Do you operate across Sydney?",
+    answer: "Yes. We provide family transport services throughout Sydney and surrounding suburbs.",
+  },
+  {
+    question: "Can I use my own child seat?",
+    answer: "Yes. You're welcome to use your own approved child restraint if preferred.",
+  },
+];
 
 export default function AboutUsPage() {
   return (
     <>
       <ServiceHero
         eyebrow="About Us"
-        title="Sydney's Dedicated Baby Seat Taxi Specialists"
-        description="Family-friendly transport built around the needs of every child, from newborn capsules to booster seats."
+        title="Baby Seat Taxi Company in Sydney"
+        description="About Baby Seat Taxi Sydney - Safe Family Transport Across Sydney"
         breadcrumbLabel="About Us"
       />
 
-      <SplitSection
-        eyebrow="Our Story"
-        title="Purpose-Built Family Transport"
-        paragraphs={[
-          "Baby Seat Taxi Sydney was established to provide dedicated, family-friendly transport across the Sydney metropolitan area. Rather than treating a car seat as an afterthought, our vehicles, booking process and driver training are all built around the needs of families travelling with babies and young children.",
-          "We work with private customers, new parents, hospitals, cruise terminal passengers, event organisers and corporate clients, adapting our service to the specific requirements of each booking.",
-        ]}
-        image={{ src: "/images/baby-capsule-taxi-sydney.png", alt: "Baby Seat Taxi Sydney booking and service overview", width: 700, height: 467 }}
-        imageFirst
-      />
+      <section className="wt-section on-dark">
+        <div className="container">
+          <div style={{ maxWidth: 820 }}>
+            <p>
+              At Baby Seat Taxi Sydney, we understand that travelling with children requires more than just a
+              ride. Parents need safety, reliability, comfort, and peace of mind every time they travel. That&apos;s
+              why we specialise in family-friendly transport services with baby capsules and child seats available
+              throughout Sydney.
+            </p>
+            <p>
+              Whether you&apos;re travelling to Sydney Airport, a hospital appointment, a family gathering, a
+              cruise terminal, or simply heading across the city, our goal is to provide safe and dependable
+              transport for families with children of all ages.
+            </p>
 
-      <FeatureGrid
-        eyebrow="Our Approach"
-        title="What Guides Our Service"
-        features={[
-          {
-            title: "Parent-First Planning",
-            description:
-              "Every booking starts with a conversation about your child's age, the seat type needed and travel details, so we can allocate the right vehicle.",
-          },
-          {
-            title: "Trained, Careful Drivers",
-            description:
-              "Our drivers are trained in fitting and checking baby capsules, child seats and booster seats before every trip.",
-          },
-          {
-            title: "Clean, Family-Friendly Fleet",
-            description:
-              "Our vehicles are regularly maintained and set up with room for prams, capsules and extra luggage.",
-          },
-        ]}
-      />
+            <h2>Our Story</h2>
+            <p>
+              Baby Seat Taxi Sydney was created to solve a common problem faced by parents and caregivers across
+              Sydney, finding safe transport equipped with the right child restraints. Many taxis and rideshare
+              vehicles do not carry child seats, leaving families with limited options when travelling with
+              newborns, toddlers, and young children.
+            </p>
+            <p>
+              We recognised the need for a dedicated transport service focused on family safety, convenience, and
+              reliability. Today, we proudly help Sydney families travel confidently by providing baby capsules and
+              child seats upon request.
+            </p>
+            <Link href="/#wcb-booking-form" className="wt-btn wt-btn-primary">
+              Book Now
+            </Link>
 
-      <SplitSection
-        title="Who We Work With"
-        paragraphs={["We proudly provide family transport for a wide range of customers and organisations across Sydney, including:"]}
-        items={familiesWeAssist}
-        image={{ src: "/images/family-transport-across-sydney.png", alt: "Families and customers Baby Seat Taxi Sydney assists", width: 800, height: 533 }}
-        background="light"
-      />
+            <h2 style={{ marginTop: 40 }}>Our Mission</h2>
+            <p>
+              Our mission is simple: to provide safe, reliable, and family-friendly transport across Sydney with
+              appropriate child restraints available for every journey.
+            </p>
+            <p>We believe parents should never have to compromise on safety when travelling with their children.</p>
+            <p>
+              Every booking is managed with care to ensure families receive the right vehicle, the appropriate
+              child restraint, and professional service from pickup to drop-off.
+            </p>
+          </div>
+        </div>
+      </section>
 
-      <ServiceAreas />
+      <Faq columns={[aboutFaq]} title="Frequently Asked Questions" eyebrow="Questions" />
       <FinalCta />
     </>
   );

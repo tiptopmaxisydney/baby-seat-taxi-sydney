@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaFacebookF, FaYoutube, FaMapMarkerAlt, FaRegEnvelope, FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
+import { FaFacebookF, FaYoutube, FaMapMarkerAlt, FaRegEnvelope, FaPhoneAlt } from "react-icons/fa";
 import { siteConfig } from "@/lib/siteConfig";
 import { footerServices, footerLinks, footerLocations } from "@/lib/homeData";
 
@@ -10,9 +10,19 @@ export default function Footer() {
   return (
     <footer className="wt-footer">
       <div className="container">
+        <div className="wt-final-cta" style={{ marginBottom: 40 }}>
+          <h2>Book a Baby Seat Taxi in Sydney Today</h2>
+          <p>Whether you need a baby capsule or child seat, our team is ready to help.</p>
+          <div className="wt-final-actions">
+            <a href={`tel:${siteConfig.phoneIntl}`} className="wt-btn wt-btn-primary">
+              Call: {siteConfig.phoneLocalDisplay}
+            </a>
+          </div>
+        </div>
+
         <div className="wt-footer-grid">
           <div>
-            <Image src="/images/baby-seat-taxi-sydney-logo.png" alt={siteConfig.name} width={180} height={35} />
+            <Image src="/images/Baby-Seat-Finall-Logo.webp" alt={siteConfig.name} width={178} height={35} />
             <p style={{ marginTop: 16, fontSize: "0.88rem" }}>
               Safe, family-friendly baby seat taxi transport across Sydney, with baby capsules and child seats for
               airport transfers, hospital transfers and everyday family travel.
@@ -60,18 +70,16 @@ export default function Footer() {
                 </span>
               </li>
               <li>
-                <FaRegEnvelope aria-hidden="true" />
-                <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+                <FaPhoneAlt aria-hidden="true" />
+                <a href={`tel:${siteConfig.phoneLocal}`}>{siteConfig.phoneLocalDisplay} (LOCALS)</a>
               </li>
               <li>
                 <FaPhoneAlt aria-hidden="true" />
-                <a href={`tel:${siteConfig.phoneIntl}`}>{siteConfig.phoneIntlDisplay}</a>
+                <a href={`tel:${siteConfig.phoneIntl}`}>{siteConfig.phoneIntlDisplay} (INTERNATIONAL)</a>
               </li>
               <li>
-                <FaWhatsapp aria-hidden="true" />
-                <a href={siteConfig.whatsapp} target="_blank" rel="noreferrer">
-                  WhatsApp
-                </a>
+                <FaRegEnvelope aria-hidden="true" />
+                <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
               </li>
             </ul>
             <ul style={{ marginTop: 16 }}>
