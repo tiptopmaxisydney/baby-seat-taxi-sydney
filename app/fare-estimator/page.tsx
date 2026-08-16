@@ -1,0 +1,71 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import ServiceHero from "@/components/service/ServiceHero";
+import FeatureGrid from "@/components/service/FeatureGrid";
+import FinalCta from "@/components/home/FinalCta";
+
+export const metadata: Metadata = {
+  title: "Fare Estimator | Baby Seat Taxi Sydney",
+  description: "See what affects the price of a baby seat taxi in Sydney, and request an instant, accurate quote for your trip.",
+};
+
+export default function FareEstimatorPage() {
+  return (
+    <>
+      <ServiceHero
+        eyebrow="Fare Estimator"
+        title="What Affects Your Fare?"
+        description="Baby seat taxi pricing depends on a few key factors. Request a quote below for an exact, no-obligation price for your trip."
+        breadcrumbLabel="Fare Estimator"
+      />
+
+      <FeatureGrid
+        eyebrow="Pricing Factors"
+        title="What Goes Into Your Fare"
+        background="white"
+        features={[
+          {
+            title: "Distance & Route",
+            description: "The distance between your pickup and destination, and current traffic conditions, are the biggest factors in your fare.",
+          },
+          {
+            title: "Trip Time & Day",
+            description: "Pickup time, day of the week and any applicable tolls (including airport tolls) can affect the final price.",
+          },
+          {
+            title: "Seat Type & Number of Children",
+            description: "Let us know how many children are travelling and which seat type each one needs so your quote reflects the correct vehicle.",
+          },
+          {
+            title: "One Way or Return",
+            description: "Booking a return trip at the same time can simplify planning around appointments and events.",
+          },
+          {
+            title: "Luggage & Prams",
+            description: "Extra luggage, prams or additional passengers may affect which vehicle is best suited to your trip.",
+          },
+          {
+            title: "Advance vs Last-Minute Booking",
+            description: "We recommend booking ahead to guarantee the correct baby capsule, child seat or booster seat is available.",
+          },
+        ]}
+      />
+
+      <section className="wt-section on-light">
+        <div className="container">
+          <span className="wt-eyebrow">Get an Exact Price</span>
+          <h2>Request a Quote for Your Exact Trip</h2>
+          <p style={{ maxWidth: 700 }}>
+            Rather than a rough estimate, our booking form gives you a real, priced quote based on your actual pickup, destination,
+            trip time and seat requirements — with no obligation to book.
+          </p>
+          <Link href="/get-quote/" className="wt-btn wt-btn-primary" style={{ marginTop: 8 }}>
+            Request a Quote
+          </Link>
+        </div>
+      </section>
+
+      <FinalCta />
+    </>
+  );
+}
