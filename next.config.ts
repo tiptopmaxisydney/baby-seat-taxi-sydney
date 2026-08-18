@@ -12,6 +12,11 @@ const nextConfig: NextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    // content-hub CMS media (Payload uploads) - dev hub runs on :3001, prod at cms.babyseattaxisydney.com.au.
+    remotePatterns: [
+      { protocol: "http", hostname: "localhost", port: "3001" },
+      { protocol: "https", hostname: "cms.babyseattaxisydney.com.au" },
+    ],
   },
   // No custom long-lived "immutable" Cache-Control on /images/* while these
   // are still placeholder graphics being iterated on — `immutable` tells

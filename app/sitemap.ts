@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/siteConfig";
-import { servicePages } from "@/lib/servicePages";
-import { blogPosts } from "@/lib/blogPosts";
+import { getServicePages } from "@/lib/servicePages";
+import { getBlogPosts } from "@/lib/blogPosts";
 
 const staticRoutes: { path: string; priority: number; changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] }[] = [
   { path: "", priority: 1, changeFrequency: "weekly" },
@@ -16,8 +16,9 @@ const staticRoutes: { path: string; priority: number; changeFrequency: MetadataR
   { path: "/cookie-policy", priority: 0.3, changeFrequency: "yearly" },
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
+  const [servicePages, blogPosts] = await Promise.all([getServicePages(), getBlogPosts()]);
 
   const staticEntries: MetadataRoute.Sitemap = staticRoutes.map((route) => ({
     url: `${siteConfig.url}${route.path}`,

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import ServiceHero from "@/components/service/ServiceHero";
-import { blogPosts } from "@/lib/blogPosts";
+import { getBlogPosts } from "@/lib/blogPosts";
 
 const title = "Blog | Baby Seat Taxi Sydney";
 const description = "News, guides and helpful information about baby seat taxis, child restraint laws and family travel in Sydney.";
@@ -15,7 +15,9 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title, description },
 };
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const blogPosts = await getBlogPosts();
+
   return (
     <>
       <ServiceHero

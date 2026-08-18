@@ -13,7 +13,7 @@ import {
   safetyFeatures,
   faqColumns,
 } from "@/lib/homeData";
-import { blogPosts } from "@/lib/blogPosts";
+import { getBlogPosts } from "@/lib/blogPosts";
 import { siteConfig } from "@/lib/siteConfig";
 
 export const metadata: Metadata = {
@@ -31,7 +31,9 @@ const faqSchema = {
   })),
 };
 
-export default function Home() {
+export default async function Home() {
+  const blogPosts = await getBlogPosts();
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
