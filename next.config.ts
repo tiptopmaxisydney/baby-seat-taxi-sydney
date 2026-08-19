@@ -25,6 +25,18 @@ const nextConfig: NextConfig = {
   // would leave visitors' browsers permanently stuck on the old version.
   // Re-add a long-lived immutable header once real, final assets are in
   // place (ideally with content-hashed filenames instead of stable ones).
+
+  // URL restructure (2026-08): transport-solutions-sydney (tiptopmaxisydney.com.au) is the
+  // canonical brand for this keyword - this site's duplicate page permanently redirects there.
+  async redirects() {
+    return [
+      {
+        source: "/baby-seat-taxi-western-sydney-airport/",
+        destination: "https://tiptopmaxisydney.com.au/western-sydney-airport-baby-seat-taxi/",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
