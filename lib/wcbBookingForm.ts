@@ -1,4 +1,5 @@
 import { WCBDateTime, parseValue } from "@/lib/wcbDateTime";
+import { getAttribution, getCurrentPage } from "@/booking-widget/utils/attribution";
 
 /**
  * Port of the wheelchair-taxi-sydney sibling site's booking widget logic,
@@ -481,7 +482,18 @@ export function attachBookingForm(form: HTMLFormElement, config: WCBConfig): () 
     const noOfChildCapsule = isCapsule ? seatCount : 0;
     const noOfChildSeat = isCapsule ? 0 : seatCount;
 
+    const attribution = getAttribution();
     const payload = {
+      brand: attribution.brand,
+      utm_source: attribution.utm_source,
+      utm_medium: attribution.utm_medium,
+      utm_campaign: attribution.utm_campaign,
+      utm_term: attribution.utm_term,
+      utm_content: attribution.utm_content,
+      gclid: attribution.gclid,
+      fbclid: attribution.fbclid,
+      landing_page: attribution.landing_page,
+      ...getCurrentPage(),
       pickup_address: pickupAddress,
       pick_up_lat: pickupLat,
       pick_up_long: pickupLng,
