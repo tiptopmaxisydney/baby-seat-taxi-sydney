@@ -26,4 +26,11 @@ export const siteConfig = {
     postcode: "2144",
     country: "AU",
   },
+  // Sibling brands under the same TipTop Transport Solutions entity - linked via sameAs in the
+  // Organization schema (app/layout.tsx) so search/AI systems can connect them as one business.
+  siblingBrands: {
+    tiptopMaxiSydney: "https://tiptopmaxisydney.com.au",
+    wheelchairTaxiSydney: "https://wheelchairtaxisydney.com.au",
+    tiptopRideBooking: "https://bookings.tiptopride.com.au",
+  },
 } as const;

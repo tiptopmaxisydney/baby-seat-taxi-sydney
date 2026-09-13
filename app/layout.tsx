@@ -68,6 +68,7 @@ const organizationSchema = {
   "@type": ["TravelAgency", "Organization"],
   "@id": `${siteConfig.url}/#organization`,
   name: siteConfig.name,
+  legalName: siteConfig.legalName,
   url: siteConfig.url,
   email: siteConfig.email,
   telephone: siteConfig.phoneIntl,
@@ -80,7 +81,13 @@ const organizationSchema = {
     addressCountry: siteConfig.address.country,
   },
   areaServed: { "@type": "City", name: "Sydney" },
-  sameAs: [] as string[],
+  sameAs: [
+    siteConfig.apps.appStore,
+    siteConfig.apps.playStore,
+    siteConfig.siblingBrands.tiptopMaxiSydney,
+    siteConfig.siblingBrands.wheelchairTaxiSydney,
+    siteConfig.siblingBrands.tiptopRideBooking,
+  ],
 };
 
 const websiteSchema = {
