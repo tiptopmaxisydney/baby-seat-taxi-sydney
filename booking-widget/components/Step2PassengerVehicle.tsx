@@ -81,6 +81,7 @@ const Step2PassengerVehicle: React.FC<Step2PassengerVehicleProps> = ({
   // instance), not `form2`, since booking_transfer_type/transfer_point/arrival
   // date all live there too and the backend expects them together.
   const bookingTransferType = Form.useWatch("booking_transfer_type", form);
+  const notesLength = ((Form.useWatch("notes", form2) as string | undefined) ?? "").length;
   const transferPointValue = Form.useWatch("transfer_point", form);
   const isAirportPickup = bookingTransferType === "airport_transfer" && transferPointValue === "pickup";
 
@@ -294,13 +295,13 @@ const Step2PassengerVehicle: React.FC<Step2PassengerVehicleProps> = ({
                 <TextArea
                   size="large"
                   variant="borderless"
-                  className="!p-0"
+                  className="!p-0 !resize-none"
                   placeholder="Anything the driver should know? e.g. gate code, meeting point, child seat instructions"
                   rows={3}
                   maxLength={500}
-                  showCount
                 />
               </Form.Item>
+              <div className="text-right text-xs text-slate-400 select-none">{notesLength}/500</div>
             </div>
           </div>
         </div>

@@ -335,13 +335,13 @@ const Step1JourneyDetails: React.FC<Step1JourneyDetailsProps> = ({
         let bookingTime: any
 
         if (distance == null) {
-          bookingTime = 30
+          bookingTime = 15
         }
         if (distance < 10) {
           bookingTime = 0
         }
         if (distance < 20 && distance > 10) {
-          bookingTime = 30
+          bookingTime = 15
         }
         if (distance < 40 && distance > 20) {
           bookingTime = 60
