@@ -16,6 +16,7 @@ export interface IVehicleDetails {
     handbags: number;
     wheel_chair_charges: number;
     is_wheelchair_vehicle?: boolean;
+    is_baby_seat_transfer?: boolean;
     child_seat_charges: number;
     base_fee: any;
     surcharge_amount: any;

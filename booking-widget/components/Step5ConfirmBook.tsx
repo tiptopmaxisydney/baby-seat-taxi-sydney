@@ -2,6 +2,7 @@
 
 import { IVehicleDetails } from "@/booking-widget/interfaces/createBooking";
 import { Checkbox, Divider, Form, FormInstance } from "antd";
+import { BabySeatItem, getBabySeatType } from "@/booking-widget/utils/babySeatTransfer";
 
 interface Step5ConfirmBookProps {
   form: FormInstance;
@@ -13,6 +14,7 @@ interface Step5ConfirmBookProps {
   childSeatCount: number;
   childCapsuleCount: number;
   wheelchairCount: number;
+  babySeatItems?: BabySeatItem[];
   airlineOptions: { label: string; options: { value: string; label: string }[] }[];
   isAgreed: boolean;
   setIsAgreed: (agreed: boolean) => void;
@@ -58,6 +60,7 @@ const Step5ConfirmBook: React.FC<Step5ConfirmBookProps> = ({
   childSeatCount,
   childCapsuleCount,
   wheelchairCount,
+  babySeatItems,
   airlineOptions,
   isAgreed,
   setIsAgreed,
@@ -143,8 +146,20 @@ const Step5ConfirmBook: React.FC<Step5ConfirmBookProps> = ({
           <SummaryRow label="Passengers" value={passenger?.passenger} />
           <SummaryRow label="Large suitcases" value={passenger?.luggage} />
           <SummaryRow label="Hand luggage" value={passenger?.handbags} />
-          {childSeatCount > 0 && <SummaryRow label="Child seats" value={childSeatCount} />}
-          {childCapsuleCount > 0 && <SummaryRow label="Baby capsules" value={childCapsuleCount} />}
+          {babySeatItems ? (
+            <SummaryRow
+              label="Seats & child ages"
+              value={babySeatItems
+                .map((item) => `${getBabySeatType(item.seat_type)?.label} (age ${item.child_age === 0 ? "under 1" : item.child_age})`)
+                .join(", ")}
+              full
+            />
+          ) : (
+            <>
+              {childSeatCount > 0 && <SummaryRow label="Child seats" value={childSeatCount} />}
+              {childCapsuleCount > 0 && <SummaryRow label="Baby capsules" value={childCapsuleCount} />}
+            </>
+          )}
           {wheelchairCount > 0 && <SummaryRow label="Wheelchairs" value={wheelchairCount} />}
 
           {isAirportPickupBooking && (

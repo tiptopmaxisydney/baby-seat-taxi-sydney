@@ -6,6 +6,8 @@ import WheelChairIcon from "@/booking-widget/components/icons/WheelChairIcon";
 import BabyCapsule from "@/booking-widget/components/icons/BabyCapsule";
 import { IVehicleDetails } from "@/booking-widget/interfaces/createBooking";
 import { Card, Image } from "antd";
+import { babySeatFare } from "@/booking-widget/utils/babySeatTransfer";
+import { getVehicleEquipmentEligibility } from "@/booking-widget/utils/vehicleEquipmentMatrix";
 
 interface VehicleCardProps extends IVehicleDetails {
   showPricing: boolean;
@@ -28,6 +30,9 @@ const VehicleCard: React.FC<VehicleCardProps> = ({
   max_babyseat,
   max_babycapsule,
   max_wheelchair,
+  is_wheelchair_vehicle,
+  is_baby_seat_transfer,
+  tax_percentage,
   showPricing,
   base_fee,
   surcharge_amount,
@@ -41,6 +46,17 @@ const VehicleCard: React.FC<VehicleCardProps> = ({
   showBabyseatOption = false,
   selected = false,
 }) => {
+  const equipmentEligibility = getVehicleEquipmentEligibility({ vehicle_name, is_wheelchair_vehicle });
+  // Baby Seat Transfer shows the cheapest possible fare (one seat) as "From $X"; the exact
+  // fixed fare is shown once seat type and quantity are chosen.
+  const babySeatFromFare = is_baby_seat_transfer
+    ? babySeatFare(
+        { base_fee, gov_levy, airport_toll, surcharge_amount, tax_percentage, child_seat_charges, child_capsule_charges },
+        1,
+        0,
+        return_trip_amount != null ? 2 : 1
+      )
+    : 0;
   return (
   <Card
     className={[
@@ -52,8 +68,8 @@ const VehicleCard: React.FC<VehicleCardProps> = ({
     <div className="flex flex-col sm:flex-row items-center sm:items-stretch gap-4 vehicle_card_inner">
       <div className="flex flex-col items-center gap-2 flex-shrink-0 w-full sm:w-28">
         <Image
-          src={process.env.NEXT_PUBLIC_DEV_BUCKET_ROOT + vehicle_id.image}
-          alt={process.env.NEXT_PUBLIC_DEV_BUCKET_ROOT + vehicle_id.image}
+          src={is_baby_seat_transfer ? "/images/booking/baby-seat-taxi.webp" : process.env.NEXT_PUBLIC_DEV_BUCKET_ROOT + vehicle_id.image}
+          alt={is_baby_seat_transfer ? "Baby Seat Transfer" : process.env.NEXT_PUBLIC_DEV_BUCKET_ROOT + vehicle_id.image}
           width="100%"
           height={90}
           className="rounded-xl object-contain"
@@ -65,33 +81,52 @@ const VehicleCard: React.FC<VehicleCardProps> = ({
       <div className="hidden sm:block w-px bg-slate-100 self-stretch" />
 
       <div className="flex-1 flex flex-col justify-center gap-1.5 text-sm text-slate-600 w-full [&_svg]:w-4 [&_svg]:h-4 [&_svg]:flex-shrink-0">
-        <div className="flex items-center gap-2">
-          <PeoplesIcon />
-          <span>{passenger} passengers</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <SuitCaseIcon />
-          <span>{luggage} large suitcases</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <LuggageIcon />
-          <span>{handbags} hand luggage</span>
-        </div>
-        {showBabyseatOption &&
+        {is_baby_seat_transfer ? (
           <>
-            {child_seat_charges != null && Number(max_babyseat ?? 2) > 0 &&
+            <div className="flex items-center gap-2">
+              <ChildSeatIcon />
+              <span>Baby &amp; child seat equipped</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <PeoplesIcon />
+              <span>Up to {Math.max(1, Number(passenger) - 1)} passengers</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <SuitCaseIcon />
+              <span>Choose seat type &amp; quantity (1–2)</span>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="flex items-center gap-2">
+              <PeoplesIcon />
+              <span>{passenger} passengers</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <SuitCaseIcon />
+              <span>{luggage} large suitcases</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <LuggageIcon />
+              <span>{handbags} hand luggage</span>
+            </div>
+          </>
+        )}
+        {showBabyseatOption && !is_baby_seat_transfer &&
+          <>
+            {equipmentEligibility.allowsBabyseat && child_seat_charges != null && Number(max_babyseat ?? 2) > 0 &&
               <div className="flex items-center gap-2">
                 <ChildSeatIcon />
                 <span>{max_babyseat ?? 2} Babyseat</span>
               </div>
             }
-            {child_capsule_charges != null && Number(max_babycapsule ?? 2) > 0 &&
+            {equipmentEligibility.allowsBabycapsule && child_capsule_charges != null && Number(max_babycapsule ?? 2) > 0 &&
               <div className="flex items-center gap-2">
                 <BabyCapsule />
                 <span>{max_babycapsule ?? 2} Babycapsule</span>
               </div>
             }
-            {wheel_chair_charges != null && Number(max_wheelchair ?? 2) > 0 &&
+            {equipmentEligibility.allowsWheelchair && wheel_chair_charges != null && Number(max_wheelchair ?? 2) > 0 &&
               <div className="flex items-center gap-2">
                 <WheelChairIcon />
                 <span>{max_wheelchair ?? 2} WheelChair</span>
@@ -117,7 +152,11 @@ const VehicleCard: React.FC<VehicleCardProps> = ({
         showPricing && (
           <div className="flex flex-col items-center sm:items-end justify-center gap-1 flex-shrink-0 w-full sm:w-auto pt-3 sm:pt-0 border-t sm:border-t-0 border-slate-100 text-center sm:text-right">
             <div className="text-xs font-medium text-slate-400 tracking-wide">AUD</div>
-            {return_trip_amount != null ? (
+            {is_baby_seat_transfer ? (
+              <div className="text-2xl font-bold text-[#1d3649]">
+                <span className="text-sm font-medium text-slate-500">From </span>${babySeatFromFare.toFixed(2)}
+              </div>
+            ) : return_trip_amount != null ? (
               <>
                 <div className="text-2xl font-bold text-[#1d3649]">
                   ${(base_fee + surcharge_amount + tax + gov_levy + airport_toll).toFixed(2)}

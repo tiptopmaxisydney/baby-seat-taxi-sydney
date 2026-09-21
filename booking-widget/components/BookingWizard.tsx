@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useContext, useEffect, useState } from "react";
-import { Form, FormInstance } from "antd";
+import { Form, FormInstance, message } from "antd";
 import { IVehicleDetails, IVehicleTypeOptions } from "@/booking-widget/interfaces/createBooking";
 import { GlobalContext } from "@/booking-widget/context/Provider";
 import henceforthApi from "@/booking-widget/utils/api";
@@ -11,6 +11,12 @@ import Step2PassengerVehicle from "./Step2PassengerVehicle";
 import Step4YourDetails from "./Step4YourDetails";
 import Step5ConfirmBook from "./Step5ConfirmBook";
 import PolicyDrawers from "./PolicyDrawers";
+import {
+  BabySeatItem,
+  babySeatMaxPassengers,
+  countBabySeats,
+  isBabySeatItemsValid,
+} from "@/booking-widget/utils/babySeatTransfer";
 
 interface BookingWizardProps {
   form: FormInstance;
@@ -83,14 +89,22 @@ const BookingWizard: React.FC<BookingWizardProps> = ({
   const [isTermsOpen, setIsTermsOpen] = useState(false);
   const [isRefundOpen, setIsRefundOpen] = useState(false);
 
-  const watch2 = Form.useWatch([], form2);
-  const childSeatCount = watch2?.no_of_childseat || 0;
-  const childCapsuleCount = watch2?.no_of_childcapsule || 0;
-  const wheelchairCount = watch2?.no_of_wheelchair || 0;
+  // Baby Seat Transfer keeps its seat selection here (not in form2): the seat counters that
+  // normally feed no_of_childseat/no_of_childcapsule aren't rendered for that card.
+  const [babySeatItems, setBabySeatItems] = useState<BabySeatItem[]>([{ seat_type: "baby_seat", child_age: null }]);
+  const isBabySeatTransfer = !!vehicleInfo?.is_baby_seat_transfer;
+  const babySeatCounts = countBabySeats(babySeatItems);
 
-  // Dynamic caps driven by wheelchair count
-  const maxPassenger =
-    wheelchairCount === 1 ? 5 :
+  const watch2 = Form.useWatch([], form2);
+  const childSeatCount = isBabySeatTransfer ? babySeatCounts.seats : watch2?.no_of_childseat || 0;
+  const childCapsuleCount = isBabySeatTransfer ? babySeatCounts.capsules : watch2?.no_of_childcapsule || 0;
+  const wheelchairCount = isBabySeatTransfer ? 0 : watch2?.no_of_wheelchair || 0;
+
+  // Dynamic caps driven by wheelchair count; Baby Seat Transfer caps at Sedan capacity minus
+  // the seats fitted (any vehicle may be sent, so the smallest one sets the limit).
+  const maxPassenger = isBabySeatTransfer
+    ? babySeatMaxPassengers(vehicleInfo?.passenger, babySeatItems.length)
+    : wheelchairCount === 1 ? 5 :
     wheelchairCount >= 2 ? 3 :
     Number(vehicleInfo?.passenger) || 0;
 
@@ -135,7 +149,7 @@ const BookingWizard: React.FC<BookingWizardProps> = ({
     }
 
     setSelectedFilters(Array.from(newFilters));
-  }, [watch2?.no_of_childseat, watch2?.no_of_wheelchair, watch2?.no_of_childcapsule]);
+  }, [childSeatCount, wheelchairCount, childCapsuleCount]);
 
   // Clamp passenger and luggage whenever wheelchair count changes
   useEffect(() => {
@@ -147,7 +161,7 @@ const BookingWizard: React.FC<BookingWizardProps> = ({
     if (currentLuggage > maxLuggage) {
       form2.setFieldValue("luggage", maxLuggage);
     }
-  }, [wheelchairCount]);
+  }, [wheelchairCount, maxPassenger]);
 
   const handleSelectVehicle = (vehicle: IVehicleDetails) => {
     form.setFieldValue("vehicle_id", vehicle?.vehicle_id?._id);
@@ -170,6 +184,10 @@ const BookingWizard: React.FC<BookingWizardProps> = ({
         await form.validateFields(fields);
       } else if (currentStep === 2) {
         await form.validateFields(["vehicle_id"]);
+        if (isBabySeatTransfer && !isBabySeatItemsValid(babySeatItems)) {
+          message.error("Please choose the seat type and enter the child's age for each seat.");
+          return;
+        }
       } else if (currentStep === 3) {
         await form2.validateFields(["name", "phone", "email", "country_code"]);
       }
@@ -190,6 +208,12 @@ const BookingWizard: React.FC<BookingWizardProps> = ({
         onSetDetailsData({
           ...values,
           filter: selectedFilters,
+          ...(isBabySeatTransfer && {
+            baby_seat_items: babySeatItems,
+            no_of_childseat: babySeatCounts.seats,
+            no_of_childcapsule: babySeatCounts.capsules,
+            no_of_wheelchair: 0,
+          }),
         });
       })
       .then(() => onSubmit())
@@ -234,6 +258,9 @@ const BookingWizard: React.FC<BookingWizardProps> = ({
             onChildCapsuleChange={handleChildCapsuleChange}
             airlineOptions={airlineOptions}
             airlineOptionsLoading={airlineOptionsLoading}
+            isReturnTrip={isReturnTrip}
+            babySeatItems={babySeatItems}
+            onBabySeatItemsChange={setBabySeatItems}
           />
         </div>
 
@@ -253,6 +280,7 @@ const BookingWizard: React.FC<BookingWizardProps> = ({
           childSeatCount={childSeatCount}
           childCapsuleCount={childCapsuleCount}
           wheelchairCount={wheelchairCount}
+          babySeatItems={isBabySeatTransfer ? babySeatItems : undefined}
           airlineOptions={airlineOptions}
           isAgreed={isAgreed}
           setIsAgreed={setIsAgreed}

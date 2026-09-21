@@ -12,6 +12,9 @@ import Counter from "@/booking-widget/components/Counter";
 import { IVehicleDetails } from "@/booking-widget/interfaces/createBooking";
 import { DatePicker, Form, FormInstance, Input, Select } from "antd";
 import VehicleCard from "./VehicleCard";
+import BabySeatTransferPanel from "./BabySeatTransferPanel";
+import { getVehicleEquipmentEligibility } from "@/booking-widget/utils/vehicleEquipmentMatrix";
+import { BabySeatItem } from "@/booking-widget/utils/babySeatTransfer";
 
 const TextArea = Input.TextArea;
 
@@ -33,6 +36,9 @@ interface Step2PassengerVehicleProps {
   onChildCapsuleChange: (value: number) => void;
   airlineOptions: { label: string; options: { value: string; label: string }[] }[];
   airlineOptionsLoading: boolean;
+  isReturnTrip: boolean;
+  babySeatItems: BabySeatItem[];
+  onBabySeatItemsChange: (items: BabySeatItem[]) => void;
 }
 
 const Step2PassengerVehicle: React.FC<Step2PassengerVehicleProps> = ({
@@ -53,17 +59,22 @@ const Step2PassengerVehicle: React.FC<Step2PassengerVehicleProps> = ({
   onChildCapsuleChange,
   airlineOptions,
   airlineOptionsLoading,
+  isReturnTrip,
+  babySeatItems,
+  onBabySeatItemsChange,
 }) => {
+  const isBabySeatTransfer = !!vehicleInfo?.is_baby_seat_transfer;
   const effectiveMaxHandbags = Number(vehicleInfo?.handbags);
   const effectiveMaxBabyseat = Number(vehicleInfo?.max_babyseat ?? 2);
   const effectiveMaxBabycapsule = Number(vehicleInfo?.max_babycapsule ?? 2);
   const effectiveMaxWheelchairs = Number(vehicleInfo?.max_wheelchair ?? 2);
 
-  const showBabyseat = vehicleInfo?.child_seat_charges != null && effectiveMaxBabyseat > 0;
-  const showBabycapsule = vehicleInfo?.child_capsule_charges != null && effectiveMaxBabycapsule > 0;
-  // SUVs don't offer the wheelchair option, even when the backend still returns wheelchair charges/max for them.
-  const isSuv = /suv/i.test(vehicleInfo?.vehicle_name || "");
-  const showWheelchair = !isSuv && vehicleInfo?.wheel_chair_charges != null && effectiveMaxWheelchairs > 0;
+  // Fleet rules (same as the customer app): Sedan carries no baby seats/capsules or wheelchairs,
+  // SUV carries no wheelchairs, even when the backend still returns charges/max for them.
+  const equipmentEligibility = getVehicleEquipmentEligibility(vehicleInfo);
+  const showBabyseat = equipmentEligibility.allowsBabyseat && vehicleInfo?.child_seat_charges != null && effectiveMaxBabyseat > 0;
+  const showBabycapsule = equipmentEligibility.allowsBabycapsule && vehicleInfo?.child_capsule_charges != null && effectiveMaxBabycapsule > 0;
+  const showWheelchair = equipmentEligibility.allowsWheelchair && vehicleInfo?.wheel_chair_charges != null && effectiveMaxWheelchairs > 0;
   const hasEquipmentOptions = showBabyseat || showBabycapsule || showWheelchair;
 
   // ── Flight Details (Airport Pickup only) — fields live on `form` (Step 1's
@@ -73,9 +84,9 @@ const Step2PassengerVehicle: React.FC<Step2PassengerVehicleProps> = ({
   const transferPointValue = Form.useWatch("transfer_point", form);
   const isAirportPickup = bookingTransferType === "airport_transfer" && transferPointValue === "pickup";
 
-  // Sedans and dedicated wheelchair vehicles aren't offered through this widget.
+  // Dedicated wheelchair vehicles aren't offered through this widget (Sedan is).
   const visibleVehicleDetails = vehicleDetails.filter(
-    (vehicle) => !vehicle.is_wheelchair_vehicle && !/sedan|wheelchair/i.test(vehicle.vehicle_name || "")
+    (vehicle) => !vehicle.is_wheelchair_vehicle && !/wheelchair/i.test(vehicle.vehicle_name || "")
   );
 
   return (
@@ -153,7 +164,14 @@ const Step2PassengerVehicle: React.FC<Step2PassengerVehicleProps> = ({
 
           <h3 className="fw-semibold mb-2 text-[#1d3649]">Special requirements</h3>
 
-          {hasEquipmentOptions ? (
+          {isBabySeatTransfer ? (
+            <BabySeatTransferPanel
+              vehicleInfo={vehicleInfo}
+              items={babySeatItems}
+              isReturnTrip={isReturnTrip}
+              onChange={onBabySeatItemsChange}
+            />
+          ) : hasEquipmentOptions ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-4">
               {showBabyseat && (
                 <Counter
@@ -268,21 +286,23 @@ const Step2PassengerVehicle: React.FC<Step2PassengerVehicleProps> = ({
             </div>
           )}
 
-          {showFlightFields && (
-            <div className="w-100 space-y-3">
-              <div className="border border-slate-200 rounded-xl px-3 py-2 transition-colors focus-within:border-[#1d3649] focus-within:ring-2 focus-within:ring-[#1d3649]/10">
-                <Form.Item className="mb-0" name={'notes'} noStyle>
-                  <TextArea
-                    size="large"
-                    variant="borderless"
-                    className="!p-0"
-                    placeholder="Any Notes"
-                    rows={3}
-                  />
-                </Form.Item>
-              </div>
+          <div className="w-100">
+            <h3 className="fw-semibold mb-2 text-[#1d3649]">Notes for your driver <span className="text-sm font-normal text-slate-500">(optional)</span></h3>
+            <div className="border border-slate-200 rounded-xl px-3 py-2 transition-colors focus-within:border-[#1d3649] focus-within:ring-2 focus-within:ring-[#1d3649]/10">
+              {/* initialValue "" keeps the untouched field defined — the submit check rejects undefined values. */}
+              <Form.Item className="mb-0" name={'notes'} initialValue="" noStyle>
+                <TextArea
+                  size="large"
+                  variant="borderless"
+                  className="!p-0"
+                  placeholder="Anything the driver should know? e.g. gate code, meeting point, child seat instructions"
+                  rows={3}
+                  maxLength={500}
+                  showCount
+                />
+              </Form.Item>
             </div>
-          )}
+          </div>
         </div>
       )}
     </div>
