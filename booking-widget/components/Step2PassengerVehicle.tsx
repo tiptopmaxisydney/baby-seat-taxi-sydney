@@ -6,6 +6,7 @@ import { PeoplesIcon } from "@/booking-widget/components/icons/PeoplesIcon";
 import ChildSeatIcon from "@/booking-widget/components/icons/ChildSeatIcon";
 import WheelChairIcon from "@/booking-widget/components/icons/WheelChairIcon";
 import BabyCapsule from "@/booking-widget/components/icons/BabyCapsule";
+import PramIcon from "@/booking-widget/components/icons/PramIcon";
 import FlightIcon from "@/booking-widget/components/icons/FlightIcon";
 import ClockIcon from "@/booking-widget/components/icons/ClockIcon";
 import Counter from "@/booking-widget/components/Counter";
@@ -32,8 +33,10 @@ interface Step2PassengerVehicleProps {
   showFlightFields: boolean;
   childSeatCount: number;
   childCapsuleCount: number;
+  pramCount: number;
   onChildSeatChange: (value: number) => void;
   onChildCapsuleChange: (value: number) => void;
+  onPramChange: (value: number) => void;
   airlineOptions: { label: string; options: { value: string; label: string }[] }[];
   airlineOptionsLoading: boolean;
   isReturnTrip: boolean;
@@ -55,8 +58,10 @@ const Step2PassengerVehicle: React.FC<Step2PassengerVehicleProps> = ({
   showFlightFields,
   childSeatCount,
   childCapsuleCount,
+  pramCount,
   onChildSeatChange,
   onChildCapsuleChange,
+  onPramChange,
   airlineOptions,
   airlineOptionsLoading,
   isReturnTrip,
@@ -68,6 +73,7 @@ const Step2PassengerVehicle: React.FC<Step2PassengerVehicleProps> = ({
   const effectiveMaxBabyseat = Number(vehicleInfo?.max_babyseat ?? 2);
   const effectiveMaxBabycapsule = Number(vehicleInfo?.max_babycapsule ?? 2);
   const effectiveMaxWheelchairs = Number(vehicleInfo?.max_wheelchair ?? 2);
+  const effectiveMaxPram = Number(vehicleInfo?.max_pram ?? 2);
 
   // Fleet rules (same as the customer app): Sedan carries no baby seats/capsules or wheelchairs,
   // SUV carries no wheelchairs, even when the backend still returns charges/max for them.
@@ -147,6 +153,17 @@ const Step2PassengerVehicle: React.FC<Step2PassengerVehicleProps> = ({
               onChange={(value) => {
                 form2.setFieldValue("luggage", value);
               }}
+            />
+            <Counter
+              key={`pram-${effectiveMaxPram}`}
+              name="no_of_pram"
+              label="No. of Prams/Strollers"
+              description={effectiveMaxPram > 0 ? `Maximum ${effectiveMaxPram} · each pram uses one large suitcase slot` : "Not available for this vehicle"}
+              icon={<PramIcon />}
+              initialValue={Math.min(Number(form2.getFieldValue("no_of_pram")) || 0, effectiveMaxPram)}
+              min={0}
+              max={effectiveMaxPram}
+              onChange={onPramChange}
             />
             <Counter
               key={`handbags-${effectiveMaxHandbags}`}
@@ -295,7 +312,7 @@ const Step2PassengerVehicle: React.FC<Step2PassengerVehicleProps> = ({
                 <TextArea
                   size="large"
                   variant="borderless"
-                  className="!p-0 !resize-none"
+                  className="!p-0 !resize-none placeholder:text-slate-300"
                   placeholder="Anything the driver should know? e.g. gate code, meeting point, child seat instructions"
                   rows={3}
                   maxLength={500}

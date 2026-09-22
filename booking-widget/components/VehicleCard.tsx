@@ -85,7 +85,7 @@ const VehicleCard: React.FC<VehicleCardProps> = ({
           <>
             <div className="flex items-center gap-2">
               <ChildSeatIcon />
-              <span>Baby &amp; child seat equipped</span>
+              <span>Baby seat and baby capsule equipped</span>
             </div>
             <div className="flex items-center gap-2">
               <PeoplesIcon />

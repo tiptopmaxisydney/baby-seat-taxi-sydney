@@ -7,7 +7,7 @@ import {
   BABY_SEAT_TYPES,
   BabySeatItem,
   BabySeatType,
-  babySeatAgeOptions,
+  babySeatDefaultAge,
   babySeatFare,
   countBabySeats,
 } from "@/booking-widget/utils/babySeatTransfer";
@@ -25,16 +25,14 @@ const BabySeatTransferPanel: React.FC<BabySeatTransferPanelProps> = ({ vehicleIn
 
   const setQuantity = (quantity: number) => {
     const next = items.slice(0, quantity);
-    while (next.length < quantity) next.push({ seat_type: "baby_seat", child_age: null });
+    while (next.length < quantity) next.push({ seat_type: "baby_seat", child_age: babySeatDefaultAge("baby_seat") });
     onChange(next);
   };
 
-  const updateItem = (index: number, patch: Partial<BabySeatItem>) =>
-    onChange(items.map((item, i) => (i === index ? { ...item, ...patch } : item)));
-
-  // Changing the seat type resets the age, since each type only accepts its own age band.
+  // No separate age input — each seat type carries its own age band (shown on the dropdown
+  // option), so changing the type just swaps in that type's representative age.
   const changeSeatType = (index: number, seat_type: BabySeatType) =>
-    updateItem(index, { seat_type, child_age: seat_type === "baby_capsule" ? 0 : null });
+    onChange(items.map((item, i) => (i === index ? { seat_type, child_age: babySeatDefaultAge(seat_type) } : item)));
 
   return (
     <div className="rounded-xl border border-[#1d3649]/20 bg-[#1d3649]/[0.02] p-4 mb-4">
@@ -64,34 +62,18 @@ const BabySeatTransferPanel: React.FC<BabySeatTransferPanelProps> = ({ vehicleIn
       </div>
 
       <div className="flex flex-col gap-2.5">
-        {items.map((item, index) => {
-          const ageOptions = babySeatAgeOptions(item.seat_type);
-          return (
-            <div key={index} className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-              <div>
-                <div className="text-xs text-slate-500 mb-1">Seat {index + 1} type</div>
-                <Select
-                  size="large"
-                  className="w-100"
-                  value={item.seat_type}
-                  onChange={(value: any) => changeSeatType(index, value as BabySeatType)}
-                  options={BABY_SEAT_TYPES.map((type) => ({ value: type.value, label: `${type.label} (${type.hint})` }))}
-                />
-              </div>
-              <div>
-                <div className="text-xs text-slate-500 mb-1">Child age (required)</div>
-                <Select
-                  size="large"
-                  className="w-100"
-                  placeholder="Select child age"
-                  value={item.child_age ?? undefined}
-                  onChange={(value: any) => updateItem(index, { child_age: Number(value) })}
-                  options={ageOptions}
-                />
-              </div>
-            </div>
-          );
-        })}
+        {items.map((item, index) => (
+          <div key={index}>
+            <div className="text-xs text-slate-500 mb-1">Seat {index + 1} type</div>
+            <Select
+              size="large"
+              className="!w-full"
+              value={item.seat_type}
+              onChange={(value: any) => changeSeatType(index, value as BabySeatType)}
+              options={BABY_SEAT_TYPES.map((type) => ({ value: type.value, label: `${type.label} (${type.hint})` }))}
+            />
+          </div>
+        ))}
       </div>
 
       <div className="flex items-center justify-between mt-4 pt-3 border-t border-slate-200">

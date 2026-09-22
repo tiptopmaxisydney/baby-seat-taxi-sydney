@@ -13,6 +13,7 @@ import Step5ConfirmBook from "./Step5ConfirmBook";
 import PolicyDrawers from "./PolicyDrawers";
 import {
   BabySeatItem,
+  babySeatDefaultAge,
   babySeatMaxPassengers,
   countBabySeats,
   isBabySeatItemsValid,
@@ -91,7 +92,7 @@ const BookingWizard: React.FC<BookingWizardProps> = ({
 
   // Baby Seat Transfer keeps its seat selection here (not in form2): the seat counters that
   // normally feed no_of_childseat/no_of_childcapsule aren't rendered for that card.
-  const [babySeatItems, setBabySeatItems] = useState<BabySeatItem[]>([{ seat_type: "baby_seat", child_age: null }]);
+  const [babySeatItems, setBabySeatItems] = useState<BabySeatItem[]>([{ seat_type: "baby_seat", child_age: babySeatDefaultAge("baby_seat") }]);
   const isBabySeatTransfer = !!vehicleInfo?.is_baby_seat_transfer;
   const babySeatCounts = countBabySeats(babySeatItems);
 
@@ -99,6 +100,7 @@ const BookingWizard: React.FC<BookingWizardProps> = ({
   const childSeatCount = isBabySeatTransfer ? babySeatCounts.seats : watch2?.no_of_childseat || 0;
   const childCapsuleCount = isBabySeatTransfer ? babySeatCounts.capsules : watch2?.no_of_childcapsule || 0;
   const wheelchairCount = isBabySeatTransfer ? 0 : watch2?.no_of_wheelchair || 0;
+  const pramCount = watch2?.no_of_pram || 0;
 
   // Dynamic caps driven by wheelchair count; Baby Seat Transfer caps at Sedan capacity minus
   // the seats fitted (any vehicle may be sent, so the smallest one sets the limit).
@@ -108,9 +110,12 @@ const BookingWizard: React.FC<BookingWizardProps> = ({
     wheelchairCount >= 2 ? 3 :
     Number(vehicleInfo?.passenger) || 0;
 
-  const maxLuggage =
+  // Each pram/stroller fitted takes up one large-suitcase slot — no separate charge, just
+  // less room. Applied on top of the wheelchair-driven override above.
+  const baseMaxLuggage =
     wheelchairCount >= 1 ? 7 :
     Number(vehicleInfo?.luggage) || 0;
+  const maxLuggage = Math.max(0, baseMaxLuggage - pramCount);
 
   const handleChildSeatChange = useCallback((newSeatValue: number) => {
     form2.setFieldValue("no_of_childseat", newSeatValue);
@@ -118,6 +123,10 @@ const BookingWizard: React.FC<BookingWizardProps> = ({
 
   const handleChildCapsuleChange = useCallback((newCapsuleValue: number) => {
     form2.setFieldValue("no_of_childcapsule", newCapsuleValue);
+  }, [form2]);
+
+  const handlePramChange = useCallback((newPramValue: number) => {
+    form2.setFieldValue("no_of_pram", newPramValue);
   }, [form2]);
 
   // SUVs don't offer the wheelchair option (hidden in Step2PassengerVehicle) — clear any
@@ -151,7 +160,7 @@ const BookingWizard: React.FC<BookingWizardProps> = ({
     setSelectedFilters(Array.from(newFilters));
   }, [childSeatCount, wheelchairCount, childCapsuleCount]);
 
-  // Clamp passenger and luggage whenever wheelchair count changes
+  // Clamp passenger and luggage whenever wheelchair or pram count changes
   useEffect(() => {
     const currentPassenger = Number(form2.getFieldValue("passenger")) || 1;
     const currentLuggage = Number(form2.getFieldValue("luggage")) || 0;
@@ -161,7 +170,7 @@ const BookingWizard: React.FC<BookingWizardProps> = ({
     if (currentLuggage > maxLuggage) {
       form2.setFieldValue("luggage", maxLuggage);
     }
-  }, [wheelchairCount, maxPassenger]);
+  }, [wheelchairCount, maxPassenger, pramCount, maxLuggage]);
 
   const handleSelectVehicle = (vehicle: IVehicleDetails) => {
     form.setFieldValue("vehicle_id", vehicle?.vehicle_id?._id);
@@ -254,8 +263,10 @@ const BookingWizard: React.FC<BookingWizardProps> = ({
             showFlightFields={showFlightFields}
             childSeatCount={childSeatCount}
             childCapsuleCount={childCapsuleCount}
+            pramCount={pramCount}
             onChildSeatChange={handleChildSeatChange}
             onChildCapsuleChange={handleChildCapsuleChange}
+            onPramChange={handlePramChange}
             airlineOptions={airlineOptions}
             airlineOptionsLoading={airlineOptionsLoading}
             isReturnTrip={isReturnTrip}
@@ -280,6 +291,7 @@ const BookingWizard: React.FC<BookingWizardProps> = ({
           childSeatCount={childSeatCount}
           childCapsuleCount={childCapsuleCount}
           wheelchairCount={wheelchairCount}
+          pramCount={pramCount}
           babySeatItems={isBabySeatTransfer ? babySeatItems : undefined}
           airlineOptions={airlineOptions}
           isAgreed={isAgreed}
