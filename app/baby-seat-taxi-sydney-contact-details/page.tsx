@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FaPhoneAlt, FaRegEnvelope, FaMapMarkerAlt, FaClock } from "react-icons/fa";
-import ServiceHero from "@/components/service/ServiceHero";
 import Faq from "@/components/home/Faq";
+import ContactForm from "@/components/ContactForm";
 import { siteConfig } from "@/lib/siteConfig";
 
 const title = "Contact Baby Seat Taxi Sydney | Book Family Transport";
@@ -35,6 +35,15 @@ const contactFaq = [
   },
 ];
 
+const contactServices = [
+  "Baby Seat Taxi",
+  "Baby Capsule Taxi",
+  "Airport Transfer",
+  "Hospital Transfer",
+  "Family / Group Travel",
+  "General Enquiry",
+];
+
 const areasWeService = [
   "Sydney CBD",
   "Parramatta",
@@ -51,13 +60,7 @@ const areasWeService = [
 export default function ContactUsPage() {
   return (
     <>
-      <ServiceHero
-        eyebrow="Get in Touch"
-        title="Book a Baby Seat Taxi in Sydney"
-        description="Contact Sydney's Baby Seat Taxi Specialists"
-        breadcrumbLabel="Contact Us"
-        image={{ src: "/images/family-transport-across-sydney-real.png", alt: "Family transport across Sydney with baby seats" }}
-      />
+      <ContactForm title="Contact Baby Seat Taxi Sydney" services={contactServices} />
 
       <section className="wt-section on-dark">
         <div className="container">
