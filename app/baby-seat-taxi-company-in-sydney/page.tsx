@@ -3,6 +3,7 @@ import Link from "next/link";
 import ServiceHero from "@/components/service/ServiceHero";
 import Faq from "@/components/home/Faq";
 import FinalCta from "@/components/home/FinalCta";
+import { siteConfig } from "@/lib/siteConfig";
 
 const title = "Baby Seat Taxi Company in Sydney | Safety-First Family Cabs";
 const description = "About Baby Seat Taxi Sydney - safe family transport across Sydney with baby capsules and child seats available on request.";
@@ -26,7 +27,7 @@ const aboutFaq = [
   },
   {
     question: "Can I request a baby capsule, child seat, or booster seat?",
-    answer: "Absolutely. We provide all three options depending on your child's age and requirements.",
+    answer: "Yes. Tell us each child's age and approximate size and we'll arrange an appropriate restraint.",
   },
   {
     question: "Do you operate across Sydney?",
@@ -80,15 +81,40 @@ export default function AboutUsPage() {
               Book Now
             </Link>
 
-            <h2 style={{ marginTop: 40 }}>Our Mission</h2>
+            <h2 style={{ marginTop: 40 }}>Family Transport Planned Around Your Children</h2>
             <p>
-              Our mission is simple: to provide safe, reliable, and family-friendly transport across Sydney with
-              appropriate child restraints available for every journey.
+              Child restraint requirements, passengers, prams and luggage are recorded before your journey so the
+              vehicle can be selected around the needs of your family. Tell us each child&apos;s age and approximate
+              size when booking and we&apos;ll arrange an appropriate restraint.
             </p>
-            <p>We believe parents should never have to compromise on safety when travelling with their children.</p>
+
+            <h2 style={{ marginTop: 40 }}>Who We Are</h2>
             <p>
-              Every booking is managed with care to ensure families receive the right vehicle, the appropriate
-              child restraint, and professional service from pickup to drop-off.
+              Baby Seat Taxi Sydney is operated by <strong>{siteConfig.legalName} Pty Ltd</strong>, based at{" "}
+              {siteConfig.address.street}, {siteConfig.address.locality} {siteConfig.address.region}{" "}
+              {siteConfig.address.postcode}. We operate as a booking service and may use authorised taxis and
+              hire vehicles from other providers to complete your journey.
+            </p>
+            <p>
+              Bookings are available 24/7 online or by phone on{" "}
+              <a href={`tel:${siteConfig.phoneIntl}`}>{siteConfig.phoneLocalDisplay}</a>, and by email at{" "}
+              <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>. For questions or feedback about a
+              booking, <Link href="/baby-seat-taxi-sydney-contact-details/">contact our team</Link>.
+            </p>
+
+            <h2 style={{ marginTop: 40 }}>How Booking Works</h2>
+            <ol>
+              <li>Enter your journey - plus your flight number for airport pickups.</li>
+              <li>Tell us each child&apos;s age and approximate size.</li>
+              <li>Add passengers, luggage and any pram.</li>
+              <li>Receive your booking confirmation.</li>
+              <li>Your vehicle arrives prepared for the requirements recorded on your booking.</li>
+            </ol>
+
+            <h2 style={{ marginTop: 40 }}>Feedback and Complaints</h2>
+            <p>
+              If something didn&apos;t go to plan, email <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a> or
+              call us with your booking details and our team will look into it.
             </p>
           </div>
         </div>

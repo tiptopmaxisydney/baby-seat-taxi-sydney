@@ -5,18 +5,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaPhoneAlt, FaRegEnvelope, FaFacebookF, FaYoutube, FaBars, FaTimes } from "react-icons/fa";
 import { siteConfig } from "@/lib/siteConfig";
-import { servicesLinks, locationsLinks } from "@/lib/navigation";
+import { servicesLinks, locationsLinks, guideLinks } from "@/lib/navigation";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<"services" | "locations" | null>(null);
+  const [openDropdown, setOpenDropdown] = useState<"services" | "locations" | "guides" | null>(null);
 
   const closeMenu = () => {
     setMenuOpen(false);
     setOpenDropdown(null);
   };
 
-  const toggleDropdown = (key: "services" | "locations") => (event: React.MouseEvent) => {
+  const toggleDropdown = (key: "services" | "locations" | "guides") => (event: React.MouseEvent) => {
     event.preventDefault();
     setOpenDropdown((open) => (open === key ? null : key));
   };
@@ -84,6 +84,23 @@ export default function Header() {
                     <p className="wt-mega-group-title">Locations</p>
                     <ul>
                       {locationsLinks.map((link) => (
+                        <li key={link.href}>
+                          <Link href={link.href} onClick={closeMenu}>{link.label}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <li className={openDropdown === "guides" ? "has-open" : undefined}>
+                <a href="#" onClick={toggleDropdown("guides")}>
+                  Guides
+                </a>
+                <div className="wt-mega">
+                  <div className="wt-mega-group">
+                    <p className="wt-mega-group-title">Family Travel Guides</p>
+                    <ul>
+                      {guideLinks.map((link) => (
                         <li key={link.href}>
                           <Link href={link.href} onClick={closeMenu}>{link.label}</Link>
                         </li>

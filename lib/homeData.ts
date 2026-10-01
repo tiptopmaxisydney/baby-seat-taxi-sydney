@@ -1,79 +1,162 @@
-// Verbatim from the live homepage's "Why Choose Baby Seat Taxi Sydney" list.
-export const whyChooseUsPoints = [
-  "Parents trust us because safety comes first.",
-  "Family-Friendly Transport",
-  "Suitable for newborns, infants, toddlers and young children.",
-  "Baby Capsules & Child Seats Available",
-  "Rear-facing baby capsules available for newborns and young infants.",
-  "Forward-facing child seats available upon request.",
-  "Sydney Airport Specialists",
-  "Reliable transfers to and from Sydney Domestic and International Airports.",
-  "Hospital Pickups",
-  "Safe transport for newborns and families leaving Sydney hospitals.",
-  "Available Across Sydney",
-  "Serving Sydney CBD, Western Sydney, Inner West, Eastern Suburbs, North Shore and surrounding areas.",
-  "24/7 Service",
-  "Pre-booked and last-minute bookings available.",
+// Official sources linked wherever child-restraint rules are summarised. Keep summaries short
+// and defer to these pages - the rules change and differ between taxis and booked hire vehicles.
+export const nswChildRestraintUrl =
+  "https://www.nsw.gov.au/driving-boating-and-transport/roads-safety-and-rules/safe-driving/child-seats";
+export const pointToPointChildRestraintUrl = "https://www.pointtopoint.nsw.gov.au/child-restraints";
+
+// Summary of the NSW Government taxi rules (checked against nswChildRestraintUrl, Oct 2026).
+export const nswTaxiRules = [
+  { age: "Up to 6 months", rule: "Must use a rear-facing child restraint." },
+  {
+    age: "6 to 12 months",
+    rule: "Must use either a rear-facing child restraint or a forward-facing child restraint with an inbuilt harness.",
+  },
+  { age: "Over 12 months", rule: "Must use a booster seat or wear a properly adjusted and fastened seatbelt." },
 ];
 
-// Verbatim from the live homepage's "Recent News" section.
-export const recentNews = [
+// Summary of the NSW Government private-vehicle rules (checked against nswChildRestraintUrl, Oct 2026).
+export const nswPrivateVehicleRules = [
+  { age: "Up to 6 months", rule: "Must use a rear-facing child restraint." },
   {
-    title: "Child car seats reduce injuries and deaths.",
-    description: "Children aged under 7 years must use an approved suitable child restraint when travelling in a vehicle.",
-    href: "https://www.nsw.gov.au/driving-boating-and-transport/roads-safety-and-rules/safe-driving/child-seats",
+    age: "6 months to 4 years",
+    rule: "Must use either a rear-facing child restraint or a forward-facing child restraint with an inbuilt harness.",
   },
   {
-    title: "Seatbelts and Child Restraints...",
-    description:
-      "When travelling in a motor vehicle in South Australia, all children under 16 years of age must be restrained in a suitable approved restraint that is properly adjusted and fastened...",
-    href: "https://www.mylicence.sa.gov.au/roadrules/seatbelts-and-child-restraints",
+    age: "4 to 7 years",
+    rule: "Must use a forward-facing child restraint with an inbuilt harness or an approved booster seat.",
+  },
+  {
+    age: "7 years and over",
+    rule: "If too small for a seatbelt, should use an approved booster seat or anchored safety harness. The suggested minimum height for a seatbelt is 145cm.",
+  },
+];
+
+// Restraint categories deliberately carry no fixed age bands - the right restraint depends on
+// age AND size, so every page asks parents for both instead of publishing ranges.
+export const restraintOptions = [
+  {
+    title: "Baby / Infant Restraint",
+    description: "Rear-facing options for babies who need an appropriate rear-facing restraint, including newborns leaving hospital.",
+  },
+  {
+    title: "Toddler / Child Restraint",
+    description: "Child restraints arranged according to your child's age and size, including forward-facing restraints with an inbuilt harness.",
+  },
+  {
+    title: "Booster Seat",
+    description: "Available for older children where a booster seat is appropriate for their age and size.",
+  },
+];
+
+export const restraintBookingNote =
+  "When booking, tell us each child's age and approximate size so we can arrange an appropriate restraint for the journey. You don't need to guess which restraint to request.";
+
+export const familyBenefits = [
+  {
+    title: "Child restraints requested at booking",
+    description: "Tell us the age of each child when booking so their restraint requirements are recorded against your trip.",
+  },
+  {
+    title: "Multiple children accommodated",
+    description: "Families travelling with two or more children can request multiple restraints, subject to vehicle configuration and availability.",
+  },
+  {
+    title: "Prams and luggage considered",
+    description: "Tell us how many suitcases, carry-ons and prams you're travelling with so we can arrange an appropriately sized vehicle.",
+  },
+  {
+    title: "Sydney Airport transfers",
+    description: "Pre-book Sydney Airport arrivals and departures with your flight number recorded against the booking.",
+  },
+  {
+    title: "24/7 bookings",
+    description: "Suitable for early departures, late arrivals and overnight flights.",
+  },
+  {
+    title: "Sydney-wide coverage",
+    description: "CBD, Eastern Suburbs, Inner West, North Shore, Western Sydney, South West and surrounding areas.",
+  },
+];
+
+export const bookingChecklist = [
+  "Age of each child",
+  "Number of adults",
+  "Number of child restraints required",
+  "Suitcases and carry-on bags",
+  "Pram or stroller",
+  "Flight number for airport pickups",
+];
+
+export const bookingSteps = [
+  { title: "Enter your journey", description: "Pickup, drop-off, date and time - plus your flight number for airport pickups." },
+  { title: "Tell us about each child", description: "Add the age and approximate size of every child travelling." },
+  { title: "Add passengers, luggage and prams", description: "So we can arrange a vehicle with room for your whole family." },
+  { title: "Receive your confirmation", description: "Your vehicle arrives prepared for the requirements recorded on your booking." },
+];
+
+// Guidance only - no seat counts are published because fitted child restraints change the usable
+// seating positions. Confirm exact configurations with operations before adding numbers here.
+export const familyVehicles = [
+  { title: "Sedan", description: "Best for two adults, one child and light luggage." },
+  { title: "SUV / Wagon", description: "Best for a family with a child restraint plus a larger pram or more luggage." },
+  { title: "7-seat vehicle", description: "Best for larger families or bookings needing multiple child restraints." },
+  { title: "Minibus", description: "Best for family groups, multiple children, large amounts of luggage and airport transfers." },
+];
+
+export const officialGuidance = [
+  {
+    title: "NSW child car seat rules",
+    description: "NSW Government guidance on child restraints in private vehicles and taxis, by age.",
+    href: nswChildRestraintUrl,
+  },
+  {
+    title: "Child restraints in taxis and hire vehicles",
+    description: "Point to Point Transport Commissioner guidance on children in taxis, booked hire vehicles and rideshare.",
+    href: pointToPointChildRestraintUrl,
   },
 ];
 
 export const serviceAreas = [
   {
     title: "Baby Seat Taxi Parramatta",
-    description: "Safe family transport across Parramatta and the wider Western Sydney business and hospital precinct, with regular runs to Westmead Hospital.",
+    href: "/baby-seat-taxi-parramatta/",
+    description: "Family transport across Parramatta and the wider Western Sydney area, including trips to and from Westmead Hospital.",
   },
   {
     title: "Baby Seat Taxi Blacktown",
-    description: "Reliable baby seat taxi coverage for Blacktown families, connecting to Blacktown Hospital and surrounding suburbs.",
+    href: "/baby-seat-taxi-blacktown/",
+    description: "Pre-booked family transport for Blacktown, Blacktown Hospital and surrounding suburbs.",
   },
   {
     title: "Baby Seat Taxi Liverpool",
-    description: "Family-friendly transport throughout Liverpool and South West Sydney, supporting families attending Liverpool Hospital and local specialists.",
+    href: "/baby-seat-taxi-liverpool/",
+    description: "Family transport throughout Liverpool and South West Sydney, including Liverpool Hospital.",
   },
   {
     title: "Baby Seat Taxi Penrith",
-    description: "Baby capsule and child seat transport across Penrith and the Blue Mountains foothills, built for longer-distance family trips.",
+    href: "/baby-seat-taxi-penrith/",
+    description: "Family transport across Penrith and the Blue Mountains foothills, including longer-distance trips.",
   },
   {
     title: "Baby Seat Taxi Campbelltown",
-    description: "Dependable baby seat taxi service for Campbelltown and Macarthur families, including transport to Campbelltown Hospital.",
+    href: "/baby-seat-taxi-campbelltown/",
+    description: "Family transport for Campbelltown and Macarthur, including Campbelltown Hospital.",
   },
   {
     title: "Baby Seat Taxi Chatswood",
-    description: "Premium family transport across Chatswood and the North Shore, ideal for hospital appointments and family outings.",
+    href: "/baby-seat-taxi-chatswood/",
+    description: "Family transport across Chatswood and the North Shore for hospital appointments and family outings.",
   },
   {
     title: "Baby Seat Taxi Bondi",
-    description: "Comfortable baby seat taxi rides across Bondi and the Eastern Suburbs, from beachside outings to hospital visits.",
+    href: "/baby-seat-taxi-bondi/",
+    description: "Family transport across Bondi and the Eastern Suburbs, from beach outings to hospital visits.",
   },
   {
     title: "Baby Seat Taxi Sydney CBD",
-    description: "Fast, professional baby seat taxi transport through the Sydney CBD, built around family schedules and traffic conditions.",
+    href: "/baby-seat-taxi-sydney-cbd/",
+    description: "Family transport to and from the Sydney CBD, hotels, Darling Harbour and Circular Quay.",
   },
-];
-
-export const fleetIncludes = [
-  "Professionally fitted baby capsules and child seats",
-  "Rear-facing baby capsules available for newborns and young infants",
-  "Forward-facing child seats available upon request",
-  "Booster seats for older children",
-  "Airport transfer vehicles with luggage and pram capacity",
-  "Hospital and medical transport vehicles",
-  "Coverage across Sydney CBD, Western Sydney, Inner West, Eastern Suburbs and North Shore",
 ];
 
 export const popularDestinations = [
@@ -82,8 +165,8 @@ export const popularDestinations = [
   "Darling Harbour",
   "Circular Quay",
   "Sydney Olympic Park",
-  "Sydney CBD",
-  "Sydney Airport",
+  "Cruise terminals",
+  "Sydney CBD hotels",
   "Major shopping centres",
 ];
 
@@ -97,20 +180,11 @@ export const hospitalsServed = [
 ];
 
 export const airportServices = [
-  "Sydney Domestic Airport Transfers",
-  "Sydney International Airport Transfers",
-  "Flight monitoring",
-  "Fixed pricing",
-  "Assistance with luggage and prams",
-];
-
-export const safetyFeatures = [
-  "Baby capsules available for newborns and infants",
-  "Child seats available for toddlers and young children",
-  "Child restraints fitted and checked before every trip",
-  "Suitable for airport transfers, hospital transfers and family travel",
-  "Clean, comfortable and family-friendly vehicles",
-  "Advance booking available to guarantee the correct child seat",
+  "Sydney Domestic and International Airport transfers",
+  "Flight number recorded against your booking",
+  "Multiple child restraints on request",
+  "Vehicle sized for your luggage and pram",
+  "Arrival and return transfers bookable together",
 ];
 
 export type Faq = { question: string; answer: string };
@@ -118,51 +192,62 @@ export type Faq = { question: string; answer: string };
 export const faqColumns: Faq[][] = [
   [
     {
-      question: "Do you provide baby seats in taxis across Sydney?",
-      answer: "Yes, we provide baby capsules and child seats for family travel throughout Sydney.",
+      question: "Do taxis need baby seats in NSW?",
+      answer:
+        "In NSW taxis, children up to 6 months must use a rear-facing restraint, and children aged 6 to 12 months must use a rear-facing restraint or a forward-facing restraint with an inbuilt harness. Children over 12 months may use a booster seat or a properly adjusted and fastened seatbelt. Booked hire and rideshare vehicles follow different rules - see our NSW child restraint guide for details and links to official sources.",
     },
     {
-      question: "Can I pre-book a taxi with a baby seat?",
-      answer: "Yes, we recommend booking in advance to ensure the correct child restraint is available.",
+      question: "Can a newborn travel in a Sydney taxi?",
+      answer:
+        "Yes, in a rear-facing restraint. Tell us your baby's age when booking so a suitable rear-facing restraint can be arranged - this is common for hospital-to-home transfers.",
     },
     {
-      question: "What types of child seats do you offer?",
-      answer: "We offer baby capsules, forward-facing child seats and booster seats depending on your child's age and size.",
+      question: "Can I book two or three child seats?",
+      answer:
+        "Yes. Request a restraint for each child when booking. Multiple restraints are subject to vehicle configuration and availability, so the more detail you give us about your children, adults and luggage, the better we can match the vehicle.",
     },
     {
-      question: "Is your baby seat taxi service available 24/7?",
-      answer: "Yes, our service operates 24 hours a day, 7 days a week across Sydney.",
+      question: "Can I use my own car seat?",
+      answer: "Yes. You're welcome to use your own approved child restraint if you prefer.",
     },
     {
-      question: "Why choose Baby Seat Taxi Sydney?",
-      answer: "We specialise in family transport with safe child restraints, professional drivers and reliable service.",
+      question: "Can you carry a pram or double stroller?",
+      answer:
+        "Yes - tell us about your pram when booking. A larger or double pram, combined with luggage and multiple restraints, may need a larger vehicle.",
+    },
+    {
+      question: "Is your service available 24/7?",
+      answer: "Yes, pre-booked transfers are available 24 hours a day, 7 days a week across Sydney.",
     },
   ],
   [
     {
-      question: "Do you provide airport transfers with baby seats?",
+      question: "Can you pick us up from Sydney Airport?",
       answer:
-        "Yes. We specialise in Sydney Airport transfers with baby seats, making travel easier for families arriving or departing with young children.",
+        "Yes. We provide Sydney Domestic and International Airport transfers. Add your flight number when booking so the booking is associated with the correct arrival.",
     },
     {
-      question: "How far in advance should I book a baby seat taxi?",
-      answer:
-        "We recommend booking as early as possible to guarantee the correct child restraint. However, we also accommodate many same-day and last-minute bookings.",
+      question: "Can I book both airport legs together?",
+      answer: "Yes. Many families book the arrival and return transfer at the same time.",
     },
     {
-      question: "Are your baby seats professionally installed?",
-      answer:
-        "Yes. All child restraints are installed and checked by trained drivers before your journey to ensure safety and compliance.",
+      question: "Can overseas visitors book before arriving in Australia?",
+      answer: "Yes. You can book online before you travel, including the child restraints you need for your arrival.",
     },
     {
-      question: "Can I book a baby seat taxi for hospital appointments?",
+      question: "How far in advance should I book?",
       answer:
-        "Absolutely. We provide safe family transport to hospitals, medical centres and specialist appointments throughout Sydney.",
+        "As early as possible, especially if you need more than one restraint or a larger vehicle. We also accommodate many same-day bookings, subject to availability.",
     },
     {
-      question: "Can I book a return trip?",
+      question: "Can I book a newborn hospital discharge?",
       answer:
-        "Yes. Many customers book both pickup and return journeys, especially for airport transfers, medical appointments and family outings.",
+        "Yes. We provide hospital-to-home transfers from Sydney hospitals. Tell us your baby's age and how many adults are travelling when you book.",
+    },
+    {
+      question: "What should I tell you when booking?",
+      answer:
+        "Each child's age and approximate size, the number of adults, suitcases and carry-on bags, any pram or stroller, and your flight number for airport pickups.",
     },
   ],
 ];
@@ -173,6 +258,7 @@ export const footerServices = [
   { label: "Child Seat Taxi Sydney", href: "/child-seat-taxi-sydney/" },
   { label: "Sydney Airport Transfers", href: "/sydney-airport-transfers-with-baby-seats/" },
   { label: "Taxi With Baby Seat Sydney", href: "/taxi-with-baby-seat-sydney/" },
+  { label: "NSW Taxi Baby Seat Laws", href: "/nsw-taxi-baby-seat-laws/" },
 ];
 
 // Verbatim from the live footer's "Useful Links" column.

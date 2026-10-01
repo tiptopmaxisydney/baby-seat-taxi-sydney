@@ -2,17 +2,36 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ServicePageTemplate from "@/components/service/ServicePageTemplate";
 import BlogPostTemplate from "@/components/blog/BlogPostTemplate";
+import GuidePageTemplate from "@/components/guide/GuidePageTemplate";
+import { guidePages, getGuidePage } from "@/lib/guides";
+import { guideImages } from "@/lib/guides/types";
 import { getServicePages, getServicePage } from "@/lib/servicePages";
 import { getBlogPosts, getBlogPost } from "@/lib/blogPosts";
 
 export async function generateStaticParams() {
   const [servicePages, blogPosts] = await Promise.all([getServicePages(), getBlogPosts()]);
-  return [...servicePages.map((p) => ({ slug: p.slug })), ...blogPosts.map((p) => ({ slug: p.slug }))];
+  return [
+    ...guidePages.map((p) => ({ slug: p.slug })),
+    ...servicePages.map((p) => ({ slug: p.slug })),
+    ...blogPosts.map((p) => ({ slug: p.slug })),
+  ];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const canonical = `/${slug}`;
+
+  const guide = getGuidePage(slug);
+  if (guide) {
+    const image = guideImages[guide.image];
+    return {
+      title: guide.metaTitle,
+      description: guide.metaDescription,
+      alternates: { canonical },
+      openGraph: { title: guide.metaTitle, description: guide.metaDescription, url: canonical, type: "website", images: [{ url: image }] },
+      twitter: { card: "summary_large_image", title: guide.metaTitle, description: guide.metaDescription, images: [image] },
+    };
+  }
 
   const servicePage = await getServicePage(slug);
   if (servicePage) {
@@ -64,6 +83,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function DynamicPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+
+  const guide = getGuidePage(slug);
+  if (guide) {
+    return <GuidePageTemplate page={guide} />;
+  }
 
   const servicePage = await getServicePage(slug);
   if (servicePage) {

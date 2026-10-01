@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { consolidatedPages } from "./lib/redirects";
 
 const nextConfig: NextConfig = {
   // superagent (used by booking-widget/utils/api.ts, ported from tiptopnextjs) pulls in
@@ -26,15 +27,10 @@ const nextConfig: NextConfig = {
   // Re-add a long-lived immutable header once real, final assets are in
   // place (ideally with content-hashed filenames instead of stable ones).
 
-  // URL restructure (2026-08): transport-solutions-sydney (tiptopmaxisydney.com.au) is the
-  // canonical brand for this keyword - this site's duplicate page permanently redirects there.
+  // Consolidated / moved pages - see lib/redirects.ts.
   async redirects() {
     return [
-      {
-        source: "/baby-seat-taxi-western-sydney-airport/",
-        destination: "https://tiptopmaxisydney.com.au/western-sydney-airport-baby-seat-taxi/",
-        permanent: true,
-      },
+      ...consolidatedPages.map(({ from, to }) => ({ source: `/${from}`, destination: to, permanent: true })),
     ];
   },
 };

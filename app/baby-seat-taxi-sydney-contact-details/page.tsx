@@ -27,7 +27,7 @@ const contactFaq = [
   },
   {
     question: "Do you provide child seats?",
-    answer: "Yes, child seats are available for toddlers and young children.",
+    answer: "Yes. Tell us each child's age and approximate size when booking so we can arrange an appropriate restraint.",
   },
   {
     question: "Can I book an airport transfer?",
@@ -78,6 +78,8 @@ export default function ContactUsPage() {
                 <FaMapMarkerAlt aria-hidden="true" style={{ marginRight: 8, color: "var(--wt-blue)" }} /> Address
               </h3>
               <p>
+                Operated by {siteConfig.legalName} Pty Ltd
+                <br />
                 {siteConfig.address.street}, {siteConfig.address.locality} {siteConfig.address.region}{" "}
                 {siteConfig.address.postcode}, {siteConfig.address.country}
               </p>

@@ -3,21 +3,33 @@ import Image from "next/image";
 import Link from "next/link";
 import Hero from "@/components/home/Hero";
 import SplitSection from "@/components/home/SplitSection";
+import CardGrid from "@/components/home/CardGrid";
+import ServiceAreas from "@/components/home/ServiceAreas";
 import Faq from "@/components/home/Faq";
+import FamilyVehicleCalculator from "@/components/home/FamilyVehicleCalculator";
 import {
-  whyChooseUsPoints,
-  recentNews,
+  restraintOptions,
+  restraintBookingNote,
+  familyBenefits,
+  bookingChecklist,
+  bookingSteps,
+  familyVehicles,
+  nswTaxiRules,
+  officialGuidance,
   popularDestinations,
   hospitalsServed,
   airportServices,
-  safetyFeatures,
   faqColumns,
 } from "@/lib/homeData";
 import { getBlogPosts } from "@/lib/blogPosts";
 import { siteConfig } from "@/lib/siteConfig";
+import { guideLinks } from "@/lib/navigation";
+import { L } from "@/lib/guides/links";
+
+const airportGuideLinks = [L.international, L.domestic, L.airportHotel, L.areas];
 
 export const metadata: Metadata = {
-  title: "Baby Seat Taxi Sydney | Safe Family Transport with Child Seats",
+  title: "Baby Seat Taxi Sydney | Taxi with Baby, Child & Booster Seats",
   description: siteConfig.description,
 };
 
@@ -43,8 +55,35 @@ export default async function Home() {
 
       <section className="wt-section on-dark">
         <div className="container">
-          <span className="wt-eyebrow">Why Choose Us</span>
-          <h2>Why Choose Baby Seat Taxi Sydney</h2>
+          <span className="wt-eyebrow">Plan Your Trip</span>
+          <h2>Tell Us About Your Children</h2>
+          <p style={{ maxWidth: 820 }}>
+            Enter who&apos;s travelling and what you&apos;re bringing for a suggested vehicle and the child restraints to
+            request.
+          </p>
+          <FamilyVehicleCalculator />
+        </div>
+      </section>
+
+      <CardGrid
+        eyebrow="Child Restraint Options"
+        title="Baby, Child & Booster Seats"
+        intro="Tell us your child's age and approximate size - we'll arrange the restraint to suit."
+        cards={restraintOptions}
+        footnote={restraintBookingNote}
+      />
+
+      <CardGrid
+        eyebrow="Why Families Pre-Book With Us"
+        title="The Right Vehicle. The Requested Child Restraint. Room for the Family."
+        intro="Child restraint requirements, passengers, prams and luggage are recorded before your journey so the vehicle can be selected around the needs of your family."
+        cards={familyBenefits}
+      />
+
+      <section className="wt-section on-dark">
+        <div className="container">
+          <span className="wt-eyebrow">Before You Book</span>
+          <h2>What to Include When Booking</h2>
           <div className="wt-split">
             <div className="wt-split-media">
               <video
@@ -57,44 +96,30 @@ export default async function Home() {
               </video>
             </div>
             <div className="wt-split-body">
+              <p>
+                Travelling with a newborn, toddler or young child shouldn&apos;t mean carrying your own car seat across
+                Sydney. Tell us who&apos;s travelling and we&apos;ll help arrange a suitable vehicle for your family.
+              </p>
+              <p>When booking, include:</p>
               <ul>
-                {whyChooseUsPoints.map((point) => (
-                  <li key={point}>{point}</li>
+                {bookingChecklist.map((item) => (
+                  <li key={item}>{item}</li>
                 ))}
               </ul>
+              <Link href="/#wcb-booking-form" className="wt-btn wt-btn-primary">
+                Book Your Family Transfer
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
       <SplitSection
-        title="Baby Capsule Taxi (Newborn to Approximately 1 Year)"
-        eyebrow="Our Baby Seat Options"
-        paragraphs={[
-          "Our baby capsule taxis are ideal for newborn babies and young infants. All capsules are professionally installed and used in a rear-facing position in accordance with Australian safety standards.",
-        ]}
-        itemsIntro="Suitable for:"
-        items={["Hospital discharge transport", "Airport transfers", "Family travel", "Everyday transport"]}
-        image={{ src: "/images/baby-capsule-taxi-sydney-real.png", alt: "Baby capsule taxi Sydney for newborns and infants", width: 700, height: 467 }}
-        imageFirst
-        background="dark"
-      />
-
-      <SplitSection
-        title="Child Seat Taxi (6 Months to 4 Years)"
-        eyebrow="Our Baby Seat Options"
-        paragraphs={["Children under four years of age require an approved child restraint suitable for their age and size."]}
-        itemsIntro="Our child seat taxis provide:"
-        items={["Safe and secure travel", "Professionally fitted restraints", "Comfortable family transport throughout Sydney"]}
-        image={{ src: "/images/child-seat-taxi-sydney-real.png", alt: "Child seat taxi Sydney for toddlers and young children", width: 700, height: 467 }}
-        background="dark"
-      />
-
-      <SplitSection
-        title="Sydney Airport Transfers with Baby Seats"
+        title="Sydney Airport Transfers with Child Seats"
         eyebrow="Airport Transfers"
         paragraphs={[
-          "Travelling with children can be stressful. Our airport transfer service makes family travel easier by providing the correct child restraint before pickup, with services including Sydney Domestic and International Airport transfers, and popular routes across Parramatta, Liverpool, Blacktown, Bondi and Chatswood.",
+          "Flying into or out of Sydney with children? Add your flight number, the number and ages of children, adults, suitcases, carry-on bags, any pram and your destination when booking - and book your return flight transfer at the same time.",
+          "Example: 2 adults and 2 children (an 8-month-old and a 4-year-old), 2 large suitcases, 2 carry-ons and 1 folded pram. Enter these details when booking and we'll arrange the appropriate vehicle and child restraints.",
         ]}
         itemsIntro="Services include:"
         items={airportServices}
@@ -103,23 +128,70 @@ export default async function Home() {
         background="dark"
       />
 
+      <CardGrid
+        eyebrow="Prams, Luggage & Family Vehicles"
+        title="Travelling with More Than One Child?"
+        intro="A baby seat may fit in a sedan, but your full travel setup may not. Two adults, two children, two child restraints, a large pram and four suitcases may need a larger vehicle. Families can request multiple restraints, subject to vehicle configuration and availability."
+        cards={familyVehicles}
+        footnote="Child restraints change the number of usable seats, so tell us everyone travelling and everything you're bringing - we'll confirm a vehicle that fits."
+      />
+
       <SplitSection
-        title="Hospital Transfers with Baby Seats"
+        title="Newborn Hospital-to-Home Transfers"
         eyebrow="Hospital Transfers"
         paragraphs={[
-          "Travelling to or from a hospital with a newborn or young child requires extra care and planning. Our hospital transfer service provides safe, comfortable and reliable transport with baby capsules and child seats available for children of all ages.",
+          "Bringing a newborn home is a journey to plan ahead. Tell us your baby's age, how many adults are travelling and what you're bringing - baby bag, pram or hospital luggage - and we'll arrange a rear-facing restraint and a suitable vehicle. If your discharge time changes, contact us to adjust the booking.",
         ]}
-        itemsIntro="We provide hospital pickup services from major Sydney hospitals including:"
+        itemsIntro="We provide pickups from Sydney hospitals including:"
         items={hospitalsServed}
         image={{ src: "/images/hospital-transfers-with-baby-seats-real.png", alt: "Hospital transfers with baby seats in Sydney", width: 795, height: 529 }}
         background="dark"
       />
 
+      <section className="wt-section on-dark">
+        <div className="container">
+          <span className="wt-eyebrow">How Booking Works</span>
+          <h2>How Booking Works</h2>
+          <div className="wt-steps">
+            {bookingSteps.map((step, i) => (
+              <div className="wt-step" key={step.title}>
+                <div className="wt-step-num">{String(i + 1).padStart(2, "0")}</div>
+                <h4>{step.title}</h4>
+                <p>{step.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="wt-section on-dark">
+        <div className="container">
+          <span className="wt-eyebrow">NSW Child Restraint Information</span>
+          <h2>Child Restraint Rules for NSW Taxis</h2>
+          <p style={{ maxWidth: 820 }}>
+            NSW Government rules for children travelling in taxis differ from the rules for private cars and for
+            booked hire and rideshare vehicles. In a taxi:
+          </p>
+          <div className="wt-grid-3">
+            {nswTaxiRules.map((r) => (
+              <div className="wt-card" key={r.age}>
+                <h3>{r.age}</h3>
+                <p>{r.rule}</p>
+              </div>
+            ))}
+          </div>
+          <p style={{ maxWidth: 820, marginTop: 24 }}>
+            Read our <Link href="/nsw-taxi-baby-seat-laws/">guide to NSW taxi baby seat laws</Link> for the taxi,
+            rideshare and private vehicle rules side by side, with links to official sources.
+          </p>
+        </div>
+      </section>
+
       <SplitSection
         title="Family Transport Across Sydney"
         eyebrow="Family Transport"
         paragraphs={[
-          "Whether you're travelling to a medical appointment, family gathering, shopping centre, airport, cruise terminal, school event, or one of Sydney's many popular attractions, Baby Seat Taxi Sydney provides safe, reliable and family-friendly transport with baby capsules and child seats available on request.",
+          "From hotels and cruise terminals to medical appointments, family gatherings and Sydney's attractions, book family transport with child restraints arranged for each child.",
         ]}
         itemsIntro="Popular family destinations in Sydney:"
         items={popularDestinations}
@@ -128,24 +200,28 @@ export default async function Home() {
         background="dark"
       />
 
-      <SplitSection
-        title="Child Safety Information"
-        eyebrow="Child Safety"
-        paragraphs={[
-          "Australian road safety laws require children to travel in approved child restraints appropriate for their age and size. We recommend booking the correct baby seat when making your reservation so our team can prepare the most suitable restraint for your child.",
-        ]}
-        itemsIntro="Safety features:"
-        items={safetyFeatures}
-        image={{ src: "/images/child-safety-information-real.png", alt: "Child safety information for baby seat taxi bookings", width: 738, height: 599 }}
-        background="dark"
-      />
+      <ServiceAreas />
 
       <section className="wt-section on-dark">
         <div className="container">
-          <span className="wt-eyebrow">Recent News</span>
-          <h2>Recent News</h2>
+          <span className="wt-eyebrow">Family Travel Guides</span>
+          <h2>Plan Your Family&apos;s Journey</h2>
+          <nav className="wt-related" aria-label="Family travel guides">
+            {[...guideLinks, ...airportGuideLinks].map((link) => (
+              <Link key={link.href} href={link.href}>
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </section>
+
+      <section className="wt-section on-dark">
+        <div className="container">
+          <span className="wt-eyebrow">Official Guidance</span>
+          <h2>Official Child Restraint Guidance</h2>
           <div className="wt-grid-3">
-            {recentNews.map((item) => (
+            {officialGuidance.map((item) => (
               <a href={item.href} key={item.href} target="_blank" rel="noreferrer" className="wt-card" style={{ display: "block" }}>
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>

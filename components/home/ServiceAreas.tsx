@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { serviceAreas } from "@/lib/homeData";
 
 export default function ServiceAreas() {
@@ -14,12 +15,15 @@ export default function ServiceAreas() {
         </p>
         <div className="wt-areas-grid">
           {serviceAreas.map((area) => (
-            <div className="wt-area-card" key={area.title}>
+            <Link href={area.href} className="wt-area-card" key={area.title} style={{ display: "block" }}>
               <h3>{area.title}</h3>
               <p>{area.description}</p>
-            </div>
+            </Link>
           ))}
         </div>
+        <p style={{ marginTop: 24 }}>
+          <Link href="/baby-seat-taxi-sydney-areas/">See all Sydney areas we cover</Link>
+        </p>
       </div>
     </section>
   );

@@ -16,6 +16,17 @@ export const locationsLinks: NavLink[] = [
   { label: "Baby Seat Taxi Campbelltown", href: "/baby-seat-taxi-campbelltown/" },
   { label: "Baby Seat Taxi Chatswood", href: "/baby-seat-taxi-chatswood/" },
   { label: "Baby Seat Taxi Bondi", href: "/baby-seat-taxi-bondi/" },
+  { label: "All Sydney Areas", href: "/baby-seat-taxi-sydney-areas/" },
+];
+
+export const guideLinks: NavLink[] = [
+  { label: "NSW Taxi Baby Seat Laws", href: "/nsw-taxi-baby-seat-laws/" },
+  { label: "Which Child Seat to Request", href: "/baby-child-booster-seat-guide/" },
+  { label: "Multiple Child Seats", href: "/taxi-with-multiple-child-seats-sydney/" },
+  { label: "Baby Seat & Pram", href: "/taxi-with-baby-seat-and-pram-sydney/" },
+  { label: "Newborn Hospital-to-Home", href: "/newborn-hospital-to-home-taxi-sydney/" },
+  { label: "Visiting Sydney with a Baby", href: "/visiting-sydney-with-a-baby/" },
+  { label: "Taxi vs Rideshare", href: "/taxi-vs-rideshare-with-baby-sydney/" },
 ];
 
 export const primaryNav: NavLink[] = [

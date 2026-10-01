@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import ServiceHero from "@/components/service/ServiceHero";
 import Faq from "@/components/home/Faq";
 import FinalCta from "@/components/home/FinalCta";
+import { faqColumns as homeFaqColumns } from "@/lib/homeData";
 
 const title = "Baby Seat Taxi Sydney FAQs | Child Seat Taxi Questions";
 const description = "Frequently asked questions about booking a baby seat taxi in Sydney, including baby capsules, child seats and service areas.";
@@ -16,23 +17,23 @@ export const metadata: Metadata = {
 
 const faqColumns = [
   [
+    ...homeFaqColumns[0],
     {
-      question: "Are baby seats mandatory in Sydney taxis?",
-      answer: "Parents should ensure children travel in an appropriate child restraint whenever possible.",
+      question: "What's the difference between taxi and rideshare child-restraint rules?",
+      answer:
+        "In NSW, children over 12 months may travel in a taxi with a booster seat or a properly adjusted seatbelt, while booked hire and rideshare vehicles generally follow the private-vehicle rules. See our NSW taxi baby seat laws guide for details and official links.",
     },
-    {
-      question: "Can I travel with a newborn baby?",
-      answer: "Yes, newborn transport is available with baby capsules.",
-    },
-    {
-      question: "Can I use my own child seat?",
-      answer: "Yes, customers are welcome to bring their own approved restraint.",
-    },
-  ],
-  [
     {
       question: "How do I book a baby seat taxi?",
       answer: "Bookings can be made online or by phone.",
+    },
+  ],
+  [
+    ...homeFaqColumns[1],
+    {
+      question: "Which vehicle should I book with four suitcases?",
+      answer:
+        "Tell us the number of adults, children, restraints, suitcases, carry-ons and prams when booking. Child restraints reduce usable seating, so a larger family with four suitcases will often need an SUV, 7-seat vehicle or minibus - we'll confirm the right vehicle.",
     },
     {
       question: "What areas do you service?",

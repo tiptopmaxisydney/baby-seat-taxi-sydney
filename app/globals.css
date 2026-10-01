@@ -1573,3 +1573,152 @@ img {
     grid-template-columns: 1fr;
   }
 }
+
+/* Guide pages: two-column info table */
+.wt-table-wrap {
+  overflow-x: auto;
+  margin-top: 24px;
+}
+.wt-table {
+  width: 100%;
+  max-width: 900px;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+.wt-table th,
+.wt-table td {
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  vertical-align: top;
+}
+.wt-table th {
+  font-family: var(--font-heading);
+  color: var(--wt-blue);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.wt-table td:first-child {
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+}
+.wt-table td {
+  color: rgba(255, 255, 255, 0.78);
+}
+.wt-related {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+.wt-related a {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  padding: 8px 16px;
+  color: #fff;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+.wt-related a:hover {
+  border-color: var(--wt-blue);
+  color: var(--wt-blue);
+}
+
+/* Family vehicle calculator */
+.wt-calc {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 28px;
+  margin-top: 28px;
+  background: #fff;
+  color: var(--wt-text);
+  border-radius: var(--wt-radius-lg);
+  padding: 28px;
+}
+.wt-calc-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 20px;
+  align-content: start;
+}
+.wt-calc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--wt-navy);
+}
+.wt-calc-field select {
+  height: 42px;
+  border: 1px solid #cbd2db;
+  border-radius: 10px;
+  padding: 0 10px;
+  font: inherit;
+  font-weight: 400;
+  background: #fff;
+  color: var(--wt-text);
+}
+.wt-calc-stepper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.wt-calc-stepper button {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid #cbd2db;
+  background: #fff;
+  color: var(--wt-navy);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.wt-calc-stepper button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.wt-calc-stepper output {
+  min-width: 20px;
+  text-align: center;
+  font-weight: 700;
+}
+.wt-calc-result {
+  background: var(--wt-blue-light);
+  border-radius: var(--wt-radius);
+  padding: 22px;
+}
+.wt-calc-result ul {
+  margin: 0 0 12px;
+  padding-left: 18px;
+  font-size: 0.9rem;
+}
+.wt-calc-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--wt-muted);
+  margin: 0 0 4px;
+  font-weight: 700;
+}
+.wt-calc-vehicle {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--wt-navy);
+  margin: 0 0 16px;
+}
+.wt-calc-note {
+  font-size: 0.82rem;
+  color: var(--wt-muted);
+  margin: 0 0 16px;
+}
+@media (max-width: 860px) {
+  .wt-calc { grid-template-columns: 1fr; padding: 20px; }
+}
+@media (max-width: 480px) {
+  .wt-calc-inputs { grid-template-columns: 1fr; }
+  .wt-table td:first-child { white-space: normal; }
+}
