@@ -2,6 +2,7 @@ import Link from "next/link";
 import ServiceHero from "@/components/service/ServiceHero";
 import Faq from "@/components/home/Faq";
 import FamilyVehicleCalculator from "@/components/home/FamilyVehicleCalculator";
+import OfficialSources from "@/components/OfficialSources";
 import { guideImages, type GuidePage, type GuideSection } from "@/lib/guides/types";
 import { siteConfig } from "@/lib/siteConfig";
 
@@ -110,6 +111,8 @@ export default function GuidePageTemplate({ page }: { page: GuidePage }) {
         breadcrumbLabel={page.navLabel}
         image={{ src: guideImages[page.image], alt: page.h1 }}
       />
+
+      {page.officialSources && <OfficialSources />}
 
       {page.sections.map((section) => (
         <Section key={section.heading} section={section} />

@@ -53,7 +53,7 @@ export default function FareEstimatorPage() {
           },
           {
             title: "Advance vs Last-Minute Booking",
-            description: "We recommend booking ahead to guarantee the correct baby capsule, child seat or booster seat is available.",
+            description: "We recommend booking ahead so the requested baby capsule or child seat can be arranged for your trip.",
           },
         ]}
       />

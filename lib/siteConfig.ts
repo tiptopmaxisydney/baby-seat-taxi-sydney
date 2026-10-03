@@ -3,7 +3,7 @@ export const siteConfig = {
   legalName: "TipTop Transport Solutions",
   url: "https://babyseattaxisydney.com.au",
   description:
-    "Book a safe baby seat taxi in Sydney with baby capsules, child seats and booster seats available. Reliable family transport, airport transfers and 24/7 service.",
+    "Book a safe baby seat taxi in Sydney with baby capsules and child seats arranged at booking. Reliable family transport, airport transfers and 24/7 service.",
   phoneLocal: "0296699390",
   phoneLocalDisplay: "(02) 9669 9390",
   phoneIntl: "+61296699390",

@@ -15,6 +15,9 @@ import {
   bookingSteps,
   familyVehicles,
   nswTaxiRules,
+  nswChildRestraintUrl,
+  pointToPointChildRestraintUrl,
+  lastReviewed,
   officialGuidance,
   popularDestinations,
   hospitalsServed,
@@ -29,7 +32,7 @@ import { L } from "@/lib/guides/links";
 const airportGuideLinks = [L.international, L.domestic, L.airportHotel, L.areas];
 
 export const metadata: Metadata = {
-  title: "Baby Seat Taxi Sydney | Taxi with Baby, Child & Booster Seats",
+  title: "Baby Seat Taxi Sydney | Taxis with Baby Capsules & Child Seats",
   description: siteConfig.description,
 };
 
@@ -67,7 +70,7 @@ export default async function Home() {
 
       <CardGrid
         eyebrow="Child Restraint Options"
-        title="Baby, Child & Booster Seats"
+        title="Baby Capsules & Child Seats"
         intro="Tell us your child's age and approximate size - we'll arrange the restraint to suit."
         cards={restraintOptions}
         footnote={restraintBookingNote}
@@ -167,10 +170,12 @@ export default async function Home() {
       <section className="wt-section on-dark">
         <div className="container">
           <span className="wt-eyebrow">NSW Child Restraint Information</span>
-          <h2>Child Restraint Rules for NSW Taxis</h2>
+          <h2>NSW Taxi Child Restraint Information</h2>
           <p style={{ maxWidth: 820 }}>
-            NSW Government rules for children travelling in taxis differ from the rules for private cars and for
-            booked hire and rideshare vehicles. In a taxi:
+            Children under 12 months require an appropriate approved child restraint when travelling in a taxi.
+            Different taxi-specific requirements apply for older children, and hire and rideshare vehicles follow
+            the private-vehicle rules instead. If you&apos;d like a child restraint arranged, tell us each
+            child&apos;s age and approximate size when booking.
           </p>
           <div className="wt-grid-3">
             {nswTaxiRules.map((r) => (
@@ -181,8 +186,17 @@ export default async function Home() {
             ))}
           </div>
           <p style={{ maxWidth: 820, marginTop: 24 }}>
-            Read our <Link href="/nsw-taxi-baby-seat-laws/">guide to NSW taxi baby seat laws</Link> for the taxi,
-            rideshare and private vehicle rules side by side, with links to official sources.
+            Source:{" "}
+            <a href={nswChildRestraintUrl} target="_blank" rel="noreferrer">
+              NSW Government – Child car seats
+            </a>{" "}
+            and the{" "}
+            <a href={pointToPointChildRestraintUrl} target="_blank" rel="noreferrer">
+              NSW Point to Point Transport Commissioner
+            </a>
+            . Last reviewed: {lastReviewed}. Read our{" "}
+            <Link href="/nsw-taxi-baby-seat-laws/">guide to NSW taxi baby seat laws</Link> for the taxi, rideshare
+            and private vehicle rules side by side.
           </p>
         </div>
       </section>

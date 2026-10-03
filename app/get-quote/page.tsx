@@ -5,7 +5,7 @@ import Faq from "@/components/home/Faq";
 import { siteConfig } from "@/lib/siteConfig";
 
 const title = "Get a Booking | Baby Seat Taxi Sydney";
-const description = "Get an instant booking for a baby capsule, child seat or booster seat taxi in Sydney. Tell us your trip details and we'll confirm pricing and availability.";
+const description = "Get an instant booking for a baby capsule or child seat taxi in Sydney. Tell us your trip details and we'll confirm pricing and availability.";
 
 export const metadata: Metadata = {
   title,

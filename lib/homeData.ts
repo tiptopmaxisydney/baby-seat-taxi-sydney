@@ -3,16 +3,45 @@
 export const nswChildRestraintUrl =
   "https://www.nsw.gov.au/driving-boating-and-transport/roads-safety-and-rules/safe-driving/child-seats";
 export const pointToPointChildRestraintUrl = "https://www.pointtopoint.nsw.gov.au/child-restraints";
+export const transportNswChildSeatsUrl = "https://www.transport.nsw.gov.au/roadsafety/parents/child-car-seats";
 
-// Summary of the NSW Government taxi rules (checked against nswChildRestraintUrl, Oct 2026).
+// Shown (with lastReviewed) near the top of every page that summarises the rules - see
+// components/OfficialSources.tsx. Re-check the rules against these and bump the date on review.
+export const lastReviewed = "October 2026";
+export const officialSources = [
+  { label: "NSW Government – Child car seats", href: nswChildRestraintUrl },
+  { label: "NSW Point to Point Transport Commissioner – Child restraints in taxi, hire and rideshare vehicles", href: pointToPointChildRestraintUrl },
+  { label: "Transport for NSW – Child car seats", href: transportNswChildSeatsUrl },
+];
+
+// We arrange baby capsules and child seats only. Booster seats are mentioned on the site only where
+// the NSW rules themselves name them, always alongside this note.
+export const noBoosterNote =
+  "We arrange baby capsules and child seats. We do not provide booster seats - if your child uses a booster seat, please bring your own approved booster.";
+
+// Summary of the NSW taxi rules (checked against pointToPointChildRestraintUrl and
+// nswChildRestraintUrl, October 2026). Taxi rules differ from hire/rideshare and private vehicles.
 export const nswTaxiRules = [
-  { age: "Up to 6 months", rule: "Must use a rear-facing child restraint." },
+  { age: "Up to 6 months", rule: "Must be secured in a suitable approved rear-facing child restraint." },
   {
     age: "6 to 12 months",
-    rule: "Must use either a rear-facing child restraint or a forward-facing child restraint with an inbuilt harness.",
+    rule: "Must be secured in a suitable approved rear-facing child restraint, or a forward-facing child restraint with an inbuilt harness. A rear-facing restraint is strongly recommended.",
   },
-  { age: "Over 12 months", rule: "Must use a booster seat or wear a properly adjusted and fastened seatbelt." },
+  {
+    age: "1 to 7 years",
+    rule: "May travel wearing a properly fastened and adjusted seatbelt, although a suitable approved child restraint is strongly recommended.",
+  },
 ];
+
+// Applies to every taxi trip - the taxi driver's obligation for babies, plus front-seat rules.
+export const nswTaxiNotes = [
+  "A taxi driver must not start a trip if a passenger is under 1 year old and neither the driver nor the adult passenger has a suitable approved child restraint.",
+  "Children under 4 years must not sit in the front seat of a taxi, hire or rideshare vehicle.",
+];
+
+// Hire and rideshare (booked hire) vehicles follow the private-vehicle rules, not the taxi rules.
+export const nswRideshareRule =
+  "The rules for hire and rideshare vehicles are the same rules that apply in a private vehicle - so children under 7 must use an approved child restraint suitable for their age and size. The taxi rules above do not apply to them.";
 
 // Summary of the NSW Government private-vehicle rules (checked against nswChildRestraintUrl, Oct 2026).
 export const nswPrivateVehicleRules = [
@@ -43,8 +72,8 @@ export const restraintOptions = [
     description: "Child restraints arranged according to your child's age and size, including forward-facing restraints with an inbuilt harness.",
   },
   {
-    title: "Booster Seat",
-    description: "Available for older children where a booster seat is appropriate for their age and size.",
+    title: "Several Children",
+    description: "Request a restraint for each child, subject to vehicle configuration and availability - give us every child's age and approximate size.",
   },
 ];
 
@@ -79,11 +108,10 @@ export const familyBenefits = [
 ];
 
 export const bookingChecklist = [
-  "Age of each child",
+  "Number of children, and each child's age and approximate size",
   "Number of adults",
-  "Number of child restraints required",
   "Suitcases and carry-on bags",
-  "Pram or stroller",
+  "Pram or stroller (single or double)",
   "Flight number for airport pickups",
 ];
 
@@ -113,6 +141,11 @@ export const officialGuidance = [
     title: "Child restraints in taxis and hire vehicles",
     description: "Point to Point Transport Commissioner guidance on children in taxis, booked hire vehicles and rideshare.",
     href: pointToPointChildRestraintUrl,
+  },
+  {
+    title: "Transport for NSW child car seats",
+    description: "Transport for NSW road safety guidance for parents on choosing and using child car seats.",
+    href: transportNswChildSeatsUrl,
   },
 ];
 
@@ -194,7 +227,7 @@ export const faqColumns: Faq[][] = [
     {
       question: "Do taxis need baby seats in NSW?",
       answer:
-        "In NSW taxis, children up to 6 months must use a rear-facing restraint, and children aged 6 to 12 months must use a rear-facing restraint or a forward-facing restraint with an inbuilt harness. Children over 12 months may use a booster seat or a properly adjusted and fastened seatbelt. Booked hire and rideshare vehicles follow different rules - see our NSW child restraint guide for details and links to official sources.",
+        "Children under 12 months must travel in a suitable approved child restraint in a NSW taxi - rear-facing up to 6 months, and rear-facing or forward-facing with an inbuilt harness from 6 to 12 months. Children over 12 months may legally use a properly fastened and adjusted seatbelt in a taxi, although a child restraint is strongly recommended. Hire and rideshare vehicles follow the private-vehicle rules instead - see our NSW taxi baby seat laws guide for the official sources.",
     },
     {
       question: "Can a newborn travel in a Sydney taxi?",

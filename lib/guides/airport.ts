@@ -34,7 +34,7 @@ export const airportGuides: GuidePage[] = [
     navLabel: "International Airport (T1)",
     metaTitle: "Sydney International Airport Baby Seat Taxi | T1 Family Transfers",
     metaDescription:
-      "Pre-book a family transfer from Sydney International Airport (T1) with baby capsules, child seats and boosters arranged for each child. Book before you fly.",
+      "Pre-book a family transfer from Sydney International Airport (T1) with baby capsules and child seats arranged for each child. Book before you fly.",
     eyebrow: "T1 International",
     h1: "Sydney International Airport Taxi with Baby Seats (T1)",
     heroDescription:
@@ -81,7 +81,7 @@ export const airportGuides: GuidePage[] = [
     navLabel: "Domestic Airport (T2 & T3)",
     metaTitle: "Sydney Domestic Airport Baby Seat Taxi | T2 & T3 Family Transfers",
     metaDescription:
-      "Family transfers to and from Sydney Domestic Airport (T2 and T3) with baby capsules, child seats and boosters arranged at booking.",
+      "Family transfers to and from Sydney Domestic Airport (T2 and T3) with baby capsules and child seats arranged at booking.",
     eyebrow: "T2 & T3 Domestic",
     h1: "Sydney Domestic Airport Taxi with Baby Seats (T2 & T3)",
     heroDescription:
@@ -135,7 +135,7 @@ export const airportGuides: GuidePage[] = [
         cards: [
           { title: "Baby + toddler", description: "A rear-facing restraint plus a forward-facing harness or rear-facing child restraint." },
           { title: "Twins", description: "Two restraints of the same type - tell us both babies' ages and sizes." },
-          { title: "Two older children", description: "Two boosters, or a child restraint plus a booster." },
+          { title: "Two young children", description: "Two child seats - tell us each child's age and approximate size." },
         ],
       },
       {
@@ -247,7 +247,7 @@ export const airportGuides: GuidePage[] = [
     navLabel: "Airport to Hotel with Baby Seat",
     metaTitle: "Sydney Airport to Hotel with Baby Seat | Family Hotel Transfers",
     metaDescription:
-      "Book a Sydney Airport to hotel transfer with a baby capsule, child seat or booster arranged for each child. CBD, Darling Harbour, Circular Quay and beyond.",
+      "Book a Sydney Airport to hotel transfer with a baby capsule or child seat arranged for each child. CBD, Darling Harbour, Circular Quay and beyond.",
     eyebrow: "Hotel Transfers",
     h1: "Sydney Airport to Hotel Transfers with Baby Seats",
     heroDescription:

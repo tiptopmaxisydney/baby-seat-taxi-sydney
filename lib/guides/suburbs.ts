@@ -347,7 +347,7 @@ function suburbPage(s: Suburb): GuidePage {
     pillar: "Locations",
     navLabel: `Baby Seat Taxi ${s.name}`,
     metaTitle: `Baby Seat Taxi ${s.name} | Taxi with Child Seats`,
-    metaDescription: `Pre-booked family transport in ${s.name} with baby capsules, child restraints and booster seats arranged at booking. Airport, hospital and family trips.`,
+    metaDescription: `Pre-booked family transport in ${s.name} with baby capsules and child seats arranged at booking. Airport, hospital and family trips.`,
     eyebrow: s.region,
     h1: `Baby Seat Taxi ${s.name}`,
     heroDescription: `Family transport from ${s.name} with the child restraints requested for your journey - airport transfers, hospital trips and days out.`,

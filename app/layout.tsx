@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Baby Seat Taxi Sydney | Book Maxi Taxi with Baby Seat",
     description:
-      "Safe, reliable baby seat taxi in Sydney. Capsule, convertible & booster seats available. Airport, suburbs & CBD transfers. Book online or call now.",
+      "Safe, reliable baby seat taxi in Sydney. Baby capsules and child seats arranged at booking. Airport, suburbs & CBD transfers. Book online or call now.",
     url: siteConfig.url,
     siteName: siteConfig.name,
     type: "website",

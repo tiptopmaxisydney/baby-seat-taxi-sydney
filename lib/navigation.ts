@@ -21,7 +21,7 @@ export const locationsLinks: NavLink[] = [
 
 export const guideLinks: NavLink[] = [
   { label: "NSW Taxi Baby Seat Laws", href: "/nsw-taxi-baby-seat-laws/" },
-  { label: "Which Child Seat to Request", href: "/baby-child-booster-seat-guide/" },
+  { label: "Which Child Seat to Request", href: "/which-child-seat-to-request/" },
   { label: "Multiple Child Seats", href: "/taxi-with-multiple-child-seats-sydney/" },
   { label: "Baby Seat & Pram", href: "/taxi-with-baby-seat-and-pram-sydney/" },
   { label: "Newborn Hospital-to-Home", href: "/newborn-hospital-to-home-taxi-sydney/" },

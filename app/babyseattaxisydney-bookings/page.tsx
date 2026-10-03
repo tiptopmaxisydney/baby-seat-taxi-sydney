@@ -5,7 +5,7 @@ import BookingForm from "@/components/home/BookingForm";
 import { siteConfig } from "@/lib/siteConfig";
 
 const title = "Bookings | Baby Seat Taxi Sydney";
-const description = "Book a baby capsule, child seat or booster seat taxi in Sydney by phone, app or online booking form.";
+const description = "Book a baby capsule or child seat taxi in Sydney by phone, app or online booking form.";
 
 export const metadata: Metadata = {
   title,

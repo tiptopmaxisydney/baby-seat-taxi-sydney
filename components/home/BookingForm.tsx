@@ -108,7 +108,6 @@ export default function BookingForm() {
               <select id="seatType" name="seatType" className="wcb-select" defaultValue="Baby Capsule (Newborn - 12 Months)" required>
                 <option value="Baby Capsule (Newborn - 12 Months)">Baby Capsule (Newborn - 12 Months)</option>
                 <option value="Child Seat (6 Months - 4 Years)">Child Seat (6 Months - 4 Years)</option>
-                <option value="Booster Seat (4 - 7 Years)">Booster Seat (4 - 7 Years)</option>
                 <option value="Multiple / Mixed Seats">Multiple / Mixed Seats</option>
               </select>
             </div>

@@ -8,4 +8,8 @@ export const consolidatedPages: { from: string; to: string }[] = [
   { from: "what-the-martian-can-teach-sales", to: "/rpa-hospital-newborn-taxi/" },
   // Duplicated the search intent of the main Sydney Airport hub.
   { from: "baby-seat-taxi-sydney-airport", to: "/sydney-airport-transfers-with-baby-seats/" },
+  // 2026-10: booster seats are not a service we provide - the booster page goes to the child seat
+  // page, and the seat guide moved to a slug without "booster" in it.
+  { from: "booster-seat-taxi-sydney", to: "/child-seat-taxi-sydney/" },
+  { from: "baby-child-booster-seat-guide", to: "/which-child-seat-to-request/" },
 ];

@@ -3,11 +3,13 @@ import Link from "next/link";
 import ServiceHero from "@/components/service/ServiceHero";
 import CardGrid from "@/components/home/CardGrid";
 import Faq from "@/components/home/Faq";
+import OfficialSources from "@/components/OfficialSources";
 import {
   nswTaxiRules,
+  nswTaxiNotes,
+  nswRideshareRule,
   nswPrivateVehicleRules,
-  nswChildRestraintUrl,
-  pointToPointChildRestraintUrl,
+  noBoosterNote,
   restraintOptions,
   restraintBookingNote,
 } from "@/lib/homeData";
@@ -29,23 +31,27 @@ const lawFaq = [
     {
       question: "Do taxis need baby seats in NSW?",
       answer:
-        "Children up to 12 months must travel in a suitable child restraint in a taxi - rear-facing up to 6 months, and rear-facing or forward-facing with an inbuilt harness from 6 to 12 months. Children over 12 months may use a booster seat or a properly adjusted and fastened seatbelt.",
+        "Yes, for babies. Children under 12 months must not travel in a NSW taxi unless they are secured in a suitable approved child restraint - rear-facing up to 6 months, and rear-facing or forward-facing with an inbuilt harness from 6 to 12 months. Children over 12 months may use a properly fastened and adjusted seatbelt, although a child restraint is strongly recommended.",
     },
     {
       question: "Are the rules for rideshare the same as taxis?",
       answer:
-        "No. Booked hire vehicles, including rideshare, are treated differently from taxis and generally follow the private-vehicle rules. Check the Point to Point Transport Commissioner's guidance for the current rules.",
+        "No. Hire and rideshare vehicles follow the same rules as private vehicles, so children under 7 must use an approved child restraint suitable for their age and size. The taxi rules do not apply to them.",
     },
   ],
   [
     {
       question: "Is a seatbelt the safest option for a toddler in a taxi?",
       answer:
-        "The taxi rules allow children over 12 months to use a properly adjusted seatbelt, but that is a legal minimum. Many parents prefer the restraint their child would use in the family car - you can request one when booking.",
+        "The taxi rules allow children over 12 months to use a properly fastened and adjusted seatbelt, but that is a legal minimum - the NSW Government strongly recommends a suitable approved child restraint. You can request a child seat when booking.",
     },
     {
       question: "Can I bring my own child restraint?",
       answer: "Yes. You're welcome to use your own approved child restraint if you prefer.",
+    },
+    {
+      question: "Do you provide booster seats?",
+      answer: "No. We arrange baby capsules and child seats only. If your child uses a booster seat, please bring your own approved booster.",
     },
   ],
 ];
@@ -74,20 +80,15 @@ export default function NswTaxiBabySeatLawsPage() {
         image={{ src: "/images/child-safety-information-real.png", alt: "Child restraint information for NSW taxis" }}
       />
 
+      <OfficialSources />
+
       <section className="wt-section on-dark">
         <div className="container">
           <div style={{ maxWidth: 820 }}>
             <p>
-              NSW has different child restraint rules depending on the type of vehicle. This page summarises the
-              NSW Government rules as at October 2026. Rules can change - always check the{" "}
-              <a href={nswChildRestraintUrl} target="_blank" rel="noreferrer">
-                NSW Government child car seat page
-              </a>{" "}
-              and the{" "}
-              <a href={pointToPointChildRestraintUrl} target="_blank" rel="noreferrer">
-                Point to Point Transport Commissioner
-              </a>{" "}
-              for the current position. This is general information, not legal advice.
+              NSW has different child restraint rules for taxis, for hire and rideshare vehicles, and for private
+              vehicles. Each is summarised separately below - don&apos;t assume the rule for one applies to the
+              others.
             </p>
           </div>
         </div>
@@ -98,6 +99,11 @@ export default function NswTaxiBabySeatLawsPage() {
           <span className="wt-eyebrow">Taxis</span>
           <h2>Child Restraint Rules in NSW Taxis</h2>
           <RulesTable rows={nswTaxiRules} />
+          <ul style={{ maxWidth: 820, marginTop: 24 }}>
+            {nswTaxiNotes.map((note) => (
+              <li key={note}>{note}</li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -106,15 +112,11 @@ export default function NswTaxiBabySeatLawsPage() {
           <span className="wt-eyebrow">Rideshare &amp; Booked Hire</span>
           <h2>Rideshare and Booked Hire Vehicles</h2>
           <div style={{ maxWidth: 820 }}>
+            <p>{nswRideshareRule}</p>
             <p>
-              Booked hire vehicles - including rideshare - are not taxis, and the taxi rules above do not apply to
-              them in the same way. Children under 12 months must use a suitable child restraint in both taxis and
-              booked hire vehicles, and for older children booked hire vehicles generally follow the private-vehicle
-              rules below. See the{" "}
-              <a href={pointToPointChildRestraintUrl} target="_blank" rel="noreferrer">
-                Point to Point Transport Commissioner&apos;s child restraint guidance
-              </a>{" "}
-              for the current rules.
+              Standard taxi, hire and rideshare vehicles don&apos;t have to carry a child restraint, and a hire or
+              rideshare driver may refuse the trip if a child under 7 has no suitable restraint - so arrange one
+              before you travel.
             </p>
           </div>
         </div>
@@ -134,7 +136,7 @@ export default function NswTaxiBabySeatLawsPage() {
         title="Requesting a Child Restraint for Your Taxi"
         intro="The taxi rules set a legal minimum. If you'd prefer your child to travel in an age- and size-appropriate restraint, request one when you book."
         cards={restraintOptions}
-        footnote={restraintBookingNote}
+        footnote={`${restraintBookingNote} ${noBoosterNote}`}
       />
 
       <section className="wt-section on-dark">

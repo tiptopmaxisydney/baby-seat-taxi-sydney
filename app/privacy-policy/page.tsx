@@ -36,7 +36,7 @@ export default function PrivacyPolicyPage() {
             <p>
               When you make a booking or enquiry, we may collect information such as your name, contact details, pickup and
               destination addresses, and details about your child, including age, weight and the type of baby capsule, child seat
-              or booster seat required. This information is used to arrange and provide family transport services.
+              required. This information is used to arrange and provide family transport services.
             </p>
 
             <h2>How We Use Your Information</h2>

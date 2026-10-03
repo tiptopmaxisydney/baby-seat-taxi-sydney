@@ -1,7 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import FinalCta from "@/components/home/FinalCta";
+import OfficialSources from "@/components/OfficialSources";
 import type { BlogPost } from "@/lib/blogPosts";
+
+// Posts that summarise the NSW child-restraint rules show the official sources up front.
+const LAW_POSTS = new Set(["do-taxis-need-baby-seats-in-sydney-nsw-laws-explained"]);
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("en-AU", { year: "numeric", month: "long", day: "numeric" });
@@ -22,6 +26,8 @@ export default function BlogPostTemplate({ post }: { post: BlogPost }) {
           </div>
         </div>
       </section>
+
+      {LAW_POSTS.has(post.slug) && <OfficialSources />}
 
       <section className="wt-section">
         <div className="container">

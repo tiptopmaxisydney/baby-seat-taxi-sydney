@@ -209,6 +209,7 @@ export const hospitalGuides: GuidePage[] = [
     heroDescription:
       "Your baby's first car trip should be one less thing to worry about. Pre-book a transfer home with a rear-facing restraint arranged and room for your hospital bags.",
     image: "hospital",
+    officialSources: true,
     sections: [
       {
         heading: "Rear-Facing from Day One",

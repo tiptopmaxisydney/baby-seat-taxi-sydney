@@ -15,13 +15,14 @@ const ageOptions: { value: ChildAge; label: string }[] = [
 ];
 
 // Mirrors the NSW private-vehicle guidance by age; the booking team confirms the actual
-// restraint from the child's age and size, so this only says what to request.
+// restraint from the child's age and size, so this only says what to request. We arrange baby
+// capsules and child seats only - never suggest a booster seat as something we provide.
 const restraintFor: Record<ChildAge, string> = {
   under6m: "Rear-facing baby restraint",
   "6to12m": "Rear-facing restraint, or forward-facing with inbuilt harness",
   "1to4y": "Child restraint (rear-facing or forward-facing with inbuilt harness)",
-  "4to7y": "Forward-facing restraint with harness, or booster seat",
-  "7plus": "Booster seat if under about 145cm, otherwise seatbelt",
+  "4to7y": "Child seat with an inbuilt harness (we don't provide booster seats)",
+  "7plus": "Seatbelt - or bring your own booster seat if your child still uses one",
 };
 
 // Deliberately conservative thresholds - fitted restraints reduce usable seats and real

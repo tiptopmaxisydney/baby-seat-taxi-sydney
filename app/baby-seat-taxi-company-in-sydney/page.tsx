@@ -26,7 +26,7 @@ const aboutFaq = [
     answer: "Yes. Sydney Airport transfers are one of our most popular services.",
   },
   {
-    question: "Can I request a baby capsule, child seat, or booster seat?",
+    question: "Can I request a baby capsule or child seat?",
     answer: "Yes. Tell us each child's age and approximate size and we'll arrange an appropriate restraint.",
   },
   {

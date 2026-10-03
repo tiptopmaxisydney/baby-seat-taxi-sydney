@@ -1,7 +1,7 @@
 // Internal link targets shared by guide pages, so related-link labels and paths stay consistent.
 export const L = {
   laws: { label: "NSW taxi baby seat laws", href: "/nsw-taxi-baby-seat-laws/" },
-  seatGuide: { label: "Which child seat should I request?", href: "/baby-child-booster-seat-guide/" },
+  seatGuide: { label: "Which child seat should I request?", href: "/which-child-seat-to-request/" },
   multiple: { label: "Taxi with multiple child seats", href: "/taxi-with-multiple-child-seats-sydney/" },
   pram: { label: "Taxi with baby seat and pram", href: "/taxi-with-baby-seat-and-pram-sydney/" },
   vsRideshare: { label: "Taxi vs rideshare with a baby", href: "/taxi-vs-rideshare-with-baby-sydney/" },
@@ -16,6 +16,5 @@ export const L = {
   newborn: { label: "Newborn hospital-to-home taxi", href: "/newborn-hospital-to-home-taxi-sydney/" },
   capsule: { label: "Baby capsule taxi", href: "/baby-capsule-taxi-sydney/" },
   childSeat: { label: "Child seat taxi", href: "/child-seat-taxi-sydney/" },
-  booster: { label: "Booster seat taxi", href: "/booster-seat-taxi-sydney/" },
   areas: { label: "All Sydney areas", href: "/baby-seat-taxi-sydney-areas/" },
 } as const;

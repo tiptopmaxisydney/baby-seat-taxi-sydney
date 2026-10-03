@@ -39,6 +39,9 @@ export type GuidePage = {
   heroDescription: string;
   image: keyof typeof guideImages;
   sections: GuideSection[];
+  // Shows the official NSW sources and "Last reviewed" date under the hero - set on every page
+  // that summarises the child-restraint rules.
+  officialSources?: boolean;
   faq: Faq[];
   // Slugs of related pages (guides or CMS pages) shown as internal links at the bottom.
   related: { label: string; href: string }[];

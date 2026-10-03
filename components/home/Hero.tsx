@@ -14,7 +14,7 @@ export default function Hero() {
           </div>
           <p>
             Travelling around Sydney with a baby or young child? Pre-book family transport with the child
-            restraint requested for your journey. Baby capsules, child restraints and booster seats can be
+            restraint requested for your journey. Baby capsules and child seats can be
             arranged for Sydney Airport transfers, hospital pickups, hotel transfers, cruise terminals and
             everyday family travel.
           </p>

@@ -21,7 +21,7 @@ const faqColumns = [
     {
       question: "What's the difference between taxi and rideshare child-restraint rules?",
       answer:
-        "In NSW, children over 12 months may travel in a taxi with a booster seat or a properly adjusted seatbelt, while booked hire and rideshare vehicles generally follow the private-vehicle rules. See our NSW taxi baby seat laws guide for details and official links.",
+        "In NSW, children under 12 months must travel in a suitable approved child restraint in a taxi. Children over 12 months may use a properly fastened and adjusted seatbelt in a taxi, although a child restraint is strongly recommended, while hire and rideshare vehicles follow the private-vehicle rules. See our NSW taxi baby seat laws guide for details and official links.",
     },
     {
       question: "How do I book a baby seat taxi?",
