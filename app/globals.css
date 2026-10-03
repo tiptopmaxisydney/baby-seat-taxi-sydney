@@ -1762,6 +1762,19 @@ img {
   color: var(--wt-muted);
   margin: 0 0 16px;
 }
+/* The calculator is a white card inside .on-dark sections, whose `.wt-section.on-dark p` rule
+   (near-white text) would otherwise win and make the result text invisible on the light panel. */
+.wt-section.on-dark .wt-calc p,
+.wt-section.on-dark .wt-calc li {
+  color: var(--wt-text);
+}
+.wt-section.on-dark .wt-calc .wt-calc-label,
+.wt-section.on-dark .wt-calc .wt-calc-note {
+  color: var(--wt-muted);
+}
+.wt-section.on-dark .wt-calc .wt-calc-vehicle {
+  color: var(--wt-navy);
+}
 @media (max-width: 860px) {
   .wt-calc { grid-template-columns: 1fr; padding: 20px; }
 }
