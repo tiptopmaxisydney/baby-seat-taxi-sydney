@@ -59,10 +59,11 @@ export default async function Home() {
       <section className="wt-section on-dark">
         <div className="container">
           <span className="wt-eyebrow">Plan Your Trip</span>
-          <h2>Tell Us About Your Children</h2>
+          <h2>Tell Us About Your Family</h2>
           <p style={{ maxWidth: 820 }}>
-            Enter who&apos;s travelling and what you&apos;re bringing for a suggested vehicle and the child restraints to
-            request.
+            Tell us who&apos;s travelling - each child&apos;s age and approximate size, the adults, your luggage and
+            pram - and our team will recommend the vehicle and confirm the child restraints. You don&apos;t need to
+            choose the exact restraint yourself.
           </p>
           <FamilyVehicleCalculator />
         </div>

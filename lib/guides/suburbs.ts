@@ -341,6 +341,39 @@ const suburbs: Suburb[] = [
 
 export const suburbSlug = (name: string) => `baby-seat-taxi-${name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
 
+// Hospital guides (lib/guides/hospital.ts) linked from any suburb that lists that hospital.
+const HOSPITAL_GUIDES: [string, string][] = [
+  ["Royal Hospital for Women", "/royal-hospital-for-women-newborn-transfer/"],
+  ["The Children's Hospital at Westmead", "/westmead-childrens-hospital-taxi-child-seat/"],
+  ["Westmead Hospital", "/westmead-hospital-baby-capsule-taxi/"],
+  ["Royal Prince Alfred Hospital", "/rpa-hospital-newborn-taxi/"],
+  ["Liverpool Hospital", "/liverpool-hospital-newborn-transfer/"],
+  ["St George Hospital", "/st-george-hospital-baby-capsule-taxi/"],
+  ["Northern Beaches Hospital", "/northern-beaches-hospital-family-transfer/"],
+];
+
+// Suburbs with their own page: the guides below plus the CMS location pages, which share the
+// same baby-seat-taxi-<suburb> slug pattern.
+const CMS_SUBURB_PAGES = ["Parramatta", "Blacktown", "Liverpool", "Penrith", "Campbelltown", "Chatswood", "Bondi"];
+const suburbsWithPages = new Set([...suburbs.map((s) => s.name), ...CMS_SUBURB_PAGES]);
+
+// Internal links specific to this suburb - nearby hospital guides and neighbouring suburb pages -
+// ahead of the shared airport/newborn/seat guides.
+function suburbRelated(s: Suburb) {
+  const hospitalLinks = HOSPITAL_GUIDES.filter(([name]) => s.hospitals.some((h) => h.startsWith(name))).map(([name, href]) => ({
+    label: `${name} transfers`,
+    href,
+  }));
+  const nearbyLinks = s.nearby
+    .filter((n) => suburbsWithPages.has(n))
+    .map((n) => ({ label: `Baby Seat Taxi ${n}`, href: `/${suburbSlug(n)}/` }));
+  return [...hospitalLinks, ...nearbyLinks, L.airportHub, L.multiple, L.seatGuide, L.areas];
+}
+
+const placeName = (value: string) => value.split(",")[0].trim();
+// First destination that isn't named after the suburb itself (no "from Coogee to Coogee Beach").
+const tripDestination = (s: Suburb) => s.destinations.find((d) => !d.includes(s.name)) ?? s.destinations[0];
+
 function suburbPage(s: Suburb): GuidePage {
   return {
     slug: suburbSlug(s.name),
@@ -376,21 +409,31 @@ function suburbPage(s: Suburb): GuidePage {
         paragraphs: [`We also cover ${s.nearby.join(", ")} and surrounding areas.`],
       },
     ],
+    // Built from this suburb's own hospitals, destinations and airport note so no two pages share
+    // the same FAQ set.
     faq: [
       {
         question: `Do you provide baby seats in ${s.name}?`,
-        answer: "Yes. Request a restraint for each child when booking - tell us their age and approximate size. You're also welcome to use your own approved restraint.",
+        answer: "Yes. Baby capsules and child seats are arranged at booking - tell us each child's age and approximate size. You're also welcome to use your own approved restraint.",
+      },
+      {
+        question: `Can you take our family to and from ${placeName(s.hospitals[0])}?`,
+        answer: `Yes. Pre-book the trip from ${s.name} with a restraint arranged for each child - tell us their ages and approximate sizes, and book the return at the same time if you know your appointment or discharge time.`,
+      },
+      {
+        question: `Can you take us from ${s.name} to ${tripDestination(s)} with child seats?`,
+        answer: "Yes. Tell us each child's age and approximate size, how many adults are travelling and whether you'd like a return pickup, and we'll arrange the restraints and a suitable vehicle.",
       },
       {
         question: `How long does it take from ${s.name} to Sydney Airport?`,
-        answer: "It depends on the time of day and traffic. Allow extra time for peak periods and tell us your flight time when booking.",
+        answer: `Travel time varies depending on traffic, pickup location and time of travel. ${s.airportNote} Tell us your flight time when booking.`,
       },
       {
         question: "Can I book more than one child seat?",
         answer: "Yes, subject to vehicle configuration and availability. Tell us about every child, adult and bag when booking.",
       },
     ],
-    related: [L.airportHub, L.newborn, L.multiple, L.seatGuide, L.areas],
+    related: suburbRelated(s),
   };
 }
 

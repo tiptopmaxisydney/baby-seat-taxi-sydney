@@ -36,6 +36,16 @@ const faqColumns = [
         "Tell us the number of adults, children, restraints, suitcases, carry-ons and prams when booking. Child restraints reduce usable seating, so a larger family with four suitcases will often need an SUV, 7-seat vehicle or minibus - we'll confirm the right vehicle.",
     },
     {
+      question: "What happens if my flight is delayed?",
+      answer:
+        "Add your flight number when booking so the booking is associated with the correct arrival, and contact us if your plans change so we can adjust the pickup.",
+    },
+    {
+      question: "Do you provide booster seats?",
+      answer:
+        "No. We arrange baby capsules and child seats only. If your child uses a booster seat, please bring your own approved booster.",
+    },
+    {
       question: "What areas do you service?",
       answer: "We provide family transport services throughout Sydney and surrounding areas.",
     },

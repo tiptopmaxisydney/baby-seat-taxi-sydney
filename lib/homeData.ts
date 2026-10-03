@@ -235,18 +235,27 @@ export const faqColumns: Faq[][] = [
         "Yes, in a rear-facing restraint. Tell us your baby's age when booking so a suitable rear-facing restraint can be arranged - this is common for hospital-to-home transfers.",
     },
     {
-      question: "Can I book two or three child seats?",
+      question: "Can I book a Sydney taxi with two child seats?",
       answer:
-        "Yes. Request a restraint for each child when booking. Multiple restraints are subject to vehicle configuration and availability, so the more detail you give us about your children, adults and luggage, the better we can match the vehicle.",
+        "Yes. Multiple child restraints can be requested when booking, subject to vehicle configuration and availability. Provide the age and approximate size of each child, together with passenger numbers, luggage and pram details.",
+    },
+    {
+      question: "Can I book three child seats?",
+      answer:
+        "Yes, subject to vehicle configuration and availability. Three child restraints usually need a larger vehicle such as a 7-seater or minibus once adults and luggage are included, so book early and tell us every child's age and approximate size.",
     },
     {
       question: "Can I use my own car seat?",
       answer: "Yes. You're welcome to use your own approved child restraint if you prefer.",
     },
     {
-      question: "Can you carry a pram or double stroller?",
+      question: "Can you carry a large pram?",
+      answer: "Yes. Tell us the type of pram when booking so we can arrange a vehicle with enough boot space alongside your luggage.",
+    },
+    {
+      question: "Can you carry a double stroller?",
       answer:
-        "Yes - tell us about your pram when booking. A larger or double pram, combined with luggage and multiple restraints, may need a larger vehicle.",
+        "Yes. A double stroller combined with luggage and child restraints often needs an SUV, 7-seater or minibus - tell us it's a double when booking.",
     },
     {
       question: "Is your service available 24/7?",

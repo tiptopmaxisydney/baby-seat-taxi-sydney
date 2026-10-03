@@ -157,7 +157,7 @@ export const childSeatGuides: GuidePage[] = [
         answer: "Yes. Tell us which children will use your restraint and which need one arranged.",
       },
     ],
-    related: [L.airport2Seats, L.pram, L.seatGuide, L.airportLuggage, L.laws],
+    related: [L.airport2Seats, L.airport3Seats, L.pram, L.seatGuide, L.airportLuggage, L.laws],
   },
   {
     slug: "taxi-with-baby-seat-and-pram-sydney",

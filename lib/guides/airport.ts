@@ -157,7 +157,70 @@ export const airportGuides: GuidePage[] = [
       FLIGHT_DELAY,
       BOTH_LEGS,
     ],
-    related: [L.multiple, L.airportHub, L.airportPram, L.airportLuggage],
+    related: [L.multiple, L.airport3Seats, L.airportHub, L.airportPram, L.airportLuggage],
+  },
+  {
+    slug: "sydney-airport-transfer-with-3-child-seats",
+    pillar: "Sydney Airport",
+    navLabel: "Airport Transfer with 3 Child Seats",
+    metaTitle: "Sydney Airport Transfer with 3 Child Seats | 7-Seater & Minibus",
+    metaDescription:
+      "Book a Sydney Airport transfer with three child seats - siblings, twins plus a toddler, or cousins travelling together. Tell us every child's age and size and we'll match a 7-seater or minibus.",
+    eyebrow: "Three Child Seats",
+    h1: "Sydney Airport Transfer with 3 Child Seats",
+    heroDescription:
+      "Three children means three restraints, and that changes the vehicle. Tell us every child's age and approximate size, the adults and your luggage, and we'll confirm a vehicle that fits everyone.",
+    image: "airport",
+    sections: [
+      {
+        heading: "Why Three Restraints Changes the Vehicle",
+        paragraphs: [
+          "Three child restraints rarely fit across the back seat of a sedan, and each one takes a full seating position. Once two adults and the suitcases from an international flight are added, most families with three children need a 7-seater or a minibus.",
+          "Restraints also need suitable seating positions with the right anchorage points, and children under 4 can't sit in the front seat - so the layout matters as much as the seat count. Multiple restraints are subject to vehicle configuration and availability, which is why we confirm the vehicle when you book.",
+        ],
+      },
+      {
+        heading: "Families We Plan For",
+        cards: [
+          { title: "Baby + two older siblings", description: "A rear-facing restraint for the baby and child seats for the older two." },
+          { title: "Twins + a toddler", description: "Two rear-facing restraints plus a child seat - tell us all three children's ages and sizes." },
+          { title: "Cousins or a family group", description: "Several families travelling together - tell us every adult and child so we can suggest one larger vehicle." },
+        ],
+      },
+      {
+        heading: "What to Tell Us When Booking",
+        list: [
+          "Each child's age and approximate size",
+          "Number of adults travelling",
+          "Large suitcases and carry-on bags",
+          "Pram type - single or double",
+          "Your flight number, and whether you want the return transfer booked too",
+        ],
+      },
+      {
+        heading: "Check Your Vehicle",
+        paragraphs: ["Enter your family's details for a suggested starting point - our team confirms the exact vehicle and restraints."],
+        calculator: true,
+      },
+    ],
+    faq: [
+      {
+        question: "Can I book three child seats for a Sydney Airport transfer?",
+        answer:
+          "Yes, subject to vehicle configuration and availability. Three restraints usually need a 7-seater or minibus once adults and luggage are included, so book early and give us each child's age and approximate size.",
+      },
+      {
+        question: "Will three child seats fit in a standard taxi?",
+        answer: "Usually not with adults and airport luggage as well. We'll recommend a larger vehicle based on everyone travelling and everything you're bringing.",
+      },
+      {
+        question: "Can I use our own seat for one child?",
+        answer: "Yes. Tell us which children will use your own approved restraint and which need one arranged.",
+      },
+      FLIGHT_DELAY,
+      BOTH_LEGS,
+    ],
+    related: [L.airport2Seats, L.multiple, L.airportLuggage, L.airportHub, L.seatGuide],
   },
   {
     slug: "sydney-airport-transfer-with-baby-and-pram",

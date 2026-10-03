@@ -1690,7 +1690,15 @@ img {
   font-weight: 600;
   color: var(--wt-navy);
 }
-.wt-calc-field select {
+/* Each child's age + approximate size, side by side across the full row. */
+.wt-calc-child {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 20px;
+}
+.wt-calc-field select,
+.wt-calc-field input {
   height: 42px;
   border: 1px solid #cbd2db;
   border-radius: 10px;
@@ -1759,5 +1767,6 @@ img {
 }
 @media (max-width: 480px) {
   .wt-calc-inputs { grid-template-columns: 1fr; }
+  .wt-calc-child { grid-template-columns: 1fr; }
   .wt-table td:first-child { white-space: normal; }
 }

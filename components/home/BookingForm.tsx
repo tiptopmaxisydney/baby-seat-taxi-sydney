@@ -5,6 +5,25 @@ import { attachDateTimePickers } from "@/lib/wcbDateTime";
 import { attachBookingForm } from "@/lib/wcbBookingForm";
 import { wcbConfig } from "@/lib/wcbConfig";
 
+// The "Tell Us About Your Family" calculator (FamilyVehicleCalculator.tsx) links here with the
+// family's details, so they reach the booking team in the driver instructions.
+function prefillFromFamilyCalculator(form: HTMLFormElement) {
+  const params = new URLSearchParams(window.location.search);
+  const family = params.get("family");
+  if (!family) return;
+
+  const setValue = (name: string, value: string) => {
+    const field = form.querySelector<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>(`[name="${name}"]`);
+    if (field && (!(field instanceof HTMLSelectElement) || Array.from(field.options).some((o) => o.value === value))) field.value = value;
+  };
+  setValue("driverInstructions", `Family details for vehicle and child-seat recommendation:\n${family.slice(0, 1000)}`);
+  const passengers = Math.min(Math.max(Number(params.get("passengers")) || 1, 1), 11);
+  setValue("passengers", String(passengers));
+  const seats = Math.min(Math.max(Number(params.get("seats")) || 0, 0), 4);
+  if (seats > 0) setValue("seatCount", String(seats));
+  if (seats > 1) setValue("seatType", "Multiple / Mixed Seats");
+}
+
 export default function BookingForm() {
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -17,6 +36,7 @@ export default function BookingForm() {
     // wcb-datetime.js before wcb-booking-form.js on the live site.
     const detachPickers = attachDateTimePickers(form);
     const detachForm = attachBookingForm(form, wcbConfig);
+    prefillFromFamilyCalculator(form);
 
     return () => {
       detachForm();
