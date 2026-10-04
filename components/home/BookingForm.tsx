@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { attachDateTimePickers } from "@/lib/wcbDateTime";
 import { attachBookingForm } from "@/lib/wcbBookingForm";
 import { wcbConfig } from "@/lib/wcbConfig";
+import EmailSuggestInput from "@/components/EmailSuggestInput";
 
 // The "Tell Us About Your Family" calculator (FamilyVehicleCalculator.tsx) links here with the
 // family's details, so they reach the booking team in the driver instructions.
@@ -180,7 +181,7 @@ export default function BookingForm() {
                 Email
                 <span className="wcb-req" aria-hidden="true">*</span>
               </label>
-              <input id="customerEmail" name="customerEmail" type="email" autoComplete="email" required />
+              <EmailSuggestInput id="customerEmail" name="customerEmail" required accentColor="#1d3649" />
             </div>
             <div className="wcb-form-row">
               <label className="wcb-label" htmlFor="customerPhone">
