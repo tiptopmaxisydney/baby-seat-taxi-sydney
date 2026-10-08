@@ -99,7 +99,7 @@ const Step2PassengerVehicle: React.FC<Step2PassengerVehicleProps> = ({
   return (
     <div>
       <h3 className="fw-semibold mb-2">Choose your vehicle</h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-4">
+      <div className="grid grid-cols-1 2xl:grid-cols-2 gap-2.5 mb-4">
         {visibleVehicleDetails && visibleVehicleDetails.length > 0 ? (
           <>
             {visibleVehicleDetails.map((vehicle, index) => (
