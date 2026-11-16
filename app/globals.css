@@ -1783,3 +1783,8 @@ img {
   .wt-calc-child { grid-template-columns: 1fr; }
   .wt-table td:first-child { white-space: normal; }
 }
+
+/* Blog post: booking form directly under the banner - no double section padding before the article. */
+.wt-blog-booking {
+  padding-bottom: 0;
+}
