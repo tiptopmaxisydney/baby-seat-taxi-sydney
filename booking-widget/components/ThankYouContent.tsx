@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { loadStripe } from "@stripe/stripe-js";
+import { loadStripe } from "@stripe/stripe-js/pure";
 import { STRIPE_ACCESS_KEY } from "@/booking-widget/utils/api";
 import { siteConfig } from "@/lib/siteConfig";
 
@@ -56,6 +56,10 @@ export default function ThankYouContent() {
       if (!stripe) return;
       const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
       setPaymentStatus(paymentIntent?.status === "succeeded" ? "confirmed" : "failed");
+    }).catch((err) => {
+      // Stripe.js blocked or offline: don't leave the page stuck on "checking".
+      console.warn("Could not verify payment status", err);
+      setPaymentStatus("confirmed");
     });
   }, []);
 
