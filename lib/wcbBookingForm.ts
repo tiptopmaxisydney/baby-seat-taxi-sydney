@@ -505,22 +505,23 @@ export function attachBookingForm(form: HTMLFormElement, config: WCBConfig): () 
         return;
       }
 
+      let localHits: AddressOption[] = [];
       try {
         const local = await savedAddress.search(text);
         if (id !== searchId) return;
         const hits = (local?.data || []).filter((item) => insideServiceArea(item.latitude, item.longitude, radiusKm));
-        if (hits.length > 0) {
-          show(hits.map((item) => ({ source: "local", id: item._id, label: item.display_name, lat: item.latitude, lng: item.longitude })));
-          return;
-        }
+        localHits = hits.map((item) => ({ source: "local" as const, id: item._id, label: item.display_name, lat: item.latitude, lng: item.longitude }));
+        if (localHits.length > 0) show(localHits);
       } catch {
         // Cache unavailable - fall through to Google
       }
       if (id !== searchId) return;
 
+      // Google suggestions are always added under the saved ones as the fallback,
+      // so a loose saved match can't hide the address the visitor is typing.
       const services = ensureGoogleServices();
       if (!services) {
-        show([]);
+        show(localHits);
         return;
       }
       const bounds = serviceBounds(radiusKm);
@@ -534,11 +535,12 @@ export function attachBookingForm(form: HTMLFormElement, config: WCBConfig): () 
         },
         (predictions, status) => {
           if (id !== searchId) return;
-          show(
+          const google: AddressOption[] =
             status === "OK" && predictions
-              ? predictions.map((p) => ({ source: "google", label: cleanAddress(p.description) || p.description, placeId: p.place_id }))
-              : []
-          );
+              ? predictions.map((p) => ({ source: "google" as const, label: cleanAddress(p.description) || p.description, placeId: p.place_id }))
+              : [];
+          const seen = new Set(localHits.map((o) => o.label.trim().toLowerCase()));
+          show([...localHits, ...google.filter((o) => !seen.has(o.label.trim().toLowerCase()))]);
         }
       );
     }

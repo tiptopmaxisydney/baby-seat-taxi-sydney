@@ -87,8 +87,8 @@ function getBiasBounds(field: "pickup" | "other") {
   );
 }
 
-// Local-first address search: only calls Google (after a debounce) when our own
-// saved-address cache has no match, per the Places-cost-reduction design.
+// Local-first address search: saved-address cache results first, Google
+// suggestions always appended below them (after a debounce).
 const AddressAutocomplete: React.FC<AddressAutocompleteProps & { biasField?: "pickup" | "other" }> = ({
   value,
   onChange,
@@ -106,21 +106,76 @@ const AddressAutocomplete: React.FC<AddressAutocompleteProps & { biasField?: "pi
   const placesServiceRef = useRef<google.maps.places.PlacesService | null>(null);
 
   const ensureGoogleServices = () =>
-    new Promise<void>((resolve) => {
-      loadGoogleMapScript(() => {
-        if (!autocompleteServiceRef.current) {
-          autocompleteServiceRef.current = new google.maps.places.AutocompleteService();
-        }
-        if (!placesServiceRef.current) {
-          placesServiceRef.current = new google.maps.places.PlacesService(document.createElement("div"));
-        }
-        if (!sessionTokenRef.current) {
-          sessionTokenRef.current = new google.maps.places.AutocompleteSessionToken();
-        }
-        resolve();
-      });
+    new Promise<boolean>((resolve) => {
+      try {
+        loadGoogleMapScript(() => {
+          try {
+            const places = (window as any).google?.maps?.places;
+            if (!places) {
+              console.log("Google Places library not available");
+              resolve(false);
+              return;
+            }
+            if (!autocompleteServiceRef.current) {
+              autocompleteServiceRef.current = new places.AutocompleteService();
+            }
+            if (!placesServiceRef.current) {
+              placesServiceRef.current = new places.PlacesService(document.createElement("div"));
+            }
+            if (!sessionTokenRef.current) {
+              sessionTokenRef.current = new places.AutocompleteSessionToken();
+            }
+            resolve(true);
+          } catch (err) {
+            console.log("Google Places init error", err);
+            resolve(false);
+          }
+        });
+      } catch (err) {
+        console.log("Google Maps script load error", err);
+        resolve(false);
+      }
     });
 
+  const getGooglePredictions = (text: string) =>
+    new Promise<AddressOption[]>(async (resolve) => {
+      const ready = await ensureGoogleServices();
+      if (!ready || !autocompleteServiceRef.current) return resolve([]);
+      try {
+        autocompleteServiceRef.current.getPlacePredictions(
+          {
+            input: text,
+            sessionToken: sessionTokenRef.current,
+            bounds: getBiasBounds(biasField),
+            componentRestrictions: { country },
+            strictBounds: true,
+          } as any,
+          (predictions, status) => {
+            if (status !== google.maps.places.PlacesServiceStatus.OK || !predictions) {
+              if (status !== google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+                console.log("Google predictions status", status);
+              }
+              return resolve([]);
+            }
+            resolve(
+              predictions.map((p) => ({
+                value: p.description,
+                label: renderOptionLabel(p.description, "google"),
+                source: "google" as const,
+                place_id: p.place_id,
+              }))
+            );
+          }
+        );
+      } catch (err) {
+        console.log("Google predictions error", err);
+        resolve([]);
+      }
+    });
+
+  // Saved addresses first, Google suggestions always added underneath as the fallback
+  // (previously Google was skipped whenever any saved address matched, so a loose
+  // saved match hid the real address).
   const runSearch = async (text: string) => {
     fetchRef.current += 1;
     const fetchId = fetchRef.current;
@@ -130,56 +185,32 @@ const AddressAutocomplete: React.FC<AddressAutocompleteProps & { biasField?: "pi
       return;
     }
 
+    let localOptions: AddressOption[] = [];
     try {
       const localRes: any = await SavedAddress.search(text);
       if (fetchId !== fetchRef.current) return;
-
-      const localResults = localRes?.data || [];
-      if (localResults.length > 0) {
-        setOptions(
-          localResults.map((item: any) => ({
-            value: item.display_name,
-            label: renderOptionLabel(item.display_name, "local"),
-            source: "local",
-            id: item._id,
-            lat: String(item.latitude),
-            lng: String(item.longitude),
-            name: item.display_name,
-          }))
-        );
-        return;
-      }
+      localOptions = (localRes?.data || []).map((item: any) => ({
+        value: item.display_name,
+        label: renderOptionLabel(item.display_name, "local"),
+        source: "local" as const,
+        id: item._id,
+        lat: String(item.latitude),
+        lng: String(item.longitude),
+        name: item.display_name,
+      }));
+      if (localOptions.length) setOptions(localOptions);
     } catch (err) {
       console.log("saved address search error", err);
     }
 
-    await ensureGoogleServices();
-    if (fetchId !== fetchRef.current || !autocompleteServiceRef.current) return;
+    const googleOptions = await getGooglePredictions(text);
+    if (fetchId !== fetchRef.current) return;
 
-    autocompleteServiceRef.current.getPlacePredictions(
-      {
-        input: text,
-        sessionToken: sessionTokenRef.current,
-        bounds: getBiasBounds(biasField),
-        componentRestrictions: { country },
-        strictBounds: true,
-      } as any,
-      (predictions, status) => {
-        if (fetchId !== fetchRef.current) return;
-        if (status !== google.maps.places.PlacesServiceStatus.OK || !predictions) {
-          setOptions([]);
-          return;
-        }
-        setOptions(
-          predictions.map((p) => ({
-            value: p.description,
-            label: renderOptionLabel(p.description, "google"),
-            source: "google",
-            place_id: p.place_id,
-          }))
-        );
-      }
-    );
+    const seen = new Set(localOptions.map((o) => o.value.trim().toLowerCase()));
+    setOptions([
+      ...localOptions,
+      ...googleOptions.filter((o) => !seen.has(o.value.trim().toLowerCase())),
+    ]);
   };
 
   const debouncedSearch = useMemo(() => debounce(runSearch, 400), []);
@@ -201,8 +232,8 @@ const AddressAutocomplete: React.FC<AddressAutocompleteProps & { biasField?: "pi
       return;
     }
 
-    await ensureGoogleServices();
-    if (!placesServiceRef.current || !option.place_id) return;
+    const ready = await ensureGoogleServices();
+    if (!ready || !placesServiceRef.current || !option.place_id) return;
 
     placesServiceRef.current.getDetails(
       { placeId: option.place_id, fields: DETAIL_FIELDS, sessionToken: sessionTokenRef.current || undefined },
