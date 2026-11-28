@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { loadStripe } from "@stripe/stripe-js/pure";
-import { STRIPE_ACCESS_KEY } from "@/booking-widget/utils/api";
+import { getStripeKey } from "@/booking-widget/utils/stripeKey";
 import { siteConfig } from "@/lib/siteConfig";
 
 interface BookingSummary {
@@ -52,7 +52,7 @@ export default function ThankYouContent() {
     if (!clientSecret) return;
 
     setPaymentStatus("checking");
-    loadStripe(STRIPE_ACCESS_KEY as string).then(async (stripe) => {
+    loadStripe(getStripeKey()).then(async (stripe) => {
       if (!stripe) return;
       const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
       setPaymentStatus(paymentIntent?.status === "succeeded" ? "confirmed" : "failed");

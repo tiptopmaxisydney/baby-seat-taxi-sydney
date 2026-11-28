@@ -4,6 +4,7 @@
 // same live-pricing calls, same Stripe payment flow. See booking-widget's other files
 // for the rest of the port; deviations from the source are documented per-file.
 import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
+import { setStripeKey } from "@/booking-widget/utils/stripeKey";
 import Image from "next/image";
 import BookingWizard from "@/booking-widget/components/BookingWizard";
 import { Form, message, Spin, Modal } from "antd";
@@ -204,7 +205,10 @@ export default function TiptopBookingForm() {
           payload.include_airport_toll = true
         }
       }
-      const result = await henceforthApi.createBooking.book(payload);
+      // stripe_multi_account: this form loads Stripe with the publishable_key the API returns
+      // (Wheelchair bookings are charged on the Wheelchair Stripe account).
+      const result = await henceforthApi.createBooking.book({ ...payload, stripe_multi_account: true });
+      setStripeKey(result?.publishable_key);
       const clientSecret = result?.client_secret;
       const amount = result?.amount;
 

@@ -4,21 +4,25 @@ import { loadStripe } from "@stripe/stripe-js/pure";
 import type { Stripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "@/booking-widget/components/StripeCheckOutForm";
-import { STRIPE_ACCESS_KEY } from "@/booking-widget/utils/api";
+import { getStripeKey } from "@/booking-widget/utils/stripeKey";
 
 // Load Stripe.js only when a payment form is actually shown (the "pure" import
 // does not inject the script on page load). A blocked/failed load resolves to
 // null instead of an unhandled rejection, and the next attempt retries.
-let stripePromise: Promise<Stripe | null> | null = null;
+// One Stripe.js instance per publishable key: Wheelchair bookings use their own Stripe account.
+const stripePromises = new Map<string, Promise<Stripe | null>>();
 const getStripe = () => {
-  if (!stripePromise) {
-    stripePromise = loadStripe(STRIPE_ACCESS_KEY as string).catch((err) => {
+  const key = getStripeKey();
+  let p = stripePromises.get(key);
+  if (!p) {
+    p = loadStripe(key).catch((err) => {
       console.warn("Stripe.js failed to load", err);
-      stripePromise = null;
+      stripePromises.delete(key);
       return null;
     });
+    stripePromises.set(key, p);
   }
-  return stripePromise;
+  return p;
 };
 
 const StripeElement = (props: any) => {
